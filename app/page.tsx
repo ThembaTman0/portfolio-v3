@@ -1,3 +1,13 @@
+import About from "@/components/About";
+import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
+
 export default function Home() {
-  return <h1 className="text-red-800 text-2xl font-bold">Hello World</h1>;
+  return (
+    <>
+      <Hero />
+      <Projects />
+      <About />
+    </>
+  );
 }
