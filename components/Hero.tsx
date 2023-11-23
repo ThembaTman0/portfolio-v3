@@ -12,9 +12,8 @@ const Hero = () => {
           <span className="bg-gradient-to-r from-green-800 to-green-400 inline-block text-transparent bg-clip-text">
             FNB,
           </span>{" "}
-          actively contributing to the dynamic world of banking as a Java
-          developer, where I combine my expertise to craft innovative solutions
-          and push the boundaries of what's possible in financial technology.
+          actively shaping the future of banking as a Java developer, pushing
+          boundaries and crafting innovative solutions in financial technology
         </p>
       </div>
     </section>

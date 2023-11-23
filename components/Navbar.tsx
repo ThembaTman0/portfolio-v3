@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="flexBetween max-container padding-container relative z-30 py-5">
+    <nav className="flexBetween max-container z-30 py-5 top-0 w-full">
       <Link href="/" className="hidden lg:block">
         <p>Themba</p>
       </Link>
