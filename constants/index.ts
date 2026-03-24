@@ -27,7 +27,14 @@ export const PROJECTS = [
     subtitle: "Java · Spring Boot · Microservices",
     description:
       "Production-ready cloud-native banking backend. Five independently deployable microservices (Accounts, Loans, Cards, Config Server, Eureka Registry), each with its own MySQL database, containerised with Docker Compose.",
-    tags: ["Java 17", "Spring Boot 3", "Spring Cloud", "Eureka", "Docker", "MySQL"],
+    tags: [
+      "Java 17",
+      "Spring Boot 3",
+      "Spring Cloud",
+      "Eureka",
+      "Docker",
+      "MySQL",
+    ],
     github: "https://github.com/ThembaTman0/Bankwave-V-2.0",
     demo: null,
   },
@@ -37,7 +44,13 @@ export const PROJECTS = [
     subtitle: "Python · Deep Learning · Remote Sensing",
     description:
       "A deep learning pipeline for classifying satellite imagery. Trained convolutional models to distinguish land-use categories from high-resolution remote sensing data.",
-    tags: ["Python", "TensorFlow", "CNN", "Remote Sensing", "Image Classification"],
+    tags: [
+      "Python",
+      "TensorFlow",
+      "CNN",
+      "Remote Sensing",
+      "Image Classification",
+    ],
     github: "https://github.com/ThembaTman0/SATELLITE-IMAGE-CLASSIFICATION",
     demo: null,
   },
@@ -60,12 +73,28 @@ export const EXPERIENCE = [
     period: "2023 — Present",
     description:
       "Shaping the future of banking at FNB, building scalable Java microservices and crafting innovative solutions in financial technology for millions of customers.",
-    tech: ["Java", "Spring Boot", "REST APIs", "SQL"],
+    tech: ["Java", "Apache Wicket", "Spring Boot", "REST APIs", "SQL"],
+  },
+  {
+    role: "Full Stack Developer - Internship",
+    company: "Avior Labs",
+    period: "2022 - 2022",
+    description:
+      "Developed software solutions supporting autonomous drone systems and aerospace simulation technologies at Avior Labs, a company specializing in UAV design, flight systems, and aerial automation.",
+    tech: ["Python", "OpenCV", "Image Processing", "Computer Vision"],
   },
 ];
 
 export const SOCIALS = [
-  { name: "GitHub", handle: "@ThembaTman0", url: "https://github.com/ThembaTman0" },
+  {
+    name: "GitHub",
+    handle: "@ThembaTman0",
+    url: "https://github.com/ThembaTman0",
+  },
   { name: "LinkedIn", handle: "Themba Ngobeni", url: "#" },
-  { name: "Email", handle: "Get in touch", url: "mailto:thembangobeni@email.com" },
+  {
+    name: "Email",
+    handle: "Get in touch",
+    url: "mailto:thembangobeni@email.com",
+  },
 ];
