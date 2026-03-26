@@ -6,17 +6,21 @@ export const NAV_LINKS = [
 ];
 
 export const SKILLS = [
-  { name: "Java", proficiency: "Expert", category: "Backend" },
-  { name: "Spring Boot", proficiency: "Expert", category: "Backend" },
-  { name: "REST APIs", proficiency: "Expert", category: "Backend" },
+  {
+    name: "Java",
+    proficiency: "3+ years",
+    category: "Backend",
+  },
+  { name: "Spring Boot", proficiency: "3+ years", category: "Backend" },
+  { name: "REST APIs", proficiency: "3+ years", category: "Backend" },
   { name: "React", proficiency: "Advanced", category: "Frontend" },
   { name: "TypeScript", proficiency: "Advanced", category: "Frontend" },
   { name: "Next.js", proficiency: "Advanced", category: "Frontend" },
   { name: "Python", proficiency: "Advanced", category: "AI / ML" },
   { name: "TensorFlow", proficiency: "Proficient", category: "AI / ML" },
-  { name: "SQL / PostgreSQL", proficiency: "Expert", category: "Data" },
+  { name: "SQL / PostgreSQL", proficiency: "3+ years", category: "Data" },
   { name: "Docker", proficiency: "Advanced", category: "DevOps" },
-  { name: "Git & CI/CD", proficiency: "Expert", category: "DevOps" },
+  { name: "Git & CI/CD", proficiency: "3+ years", category: "DevOps" },
   { name: "AWS", proficiency: "Proficient", category: "Cloud" },
 ];
 
