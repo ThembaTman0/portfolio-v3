@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Themba Ngobeni — Java Developer",
+  title: "Themba Ngobeni - Java Developer",
   description:
     "Software developer at FNB, passionate about Java, AI/ML, and modern web development. Based in Johannesburg, South Africa.",
 };
@@ -18,7 +18,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,700;9..144,1,300;9..144,1,400&family=DM+Sans:wght@300;400;500&display=swap"
           rel="stylesheet"

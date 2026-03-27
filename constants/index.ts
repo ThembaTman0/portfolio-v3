@@ -13,24 +13,24 @@ export const SKILLS = [
   },
   { name: "Spring Boot", proficiency: "3+ years", category: "Backend" },
   { name: "REST APIs", proficiency: "3+ years", category: "Backend" },
-  { name: "React", proficiency: "Advanced", category: "Frontend" },
-  { name: "TypeScript", proficiency: "Advanced", category: "Frontend" },
-  { name: "Next.js", proficiency: "Advanced", category: "Frontend" },
-  { name: "Python", proficiency: "Advanced", category: "AI / ML" },
-  { name: "TensorFlow", proficiency: "Proficient", category: "AI / ML" },
   { name: "SQL / PostgreSQL", proficiency: "3+ years", category: "Data" },
-  { name: "Docker", proficiency: "Advanced", category: "DevOps" },
   { name: "Git & CI/CD", proficiency: "3+ years", category: "DevOps" },
-  { name: "AWS", proficiency: "Proficient", category: "Cloud" },
+  { name: "Docker", proficiency: "2+ years", category: "DevOps" },
+  { name: "AWS", proficiency: "1 year", category: "Cloud" },
+  { name: "React", proficiency: "2+ years", category: "Frontend" },
+  { name: "TypeScript", proficiency: "2+ years", category: "Frontend" },
+  { name: "Next.js", proficiency: "2+ years", category: "Frontend" },
+  { name: "Python", proficiency: "Honours Research", category: "AI / ML" },
+  { name: "TensorFlow", proficiency: "Honours Research", category: "AI / ML" },
 ];
 
 export const PROJECTS = [
   {
     id: "01",
-    title: "Bankwave V2.0",
+    title: "Bankwave V2.0 - Microservices Banking Platform",
     subtitle: "Java · Spring Boot · Microservices",
     description:
-      "Production-ready cloud-native banking backend. Five independently deployable microservices (Accounts, Loans, Cards, Config Server, Eureka Registry), each with its own MySQL database, containerised with Docker Compose.",
+      "A microservices-based banking backend built with Spring Boot and Spring Cloud, demonstrating service discovery, centralized configuration, and containerized deployment for scalable financial systems.",
     tags: [
       "Java 17",
       "Spring Boot 3",
@@ -47,7 +47,7 @@ export const PROJECTS = [
     title: "Satellite Image Classification",
     subtitle: "Python · Deep Learning · Remote Sensing",
     description:
-      "A deep learning pipeline for classifying satellite imagery. Trained convolutional models to distinguish land-use categories from high-resolution remote sensing data.",
+      "Built an end-to-end image classification workflow involving preprocessing, feature extraction, and machine learning model evaluation as part of an honours-level research project.",
     tags: [
       "Python",
       "TensorFlow",
@@ -60,10 +60,10 @@ export const PROJECTS = [
   },
   {
     id: "03",
-    title: "Portfolio V3",
+    title: "Portfolio V2",
     subtitle: "Next.js · TypeScript · Design",
     description:
-      "This portfolio — built with Next.js, TypeScript and Tailwind CSS. Dark editorial design with clean typography and minimal animations.",
+      "This portfolio built with Next.js, TypeScript and Tailwind CSS. Dark editorial design with clean typography and minimal animations.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/ThembaTman0/Portfolio-V2",
     demo: "https://thembangobeni.netlify.app",
@@ -73,18 +73,18 @@ export const PROJECTS = [
 export const EXPERIENCE = [
   {
     role: "Java Developer",
-    company: "First National Bank (FNB)",
-    period: "2023 — Present",
+    company: "First National Bank (FNB) - Foreign Exchange",
+    period: "2023 - Present",
     description:
-      "Shaping the future of banking at FNB, building scalable Java microservices and crafting innovative solutions in financial technology for millions of customers.",
+      "Building backend systems for FNB's foreign exchange division the engine behind currency conversions and international money transfers for millions of customers. Working on modernising older codebases, improving system reliability, scalability, and ease of deployment.",
     tech: ["Java", "Apache Wicket", "Spring Boot", "REST APIs", "SQL"],
   },
   {
     role: "Full Stack Developer - Internship",
     company: "Avior Labs",
-    period: "2022 - 2022",
+    period: "2022 Nov - 2022 Dec",
     description:
-      "Developed software solutions supporting autonomous drone systems and aerospace simulation technologies at Avior Labs, a company specializing in UAV design, flight systems, and aerial automation.",
+      "Two-month internship contributing to software tooling for autonomous drone systems. Worked on image processing components supporting UAV flight simulation pipelines.",
     tech: ["Python", "OpenCV", "Image Processing", "Computer Vision"],
   },
 ];

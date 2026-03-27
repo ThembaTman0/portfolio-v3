@@ -66,11 +66,11 @@ const About = () => {
           }}
         >
           I&apos;m a{" "}
-          <span style={{ color: "var(--text)" }}>
-            tech enthusiast and software developer
-          </span>{" "}
-          at FNB, passionate about AI, ML, and web development. I craft
-          innovative solutions and embrace the exciting frontiers of technology.
+          <span style={{ color: "var(--text)" }}>Java developer at FNB</span>{" "}
+          focused on building scalable and reliable backend systems for
+          enterprise banking. I enjoy designing clean architectures, improving
+          system performance, and delivering software that solves real business
+          problems.
         </p>
         <p
           className="reveal"
@@ -82,11 +82,28 @@ const About = () => {
             transitionDelay: "0.2s",
           }}
         >
-          When I&apos;m not building banking infrastructure in Java, you&apos;ll
-          find me{" "}
-          <span style={{ color: "var(--text)" }}>training ML models</span>,
-          pushing commits to side projects, or exploring the latest in web
-          development.
+          My experience spans{" "}
+          <span style={{ color: "var(--text)" }}>
+            Java microservices, REST APIs, and modern backend development
+            practices
+          </span>
+          . During my honours studies in Mathematical Sciences, I explored
+          applied machine learning, strengthening my analytical and
+          problem-solving approach to software engineering.
+        </p>
+        <p
+          className="reveal"
+          style={{
+            color: "var(--muted)",
+            fontSize: "0.94rem",
+            lineHeight: 1.9,
+            marginBottom: "1.3rem",
+            transitionDelay: "0.22s",
+          }}
+        >
+          Outside of work, I build side projects, refine my engineering skills,
+          and explore new technologies that improve how software is designed and
+          delivered.
         </p>
         <p
           className="reveal"
@@ -99,9 +116,9 @@ const About = () => {
         >
           I believe great software lives at the intersection of{" "}
           <span style={{ color: "var(--text)" }}>
-            technical rigour and clean design
-          </span>
-          . That is the standard I hold myself to.
+            technical rigour, simplicity, and maintainability
+          </span>{" "}
+          a standard I continuously work toward.
         </p>
 
         {/* Stats */}
@@ -162,7 +179,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Right — image card */}
+      {/* Right - image card */}
       <div className="reveal" style={{ transitionDelay: "0.2s" }}>
         <div
           style={{
@@ -268,7 +285,7 @@ const About = () => {
               fontSize: "0.66rem",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "var(--mute1)",
+              color: "var(--accent)",
             }}
           >
             Johannesburg, ZA

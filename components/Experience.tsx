@@ -141,7 +141,7 @@ const Experience = () => {
               fontVariantNumeric: "tabular-nums",
             }}
           >
-            2020 — 2023
+            2021 - 2022
           </div>
           <div>
             <div
@@ -172,9 +172,10 @@ const Experience = () => {
                 lineHeight: 1.8,
               }}
             >
-              Studied core CS principles, software engineering, data structures,
-              and algorithms, with a focus on applied machine learning and
-              systems design.
+              Built a strong foundation in pure and applied mathematics
+              alongside computer science fundamentals covering data structures,
+              algorithms, and software engineering, with a specialisation in
+              applied machine learning and systems design.
             </p>
           </div>
           <div

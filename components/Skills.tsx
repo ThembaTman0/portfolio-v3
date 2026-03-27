@@ -67,8 +67,8 @@ const Skills = () => {
               maxWidth: "520px",
             }}
           >
-            From enterprise Java systems to machine learning pipelines, I work
-            across the full spectrum of modern software development.
+            Specialising in backend engineering and distributed systems, with
+            practical experience across modern software platforms.
           </p>
         </div>
 
@@ -87,9 +87,9 @@ const Skills = () => {
           {SKILLS.map((skill) => {
             const colorMap: Record<string, string> = {
               "3+ years": "var(--accent)",
-              Advanced: "#8fb4c0",
-              Proficient: "var(--muted)",
-              Familiar: "var(--muted2)",
+              "2+ years": "var(--muted2)",
+              "Honours Research": "#8fb4c0",
+              "1+ year": "var(--muted)",
             };
             const dotColor = colorMap[skill.proficiency] ?? "var(--muted)";
 
