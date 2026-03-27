@@ -4,17 +4,17 @@
   <img alt="Demo" src="Portfolio.png" />
 </div>
 
-A dark editorial portfolio built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Designed with a luxury, minimal aesthetic — featuring a frosted glass navbar, scroll-reveal animations, and a clean typographic system using Fraunces and DM Sans.
+A dark editorial portfolio built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Designed with a luxury, minimal aesthetic featuring a frosted glass navbar, scroll-reveal animations, and a clean typographic system using Fraunces and DM Sans.
 
 ---
 
 ## Tech Stack
 
-- **Framework** — Next.js 14 (App Router)
-- **Language** — TypeScript
-- **Styling** — Tailwind CSS + inline styles with CSS custom properties
-- **Fonts** — Fraunces (display) · DM Sans (body) via Google Fonts
-- **Deployment** — Vercel (recommended) or Netlify
+- **Framework** Next.js 14 (App Router)
+- **Language** TypeScript
+- **Styling** Tailwind CSS + inline styles with CSS custom properties
+- **Fonts** Fraunces (display) · DM Sans (body) via Google Fonts
+- **Deployment** Vercel (recommended) or Netlify
 
 ---
 
@@ -49,11 +49,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 portfolio-v3/
 ├── app/
 │   ├── globals.css       # CSS variables, animations, utility classes
-│   ├── layout.tsx        # Root layout — Navbar, Footer, scroll reveal script
-│   └── page.tsx          # Home page — composes all sections
+│   ├── layout.tsx        # Root layout Navbar, Footer, scroll reveal script
+│   └── page.tsx          # Home page composes all sections
 ├── components/
 │   ├── Navbar.tsx        # Frosted glass fixed navbar with top gold hairline
-│   ├── Hero.tsx          # Landing section — headline, CTA, decorative panel
+│   ├── Hero.tsx          # Landing section headline, CTA, decorative panel
 │   ├── About.tsx         # Bio, stats, photo card, tech chips
 │   ├── Skills.tsx        # Skills grid with proficiency labels
 │   ├── Projects.tsx      # Editorial project list with GitHub/live links
@@ -61,7 +61,7 @@ portfolio-v3/
 │   ├── Contact.tsx       # Contact email and social links
 │   └── Footer.tsx        # Copyright and back to top
 ├── constants/
-│   └── index.ts          # All data — nav links, skills, projects, experience, socials
+│   └── index.ts          # All data nav links, skills, projects, experience, socials
 └── public/
     └── profile.jpg       # Add your profile photo here
 ```
@@ -70,7 +70,7 @@ portfolio-v3/
 
 ## Customisation
 
-All content lives in one file — **`constants/index.ts`**. Update it to make the portfolio your own.
+All content lives in one file **`constants/index.ts`**. Update it to make the portfolio your own.
 
 ### Personal details
 
