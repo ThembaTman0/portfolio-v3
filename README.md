@@ -1,20 +1,31 @@
-# Themba Ngobeni Portfolio V3
-
 <div align="center">
-  <img alt="Demo" src="Portfolio.png" />
-</div>
+
+# Themba Ngobeni — Portfolio V3
+
+### Dark Editorial Developer Portfolio
+
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-Deploy-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
 A dark editorial portfolio built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Designed with a luxury, minimal aesthetic featuring a frosted glass navbar, scroll-reveal animations, and a clean typographic system using Fraunces and DM Sans.
+
+<img alt="Portfolio Preview" src="Portfolio.png" />
+
+</div>
 
 ---
 
 ## Tech Stack
 
-- **Framework** Next.js 14 (App Router)
-- **Language** TypeScript
-- **Styling** Tailwind CSS + inline styles with CSS custom properties
-- **Fonts** Fraunces (display) · DM Sans (body) via Google Fonts
-- **Deployment** Vercel (recommended) or Netlify
+| Category | Technology |
+|----------|-----------|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS + CSS custom properties |
+| Fonts | Fraunces (display) · DM Sans (body) |
+| Deployment | Vercel / Netlify |
 
 ---
 
@@ -22,8 +33,8 @@ A dark editorial portfolio built with **Next.js 14**, **TypeScript**, and **Tail
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-latest-CB3837?style=flat-square&logo=npm&logoColor=white)](https://www.npmjs.com/)
 
 ### Installation
 
@@ -49,11 +60,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 portfolio-v3/
 ├── app/
 │   ├── globals.css       # CSS variables, animations, utility classes
-│   ├── layout.tsx        # Root layout Navbar, Footer, scroll reveal script
-│   └── page.tsx          # Home page composes all sections
+│   ├── layout.tsx        # Root layout, Navbar, Footer, scroll reveal script
+│   └── page.tsx          # Home page, composes all sections
 ├── components/
 │   ├── Navbar.tsx        # Frosted glass fixed navbar with top gold hairline
-│   ├── Hero.tsx          # Landing section headline, CTA, decorative panel
+│   ├── Hero.tsx          # Landing section, headline, CTA, decorative panel
 │   ├── About.tsx         # Bio, stats, photo card, tech chips
 │   ├── Skills.tsx        # Skills grid with proficiency labels
 │   ├── Projects.tsx      # Editorial project list with GitHub/live links
@@ -61,7 +72,7 @@ portfolio-v3/
 │   ├── Contact.tsx       # Contact email and social links
 │   └── Footer.tsx        # Copyright and back to top
 ├── constants/
-│   └── index.ts          # All data nav links, skills, projects, experience, socials
+│   └── index.ts          # All data: nav links, skills, projects, experience, socials
 └── public/
     └── profile.jpg       # Add your profile photo here
 ```
@@ -70,13 +81,13 @@ portfolio-v3/
 
 ## Customisation
 
-All content lives in one file **`constants/index.ts`**. Update it to make the portfolio your own.
+All content lives in one file: **`constants/index.ts`**. Update it to make the portfolio your own.
 
-### Personal details
+### Personal Details
 
 Edit `Hero.tsx` and `About.tsx` for your name, role, and bio text.
 
-### Navigation links
+### Navigation Links
 
 ```ts
 export const NAV_LINKS = [
@@ -128,14 +139,13 @@ export const EXPERIENCE = [
 ];
 ```
 
-### Profile photo
+### Profile Photo
 
 Drop your image into `public/` (e.g. `public/profile.jpg`), then in `About.tsx` replace the monogram placeholder with:
 
 ```tsx
 import Image from "next/image";
 
-// Replace the center content div with:
 <Image
   src="/profile.jpg"
   alt="Your Name"
@@ -152,8 +162,8 @@ All colours are defined as CSS variables in `app/globals.css`:
 ```css
 :root {
   --bg:      #0a0a0a;   /* Page background */
-  --accent:  #c8a05a;   /* Gold — primary accent */
-  --accent2: #b86840;   /* Amber — hover state */
+  --accent:  #c8a05a;   /* Gold, primary accent */
+  --accent2: #b86840;   /* Amber, hover state */
   --text:    #ddd8cf;   /* Body text */
   --muted:   #64605b;   /* Secondary text */
   --white:   #ede9e1;   /* Headings */
@@ -164,15 +174,20 @@ All colours are defined as CSS variables in `app/globals.css`:
 
 ## Deployment
 
-### Vercel (recommended)
+### Vercel (Recommended)
 
-1. Push to GitHub
-2. Go to [vercel.com](https://vercel.com) → **Add New Project** → import your repo
-3. Leave all settings as default → **Deploy**
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+1. Push your project to GitHub
+2. Go to [vercel.com](https://vercel.com) and click **Add New Project**
+3. Import your repo and leave all settings as default
+4. Click **Deploy**
 
 Vercel auto-deploys on every push to `main`.
 
 ### Netlify
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start)
 
 1. Install the adapter:
 
