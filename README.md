@@ -1,5 +1,9 @@
 # Themba Ngobeni — Portfolio V3
 
+<div align="center">
+  <img alt="Demo" src="PPortfolio.png" />
+</div>
+
 A dark editorial portfolio built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Designed with a luxury, minimal aesthetic — featuring a frosted glass navbar, scroll-reveal animations, and a clean typographic system using Fraunces and DM Sans.
 
 ---
