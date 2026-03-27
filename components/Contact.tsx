@@ -69,7 +69,7 @@ const Contact = () => {
 
         <a
           className="reveal"
-          href="mailto:thembangobeni@email.com"
+          href="mailto:thembatman0@gmail.com"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -91,7 +91,7 @@ const Contact = () => {
             e.currentTarget.style.borderColor = "rgba(200,160,90,0.35)";
           }}
         >
-          thembangobeni@email.com
+          thembatman0@gmail.com
           <svg
             width="13"
             height="13"

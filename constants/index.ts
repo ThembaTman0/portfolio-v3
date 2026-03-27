@@ -95,10 +95,14 @@ export const SOCIALS = [
     handle: "@ThembaTman0",
     url: "https://github.com/ThembaTman0",
   },
-  { name: "LinkedIn", handle: "Themba Ngobeni", url: "#" },
+  {
+    name: "LinkedIn",
+    handle: "Themba Ngobeni",
+    url: "https://www.linkedin.com/in/themba-ngobeni-6a163b164/",
+  },
   {
     name: "Email",
     handle: "Get in touch",
-    url: "mailto:thembangobeni@email.com",
+    url: "mailto:thembatman0@gmail.com",
   },
 ];
