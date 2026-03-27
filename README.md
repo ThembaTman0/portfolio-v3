@@ -1,4 +1,4 @@
-# Themba Ngobeni — Portfolio V3
+# Themba Ngobeni Portfolio V3
 
 <div align="center">
   <img alt="Demo" src="Portfolio.png" />
