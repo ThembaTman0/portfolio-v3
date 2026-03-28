@@ -68,6 +68,24 @@ export const PROJECTS = [
     github: "https://github.com/ThembaTman0/Portfolio-V2",
     demo: "https://thembangobeni.netlify.app",
   },
+  {
+    id: "04",
+    title: "Eataliano v2 — Recipe Discovery Platform",
+    subtitle: "React · Framer Motion · REST API",
+    description:
+      "A full recipe discovery app rebuilt from the ground up with React 18, featuring a debounced live-search with autocomplete, animated page transitions, and a persistent dark/light theme system. Architected with a clean separation of concerns across custom hooks, a service layer with in-memory TTL caching, and fully lazy-loaded pages. Designed with editorial typography and shimmer skeleton loading states for a polished, production-grade user experience.",
+    tags: [
+      "React 18",
+      "React Router v6",
+      "Framer Motion",
+      "Styled Components",
+      "CSS Variables",
+      "REST API",
+      "Custom Hooks",
+    ],
+    github: "https://github.com/ThembaTman0/Eataliano-v2/tree/main",
+    demo: "https://eataliano.vercel.app/",
+  },
 ];
 
 export const EXPERIENCE = [
