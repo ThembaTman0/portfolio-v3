@@ -4,16 +4,15 @@ const Hero = () => {
   return (
     <section
       id="home"
+      className="hero-grid"
       style={{
         minHeight: "100vh",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
         position: "relative",
         overflow: "hidden",
         borderBottom: "1px solid var(--line)",
       }}
     >
-      {/* Subtle radial vignette at base of hero */}
+      {/* Radial vignette at base */}
       <div
         aria-hidden="true"
         style={{
@@ -21,11 +20,29 @@ const Hero = () => {
           bottom: 0,
           left: 0,
           right: 0,
-          height: "35%",
+          height: "40%",
           background:
-            "linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 100%)",
+            "linear-gradient(to top, rgba(10,10,10,0.65) 0%, transparent 100%)",
           pointerEvents: "none",
           zIndex: 1,
+        }}
+      />
+
+      {/* Ambient accent glow — bottom left */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          bottom: "-10%",
+          left: "-5%",
+          width: "55vw",
+          height: "55vw",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(200,160,90,0.045) 0%, transparent 65%)",
+          pointerEvents: "none",
+          zIndex: 0,
+          animation: "accentPulse 6s ease-in-out infinite",
         }}
       />
 
@@ -114,15 +131,19 @@ const Hero = () => {
               padding: "0.85rem 1.7rem",
               borderRadius: "var(--radius)",
               textDecoration: "none",
-              transition: "background 0.25s ease, transform 0.25s ease",
+              transition:
+                "background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "var(--accent2)";
-              e.currentTarget.style.transform = "translateY(-1px)";
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow =
+                "0 12px 32px rgba(200,160,90,0.25)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "var(--accent)";
               e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
             }}
           >
             View my work
@@ -145,10 +166,14 @@ const Hero = () => {
               color: "var(--muted)",
               textDecoration: "none",
               letterSpacing: "0.02em",
-              transition: "color 0.25s ease",
+              transition: "color 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "var(--text)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "var(--muted)")
+            }
           >
             Get in touch →
           </a>
@@ -157,6 +182,7 @@ const Hero = () => {
 
       {/* Right decorative panel */}
       <div
+        className="hero-right"
         style={{
           position: "relative",
           overflow: "hidden",
@@ -169,6 +195,7 @@ const Hero = () => {
       >
         {/* Fine cross-hatch grid */}
         <div
+          aria-hidden="true"
           style={{
             position: "absolute",
             inset: 0,
@@ -179,32 +206,36 @@ const Hero = () => {
           }}
         />
 
-        {/* Accent corner top-right bracket */}
+        {/* Accent corner — top right */}
         <div
+          aria-hidden="true"
           style={{
             position: "absolute",
             top: "9rem",
             right: "2.5rem",
             width: "40px",
             height: "40px",
-            borderTop: "1px solid rgba(200,160,90,0.25)",
-            borderRight: "1px solid rgba(200,160,90,0.25)",
+            borderTop: "1px solid rgba(200,160,90,0.28)",
+            borderRight: "1px solid rgba(200,160,90,0.28)",
           }}
         />
+        {/* Accent corner — bottom left */}
         <div
+          aria-hidden="true"
           style={{
             position: "absolute",
             bottom: "5rem",
             left: "2.5rem",
             width: "40px",
             height: "40px",
-            borderBottom: "1px solid rgba(200,160,90,0.2)",
-            borderLeft: "1px solid rgba(200,160,90,0.2)",
+            borderBottom: "1px solid rgba(200,160,90,0.22)",
+            borderLeft: "1px solid rgba(200,160,90,0.22)",
           }}
         />
 
-        {/* Ghost monogram */}
+        {/* Ghost monogram — floating */}
         <div
+          aria-hidden="true"
           style={{
             fontFamily: "'Fraunces', serif",
             fontSize: "clamp(10rem, 16vw, 18rem)",
@@ -217,6 +248,7 @@ const Hero = () => {
             position: "absolute",
             right: "-1rem",
             bottom: "2rem",
+            animation: "float 7s ease-in-out infinite",
           }}
         >
           TN
@@ -229,13 +261,22 @@ const Hero = () => {
             top: "9rem",
             left: "2.5rem",
             border: "1px solid rgba(255,255,255,0.07)",
-            background: "rgba(17,17,17,0.7)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
+            background: "rgba(17,17,17,0.75)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
             padding: "0.65rem 1rem",
             display: "flex",
             alignItems: "center",
             gap: "0.6rem",
+            transition: "border-color 0.3s ease, background 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = "rgba(74,222,128,0.25)";
+            e.currentTarget.style.background = "rgba(17,17,17,0.9)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+            e.currentTarget.style.background = "rgba(17,17,17,0.75)";
           }}
         >
           <span
@@ -246,6 +287,7 @@ const Hero = () => {
               background: "#4ade80",
               display: "block",
               animation: "pulse 3s ease-in-out infinite",
+              flexShrink: 0,
             }}
           />
           <span
@@ -261,8 +303,9 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator centred */}
+      {/* Scroll indicator */}
       <div
+        aria-hidden="true"
         style={{
           position: "absolute",
           bottom: "2.8rem",
@@ -284,7 +327,8 @@ const Hero = () => {
           style={{
             width: "1px",
             height: "28px",
-            background: "rgba(200,160,90,0.2)",
+            background:
+              "linear-gradient(to bottom, transparent, rgba(200,160,90,0.35))",
           }}
         />
         scroll

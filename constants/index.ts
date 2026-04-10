@@ -2,6 +2,7 @@ export const NAV_LINKS = [
   { href: "#about", key: "about", label: "About" },
   { href: "#skills", key: "skills", label: "Skills" },
   { href: "#projects", key: "projects", label: "Projects" },
+  { href: "#experience", key: "experience", label: "Experience" },
   { href: "#contact", key: "contact", label: "Contact" },
 ];
 

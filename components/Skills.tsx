@@ -72,34 +72,34 @@ const Skills = () => {
           </p>
         </div>
 
-        {/* Skills grid */}
+        {/* Skills grid — each card reveals individually with stagger */}
         <div
-          className="reveal"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
             gap: "1px",
             background: "var(--line)",
             border: "1px solid var(--line)",
-            transitionDelay: "0.2s",
           }}
         >
-          {SKILLS.map((skill) => {
+          {SKILLS.map((skill, i) => {
             const colorMap: Record<string, string> = {
               "3+ years": "var(--accent)",
               "2+ years": "var(--muted2)",
               "Honours Research": "#8fb4c0",
               "1+ year": "var(--muted)",
+              "1 year": "var(--muted)",
             };
             const dotColor = colorMap[skill.proficiency] ?? "var(--muted)";
 
             return (
               <div
                 key={skill.name}
-                className="card-hover"
+                className="reveal card-hover"
                 style={{
                   background: "var(--bg2)",
                   padding: "1.6rem 1.8rem",
+                  transitionDelay: `${0.05 * i}s`,
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.background = "var(--bg3)")
@@ -114,6 +114,8 @@ const Skills = () => {
                     justifyContent: "space-between",
                     alignItems: "center",
                     marginBottom: "0.55rem",
+                    position: "relative",
+                    zIndex: 1,
                   }}
                 >
                   <div
@@ -161,6 +163,8 @@ const Skills = () => {
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     color: "var(--muted2)",
+                    position: "relative",
+                    zIndex: 1,
                   }}
                 >
                   {skill.category}

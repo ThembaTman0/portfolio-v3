@@ -18,6 +18,8 @@
   --accent-dim: rgba(200, 160, 90, 0.15);
   --white:   #ede9e1;
   --radius:  2px;
+  --ease-silk: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 * {
@@ -27,7 +29,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior handled by JS smooth scroll in layout */
 }
 
 body {
@@ -59,12 +61,30 @@ body::before {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: rgba(200,160,90,0.35); }
 
-/* ── Scroll reveal ───────────────────────────────────────────── */
+/* ── Scroll progress bar ─────────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 200;
+  pointer-events: none;
+  will-change: transform;
+}
+
+
+/* ── Silk scroll reveal ──────────────────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition:
+    opacity  1s var(--ease-silk),
+    transform 1s var(--ease-silk);
+  will-change: transform, opacity;
 }
 .reveal.visible {
   opacity: 1;
@@ -103,16 +123,25 @@ body::before {
   width: 0;
   height: 1px;
   background: var(--accent);
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 0.4s var(--ease-silk);
 }
 .hover-line:hover::after {
   width: 100%;
 }
 
-/* ── Card hover border ───────────────────────────────────────── */
+/* ── Active nav link ─────────────────────────────────────────── */
+.nav-active {
+  color: var(--white) !important;
+}
+.nav-active::after {
+  width: 100% !important;
+}
+
+/* ── Card hover border + shimmer ─────────────────────────────── */
 .card-hover {
   position: relative;
-  transition: background 0.3s ease;
+  overflow: hidden;
+  transition: background 0.4s var(--ease-silk);
 }
 .card-hover::before {
   content: "";
@@ -124,18 +153,42 @@ body::before {
   background: var(--accent);
   transform: scaleY(0);
   transform-origin: bottom;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s var(--ease-silk);
+  z-index: 1;
 }
 .card-hover:hover::before {
   transform: scaleY(1);
 }
+/* Shimmer sweep */
+.card-hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(200, 160, 90, 0.06) 50%,
+    transparent 80%
+  );
+  transform: translateX(-140%) skewX(-12deg);
+  transition: none;
+  pointer-events: none;
+  z-index: 0;
+}
+.card-hover:hover::after {
+  transform: translateX(300%) skewX(-12deg);
+  transition: transform 0.75s var(--ease-silk);
+}
 
 /* ── Project row hover ───────────────────────────────────────── */
 .project-row {
-  transition: background 0.3s ease;
+  transition: background 0.4s var(--ease-silk);
 }
 .project-row:hover {
-  background: rgba(255,255,255,0.012);
+  background: rgba(255,255,255,0.015);
 }
 .project-row:hover .project-num {
   color: var(--accent) !important;
@@ -144,22 +197,99 @@ body::before {
   color: var(--white) !important;
 }
 
-/* ── Scroll bounce on hero ───────────────────────────────────── */
-@keyframes scrollBounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(7px); }
+/* ── Mobile menu slide ───────────────────────────────────────── */
+.mobile-menu {
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition:
+    opacity    0.4s var(--ease-silk),
+    transform  0.4s var(--ease-silk),
+    visibility 0.4s;
+}
+.mobile-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 
-/* ── Available dot pulse ─────────────────────────────────────── */
+/* ── Keyframes ───────────────────────────────────────────────── */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50%       { transform: translateX(-50%) translateY(8px); opacity: 1; }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4); }
-  50%       { opacity: 0.7; box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
+  50%       { opacity: 0.75; box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
 }
 
-/* ── Stat number count-in ────────────────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes accentPulse {
+  0%, 100% { opacity: 0.07; }
+  50%       { opacity: 0.14; }
+}
+
+/* ── Loading screen ──────────────────────────────────────────── */
+@keyframes loadFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loadLine {
+  from { width: 0;   opacity: 0; }
+  to   { width: 36px; opacity: 1; }
+}
+
+@keyframes loadProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ── Responsive layouts ──────────────────────────────────────── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.exp-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-right {
+    display: none;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .exp-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 @layer utilities {

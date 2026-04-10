@@ -5,11 +5,8 @@ const About = () => {
   return (
     <section
       id="about"
+      className="about-grid"
       style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "5rem",
-        alignItems: "start",
         padding: "8rem 3rem",
         borderBottom: "1px solid var(--line)",
         maxWidth: "1440px",
@@ -118,7 +115,7 @@ const About = () => {
           <span style={{ color: "var(--text)" }}>
             technical rigour, simplicity, and maintainability
           </span>{" "}
-          a standard I continuously work toward.
+          — a standard I continuously work toward.
         </p>
 
         {/* Stats */}
@@ -142,7 +139,7 @@ const About = () => {
               style={{
                 padding: "1.6rem 1.4rem",
                 borderRight: i < 2 ? "1px solid var(--line)" : "none",
-                transition: "background 0.3s ease",
+                transition: "background 0.4s var(--ease-silk)",
               }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.background = "var(--bg3)")
@@ -179,7 +176,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* Right - image card */}
+      {/* Right - profile image card */}
       <div className="reveal" style={{ transitionDelay: "0.2s" }}>
         <div
           style={{
@@ -190,105 +187,121 @@ const About = () => {
             overflow: "hidden",
           }}
         >
-          {/* Fine grid */}
+          {/* Profile image */}
+          <Image
+            src="/Profile.png"
+            alt="Themba Ngobeni"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center top" }}
+            priority
+          />
+
+          {/* Fine grid overlay */}
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               inset: 0,
               backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px)," +
-                "linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)",
+                "linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px)," +
+                "linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px)",
               backgroundSize: "32px 32px",
+              zIndex: 1,
+              pointerEvents: "none",
             }}
           />
+
+          {/* Bottom gradient fade */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "60%",
+              background:
+                "linear-gradient(to top, rgba(10,10,10,0.94) 0%, rgba(10,10,10,0.5) 40%, transparent 100%)",
+              zIndex: 2,
+            }}
+          />
+
           {/* Corner accents */}
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               top: "1.2rem",
               left: "1.2rem",
               width: "28px",
               height: "28px",
-              borderTop: "1px solid rgba(200,160,90,0.3)",
-              borderLeft: "1px solid rgba(200,160,90,0.3)",
+              borderTop: "1px solid rgba(200,160,90,0.35)",
+              borderLeft: "1px solid rgba(200,160,90,0.35)",
+              zIndex: 3,
             }}
           />
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
-              bottom: "1.2rem",
+              top: "1.2rem",
               right: "1.2rem",
               width: "28px",
               height: "28px",
-              borderBottom: "1px solid rgba(200,160,90,0.3)",
-              borderRight: "1px solid rgba(200,160,90,0.3)",
+              borderTop: "1px solid rgba(200,160,90,0.35)",
+              borderRight: "1px solid rgba(200,160,90,0.35)",
+              zIndex: 3,
             }}
           />
 
-          {/* Center content */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "1.1rem",
-            }}
-          >
-            <div
-              style={{
-                width: "88px",
-                height: "88px",
-                borderRadius: "50%",
-                background: "var(--bg3)",
-                border: "1px solid var(--line)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "'Fraunces', serif",
-                fontSize: "1.65rem",
-                fontWeight: 400,
-                color: "var(--accent)",
-                letterSpacing: "0.02em",
-              }}
-            >
-              <Image
-                src="/Profile.png"
-                alt="Themba Ngobeni"
-                fill
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-                priority
-              />
-            </div>
-            <p
-              style={{
-                fontSize: "0.72rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "var(--muted)",
-              }}
-            >
-              Themba Ngobeni
-            </p>
-            <p style={{ fontSize: "0.68rem", color: "var(--muted2)" }}>
-              Replace with your photo
-            </p>
-          </div>
-          {/* Corner label */}
+          {/* Name + location overlay */}
           <div
             style={{
               position: "absolute",
               bottom: "1.4rem",
+              left: "1.4rem",
               right: "1.4rem",
-              fontSize: "0.66rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--accent)",
+              zIndex: 3,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
             }}
           >
-            Johannesburg, ZA
+            <div>
+              <div
+                style={{
+                  fontFamily: "'Fraunces', serif",
+                  fontSize: "1.05rem",
+                  fontWeight: 300,
+                  color: "var(--white)",
+                  marginBottom: "0.18rem",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Themba Ngobeni
+              </div>
+              <div
+                style={{
+                  fontSize: "0.66rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "var(--muted)",
+                }}
+              >
+                Java Developer · FNB
+              </div>
+            </div>
+            <div
+              style={{
+                fontSize: "0.62rem",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                opacity: 0.85,
+              }}
+            >
+              Johannesburg, ZA
+            </div>
           </div>
         </div>
 
@@ -320,13 +333,15 @@ const About = () => {
                 padding: "0.22rem 0.65rem",
                 borderRadius: "1px",
                 background: "rgba(200,160,90,0.04)",
-                transition: "border-color 0.2s ease, background 0.2s ease",
+                transition:
+                  "border-color 0.3s ease, background 0.3s ease, color 0.3s ease",
+                cursor: "default",
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.borderColor =
-                  "rgba(200,160,90,0.45)";
+                  "rgba(200,160,90,0.5)";
                 (e.currentTarget as HTMLElement).style.background =
-                  "rgba(200,160,90,0.08)";
+                  "rgba(200,160,90,0.1)";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.borderColor =
