@@ -1,5 +1,7 @@
 "use client";
 import { SOCIALS } from "@/constants";
+import { m } from "framer-motion";
+import { reveal, revealScale } from "./motion-utils";
 
 const Contact = () => {
   return (
@@ -19,7 +21,11 @@ const Contact = () => {
     >
       {/* Left */}
       <div>
-        <div className="reveal section-label" style={{ marginBottom: "3rem" }}>
+        <m.div
+          className="section-label"
+          style={{ marginBottom: "3rem" }}
+          {...reveal(0)}
+        >
           Contact
           <span
             style={{
@@ -30,10 +36,9 @@ const Contact = () => {
           >
             05
           </span>
-        </div>
+        </m.div>
 
-        <h2
-          className="reveal"
+        <m.h2
           style={{
             fontFamily: "'Fraunces', serif",
             fontSize: "clamp(2.4rem, 4vw, 4rem)",
@@ -42,8 +47,8 @@ const Contact = () => {
             color: "var(--white)",
             letterSpacing: "-0.026em",
             marginBottom: "1.6rem",
-            transitionDelay: "0.1s",
           }}
+          {...reveal(0.1)}
         >
           Let&apos;s build something
           <br />
@@ -51,24 +56,22 @@ const Contact = () => {
             great together
           </em>
           .
-        </h2>
+        </m.h2>
 
-        <p
-          className="reveal"
+        <m.p
           style={{
             color: "var(--muted)",
             fontSize: "0.93rem",
             lineHeight: 1.85,
             marginBottom: "2.8rem",
-            transitionDelay: "0.15s",
           }}
+          {...reveal(0.18)}
         >
           Whether you have a project in mind, want to discuss opportunities, or
           just want to say hello, my inbox is always open.
-        </p>
+        </m.p>
 
-        <a
-          className="reveal"
+        <m.a
           href="mailto:thembatman0@gmail.com"
           style={{
             display: "inline-flex",
@@ -80,8 +83,8 @@ const Contact = () => {
             paddingBottom: "0.35rem",
             borderBottom: "1px solid rgba(200,160,90,0.35)",
             transition: "color 0.25s ease, border-color 0.25s ease",
-            transitionDelay: "0.2s",
           }}
+          {...reveal(0.25)}
           onMouseEnter={(e) => {
             e.currentTarget.style.color = "var(--accent)";
             e.currentTarget.style.borderColor = "var(--accent)";
@@ -102,18 +105,20 @@ const Contact = () => {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </a>
+        </m.a>
       </div>
 
       {/* Right socials */}
-      <div className="reveal" style={{ transitionDelay: "0.2s" }}>
+      <m.div {...revealScale(0.2)}>
         <div style={{ border: "1px solid var(--line)" }}>
           {SOCIALS.map((social, i) => (
-            <a
+            <m.a
               key={social.name}
               href={social.url}
               target={social.url.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
+              whileHover={{ paddingLeft: "2.4rem", background: "rgba(255,255,255,0.02)" }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -123,17 +128,7 @@ const Contact = () => {
                   i < SOCIALS.length - 1 ? "1px solid var(--line)" : "none",
                 textDecoration: "none",
                 color: "var(--text)",
-                transition:
-                  "background 0.25s ease, padding-left 0.3s cubic-bezier(0.16,1,0.3,1)",
                 fontSize: "0.88rem",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-                e.currentTarget.style.paddingLeft = "2.4rem";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.paddingLeft = "1.8rem";
               }}
             >
               <span style={{ fontWeight: 400, letterSpacing: "0.01em" }}>
@@ -148,10 +143,10 @@ const Contact = () => {
               >
                 {social.handle}
               </span>
-            </a>
+            </m.a>
           ))}
         </div>
-      </div>
+      </m.div>
     </section>
   );
 };

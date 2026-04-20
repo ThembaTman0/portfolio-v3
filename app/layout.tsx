@@ -3,6 +3,8 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import LoadingScreen from "@/components/LoadingScreen";
+import AnimatedDotGrid from "@/components/AnimatedDotGrid";
+import MotionProvider from "@/components/MotionProvider";
 
 export const metadata: Metadata = {
   title: "Themba Ngobeni - Java Developer",
@@ -30,13 +32,16 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* Loading screen — shown once per session */}
+        {/* Loading screen - shown once per session */}
         <LoadingScreen />
 
+        <AnimatedDotGrid />
         <div id="scroll-progress" />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </MotionProvider>
 
         <script
           dangerouslySetInnerHTML={{
@@ -102,36 +107,6 @@ export default function RootLayout({
                 }
                 window.addEventListener('scroll', updateProgress, { passive: true });
 
-                /* ── IntersectionObserver scroll reveal ──── */
-                var observer = new IntersectionObserver(
-                  function (entries) {
-                    entries.forEach(function (entry) {
-                      if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                      }
-                    });
-                  },
-                  { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-                );
-
-                function initReveal() {
-                  document.querySelectorAll('.reveal').forEach(function (el) {
-                    observer.observe(el);
-                  });
-                }
-
-                if (document.readyState === 'loading') {
-                  document.addEventListener('DOMContentLoaded', initReveal);
-                } else {
-                  initReveal();
-                }
-
-                new MutationObserver(function () {
-                  document.querySelectorAll('.reveal:not(.visible)').forEach(function (el) {
-                    observer.observe(el);
-                  });
-                }).observe(document.body, { childList: true, subtree: true });
               })();
             `,
           }}

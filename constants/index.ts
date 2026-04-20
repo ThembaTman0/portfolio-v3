@@ -71,7 +71,7 @@ export const PROJECTS = [
   },
   {
     id: "04",
-    title: "Eataliano v2 — Recipe Discovery Platform",
+    title: "Eataliano v2 - Recipe Discovery Platform",
     subtitle: "React · Framer Motion · REST API",
     description:
       "A full recipe discovery app rebuilt from the ground up with React 18, featuring a debounced live-search with autocomplete, animated page transitions, and a persistent dark/light theme system. Architected with a clean separation of concerns across custom hooks, a service layer with in-memory TTL caching, and fully lazy-loaded pages. Designed with editorial typography and shimmer skeleton loading states for a polished, production-grade user experience.",

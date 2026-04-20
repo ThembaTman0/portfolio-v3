@@ -1,12 +1,14 @@
 "use client";
 import { SKILLS } from "@/constants";
+import { m } from "framer-motion";
+import { reveal } from "./motion-utils";
 
 const Skills = () => {
   return (
     <section
       id="skills"
       style={{
-        background: "var(--bg2)",
+        background: "rgba(17,17,17,0.72)",
         padding: "8rem 3rem",
         borderBottom: "1px solid var(--line)",
       }}
@@ -23,9 +25,10 @@ const Skills = () => {
           }}
         >
           <div>
-            <div
-              className="reveal section-label"
+            <m.div
+              className="section-label"
               style={{ marginBottom: "1.6rem" }}
+              {...reveal(0)}
             >
               Skills
               <span
@@ -37,9 +40,8 @@ const Skills = () => {
               >
                 02
               </span>
-            </div>
-            <h2
-              className="reveal"
+            </m.div>
+            <m.h2
               style={{
                 fontFamily: "'Fraunces', serif",
                 fontSize: "clamp(2rem, 3vw, 3rem)",
@@ -47,32 +49,31 @@ const Skills = () => {
                 lineHeight: 1.08,
                 color: "var(--white)",
                 letterSpacing: "-0.022em",
-                transitionDelay: "0.1s",
               }}
+              {...reveal(0.1)}
             >
               The tools I<br />
               <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
                 work with
               </em>
               .
-            </h2>
+            </m.h2>
           </div>
-          <p
-            className="reveal"
+          <m.p
             style={{
               color: "var(--muted)",
               fontSize: "0.93rem",
               lineHeight: 1.85,
-              transitionDelay: "0.15s",
               maxWidth: "520px",
             }}
+            {...reveal(0.15)}
           >
             Specialising in backend engineering and distributed systems, with
             practical experience across modern software platforms.
-          </p>
+          </m.p>
         </div>
 
-        {/* Skills grid — each card reveals individually with stagger */}
+        {/* Skills grid */}
         <div
           style={{
             display: "grid",
@@ -93,20 +94,22 @@ const Skills = () => {
             const dotColor = colorMap[skill.proficiency] ?? "var(--muted)";
 
             return (
-              <div
+              <m.div
                 key={skill.name}
-                className="reveal card-hover"
+                className="card-hover"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{
+                  duration: 0.65,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.04 * i,
+                }}
+                whileHover={{ background: "var(--bg3)" }}
                 style={{
                   background: "var(--bg2)",
                   padding: "1.6rem 1.8rem",
-                  transitionDelay: `${0.05 * i}s`,
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "var(--bg3)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = "var(--bg2)")
-                }
               >
                 <div
                   style={{
@@ -169,7 +172,7 @@ const Skills = () => {
                 >
                   {skill.category}
                 </div>
-              </div>
+              </m.div>
             );
           })}
         </div>

@@ -1,4 +1,6 @@
 "use client";
+import { m } from "framer-motion";
+import { heroContainer, heroItem, heroPanel } from "./motion-utils";
 
 const Hero = () => {
   return (
@@ -12,7 +14,7 @@ const Hero = () => {
         borderBottom: "1px solid var(--line)",
       }}
     >
-      {/* Radial vignette at base */}
+      {/* Radial vignette */}
       <div
         aria-hidden="true"
         style={{
@@ -28,7 +30,7 @@ const Hero = () => {
         }}
       />
 
-      {/* Ambient accent glow — bottom left */}
+      {/* Ambient accent glow */}
       <div
         aria-hidden="true"
         style={{
@@ -46,8 +48,11 @@ const Hero = () => {
         }}
       />
 
-      {/* Left content */}
-      <div
+      {/* Left content - staggered page-load animation */}
+      <m.div
+        variants={heroContainer}
+        initial="hidden"
+        animate="show"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -57,15 +62,16 @@ const Hero = () => {
           zIndex: 2,
         }}
       >
-        <div
-          className="reveal section-label"
+        <m.div
+          variants={heroItem}
+          className="section-label"
           style={{ marginBottom: "1.6rem", color: "var(--accent)" }}
         >
           Java Developer&nbsp;·&nbsp;FNB&nbsp;·&nbsp;South Africa
-        </div>
+        </m.div>
 
-        <h1
-          className="reveal"
+        <m.h1
+          variants={heroItem}
           style={{
             fontFamily: "'Fraunces', serif",
             fontSize: "clamp(3rem, 5.5vw, 5.6rem)",
@@ -74,7 +80,6 @@ const Hero = () => {
             color: "var(--white)",
             letterSpacing: "-0.028em",
             marginBottom: "2rem",
-            transitionDelay: "0.08s",
           }}
         >
           Hi, I&apos;m{" "}
@@ -89,35 +94,35 @@ const Hero = () => {
             matters
           </em>
           .
-        </h1>
+        </m.h1>
 
-        <p
-          className="reveal"
+        <m.p
+          variants={heroItem}
           style={{
             fontSize: "0.94rem",
             color: "var(--muted)",
             maxWidth: "380px",
             lineHeight: 1.85,
             marginBottom: "3rem",
-            transitionDelay: "0.16s",
           }}
         >
           Building scalable Java microservices at FNB, designing resilient
           backend architectures, and developing production-grade software used
           by thousands of customers.
-        </p>
+        </m.p>
 
-        <div
-          className="reveal"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "2rem",
-            transitionDelay: "0.24s",
-          }}
+        <m.div
+          variants={heroItem}
+          style={{ display: "flex", alignItems: "center", gap: "2rem" }}
         >
-          <a
+          <m.a
             href="#projects"
+            whileHover={{
+              y: -2,
+              boxShadow: "0 12px 32px rgba(200,160,90,0.28)",
+            }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2 }}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -131,19 +136,6 @@ const Hero = () => {
               padding: "0.85rem 1.7rem",
               borderRadius: "var(--radius)",
               textDecoration: "none",
-              transition:
-                "background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--accent2)";
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow =
-                "0 12px 32px rgba(200,160,90,0.25)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--accent)";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
             }}
           >
             View my work
@@ -157,7 +149,7 @@ const Hero = () => {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </a>
+          </m.a>
           <a
             href="#contact"
             className="hover-line"
@@ -177,12 +169,15 @@ const Hero = () => {
           >
             Get in touch →
           </a>
-        </div>
-      </div>
+        </m.div>
+      </m.div>
 
       {/* Right decorative panel */}
-      <div
+      <m.div
         className="hero-right"
+        variants={heroPanel}
+        initial="hidden"
+        animate="show"
         style={{
           position: "relative",
           overflow: "hidden",
@@ -206,7 +201,7 @@ const Hero = () => {
           }}
         />
 
-        {/* Accent corner — top right */}
+        {/* Accent corner - top right */}
         <div
           aria-hidden="true"
           style={{
@@ -219,7 +214,7 @@ const Hero = () => {
             borderRight: "1px solid rgba(200,160,90,0.28)",
           }}
         />
-        {/* Accent corner — bottom left */}
+        {/* Accent corner - bottom left */}
         <div
           aria-hidden="true"
           style={{
@@ -233,7 +228,7 @@ const Hero = () => {
           }}
         />
 
-        {/* Ghost monogram — floating */}
+        {/* Ghost monogram - floating */}
         <div
           aria-hidden="true"
           style={{
@@ -255,7 +250,10 @@ const Hero = () => {
         </div>
 
         {/* Status badge */}
-        <div
+        <m.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: "absolute",
             top: "9rem",
@@ -271,12 +269,16 @@ const Hero = () => {
             transition: "border-color 0.3s ease, background 0.3s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "rgba(74,222,128,0.25)";
-            e.currentTarget.style.background = "rgba(17,17,17,0.9)";
+            (e.currentTarget as HTMLElement).style.borderColor =
+              "rgba(74,222,128,0.25)";
+            (e.currentTarget as HTMLElement).style.background =
+              "rgba(17,17,17,0.9)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-            e.currentTarget.style.background = "rgba(17,17,17,0.75)";
+            (e.currentTarget as HTMLElement).style.borderColor =
+              "rgba(255,255,255,0.07)";
+            (e.currentTarget as HTMLElement).style.background =
+              "rgba(17,17,17,0.75)";
           }}
         >
           <span
@@ -300,8 +302,8 @@ const Hero = () => {
           >
             Available for work
           </span>
-        </div>
-      </div>
+        </m.div>
+      </m.div>
 
       {/* Scroll indicator */}
       <div

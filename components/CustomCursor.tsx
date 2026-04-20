@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 
 /*
- * Custom cursor — dot + lagged ring + ambient glow.
+ * Custom cursor - dot + lagged ring + ambient glow.
  * All motion runs in a single rAF loop using transform only (GPU composited).
  * Automatically disabled on touch/coarse-pointer devices.
  */
@@ -27,7 +27,7 @@ const CustomCursor = () => {
     let rx = 0, ry = 0;
     let gx = 0, gy = 0;
 
-    // Ring scale — lerped in rAF so scale transitions are smooth
+    // Ring scale - lerped in rAF so scale transitions are smooth
     let ringScale = 1;
     let targetRingScale = 1;
 
@@ -48,7 +48,7 @@ const CustomCursor = () => {
       dot.style.transform = `translate(${tx - 3}px, ${ty - 3}px)`;
       // Ring: lagged position + lerped scale
       ring.style.transform = `translate(${rx - 20}px, ${ry - 20}px) scale(${ringScale.toFixed(3)})`;
-      // Glow: very lagged — creates depth
+      // Glow: very lagged - creates depth
       glow.style.transform = `translate(${gx - 300}px, ${gy - 300}px)`;
 
       rafId = requestAnimationFrame(tick);

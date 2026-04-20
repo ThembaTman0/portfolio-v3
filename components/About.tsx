@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+import { m } from "framer-motion";
+import { reveal, revealScale } from "./motion-utils";
 
 const About = () => {
   return (
@@ -15,9 +17,10 @@ const About = () => {
     >
       {/* Left */}
       <div>
-        <div
-          className="reveal section-label"
+        <m.div
+          className="section-label"
           style={{ marginBottom: "3.5rem" }}
+          {...reveal(0)}
         >
           About
           <span
@@ -29,10 +32,9 @@ const About = () => {
           >
             01
           </span>
-        </div>
+        </m.div>
 
-        <h2
-          className="reveal"
+        <m.h2
           style={{
             fontFamily: "'Fraunces', serif",
             fontSize: "clamp(2.2rem, 3.5vw, 3.5rem)",
@@ -41,8 +43,8 @@ const About = () => {
             color: "var(--white)",
             letterSpacing: "-0.022em",
             marginBottom: "2.4rem",
-            transitionDelay: "0.1s",
           }}
+          {...reveal(0.1)}
         >
           A developer who
           <br />
@@ -50,17 +52,16 @@ const About = () => {
             loves
           </em>{" "}
           the craft.
-        </h2>
+        </m.h2>
 
-        <p
-          className="reveal"
+        <m.p
           style={{
             color: "var(--muted)",
             fontSize: "0.94rem",
             lineHeight: 1.9,
             marginBottom: "1.3rem",
-            transitionDelay: "0.15s",
           }}
+          {...reveal(0.17)}
         >
           I&apos;m a{" "}
           <span style={{ color: "var(--text)" }}>Java developer at FNB</span>{" "}
@@ -68,16 +69,15 @@ const About = () => {
           enterprise banking. I enjoy designing clean architectures, improving
           system performance, and delivering software that solves real business
           problems.
-        </p>
-        <p
-          className="reveal"
+        </m.p>
+        <m.p
           style={{
             color: "var(--muted)",
             fontSize: "0.94rem",
             lineHeight: 1.9,
             marginBottom: "1.3rem",
-            transitionDelay: "0.2s",
           }}
+          {...reveal(0.22)}
         >
           My experience spans{" "}
           <span style={{ color: "var(--text)" }}>
@@ -87,66 +87,58 @@ const About = () => {
           . During my honours studies in Mathematical Sciences, I explored
           applied machine learning, strengthening my analytical and
           problem-solving approach to software engineering.
-        </p>
-        <p
-          className="reveal"
+        </m.p>
+        <m.p
           style={{
             color: "var(--muted)",
             fontSize: "0.94rem",
             lineHeight: 1.9,
             marginBottom: "1.3rem",
-            transitionDelay: "0.22s",
           }}
+          {...reveal(0.26)}
         >
           Outside of work, I build side projects, refine my engineering skills,
           and explore new technologies that improve how software is designed and
           delivered.
-        </p>
-        <p
-          className="reveal"
+        </m.p>
+        <m.p
           style={{
             color: "var(--muted)",
             fontSize: "0.94rem",
             lineHeight: 1.9,
-            transitionDelay: "0.25s",
           }}
+          {...reveal(0.3)}
         >
           I believe great software lives at the intersection of{" "}
           <span style={{ color: "var(--text)" }}>
             technical rigour, simplicity, and maintainability
           </span>{" "}
-          — a standard I continuously work toward.
-        </p>
+          - a standard I continuously work toward.
+        </m.p>
 
         {/* Stats */}
-        <div
-          className="reveal"
+        <m.div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             border: "1px solid var(--line)",
             marginTop: "3.5rem",
-            transitionDelay: "0.3s",
           }}
+          {...reveal(0.35)}
         >
           {[
             { num: "3+", label: "Years exp." },
             { num: "15+", label: "Projects" },
             { num: "∞", label: "Curiosity" },
           ].map((s, i) => (
-            <div
+            <m.div
               key={i}
+              whileHover={{ background: "var(--bg3)" }}
+              transition={{ duration: 0.3 }}
               style={{
                 padding: "1.6rem 1.4rem",
                 borderRight: i < 2 ? "1px solid var(--line)" : "none",
-                transition: "background 0.4s var(--ease-silk)",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "var(--bg3)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = "transparent")
-              }
             >
               <div
                 style={{
@@ -171,13 +163,13 @@ const About = () => {
               >
                 {s.label}
               </div>
-            </div>
+            </m.div>
           ))}
-        </div>
+        </m.div>
       </div>
 
       {/* Right - profile image card */}
-      <div className="reveal" style={{ transitionDelay: "0.2s" }}>
+      <m.div {...revealScale(0.18)}>
         <div
           style={{
             aspectRatio: "4/5",
@@ -322,8 +314,13 @@ const About = () => {
             "TensorFlow",
             "Next.js",
           ].map((s) => (
-            <span
+            <m.span
               key={s}
+              whileHover={{
+                borderColor: "rgba(200,160,90,0.5)",
+                background: "rgba(200,160,90,0.1)",
+              }}
+              transition={{ duration: 0.25 }}
               style={{
                 fontSize: "0.66rem",
                 letterSpacing: "0.09em",
@@ -333,28 +330,15 @@ const About = () => {
                 padding: "0.22rem 0.65rem",
                 borderRadius: "1px",
                 background: "rgba(200,160,90,0.04)",
-                transition:
-                  "border-color 0.3s ease, background 0.3s ease, color 0.3s ease",
                 cursor: "default",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor =
-                  "rgba(200,160,90,0.5)";
-                (e.currentTarget as HTMLElement).style.background =
-                  "rgba(200,160,90,0.1)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor =
-                  "rgba(200,160,90,0.2)";
-                (e.currentTarget as HTMLElement).style.background =
-                  "rgba(200,160,90,0.04)";
+                display: "inline-block",
               }}
             >
               {s}
-            </span>
+            </m.span>
           ))}
         </div>
-      </div>
+      </m.div>
     </section>
   );
 };

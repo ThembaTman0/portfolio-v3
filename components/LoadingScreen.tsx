@@ -60,7 +60,7 @@ const LoadingScreen = () => {
         }}
       />
 
-      {/* T.N — staggered letter reveal */}
+      {/* T.N - staggered letter reveal */}
       <div
         style={{
           fontFamily: "'Fraunces', serif",

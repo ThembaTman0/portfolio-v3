@@ -1,20 +1,23 @@
 "use client";
 import { EXPERIENCE } from "@/constants";
+import { m } from "framer-motion";
+import { reveal } from "./motion-utils";
 
 const Experience = () => {
   return (
     <section
       id="experience"
       style={{
-        background: "var(--bg2)",
+        background: "rgba(17,17,17,0.72)",
         padding: "8rem 3rem",
         borderBottom: "1px solid var(--line)",
       }}
     >
       <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
-        <div
-          className="reveal section-label"
+        <m.div
+          className="section-label"
           style={{ marginBottom: "4.5rem" }}
+          {...reveal(0)}
         >
           Experience
           <span
@@ -26,13 +29,20 @@ const Experience = () => {
           >
             04
           </span>
-        </div>
+        </m.div>
 
         <div style={{ borderTop: "1px solid var(--line)" }}>
           {EXPERIENCE.map((exp, i) => (
-            <div
+            <m.div
               key={i}
-              className="reveal"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{
+                duration: 0.7,
+                ease: [0.16, 1, 0.3, 1],
+                delay: i * 0.1,
+              }}
               style={{
                 display: "grid",
                 gridTemplateColumns: "160px 1fr 1fr",
@@ -40,7 +50,6 @@ const Experience = () => {
                 alignItems: "start",
                 padding: "2.8rem 0",
                 borderBottom: "1px solid var(--line)",
-                transitionDelay: `${i * 0.1}s`,
               }}
             >
               <div>
@@ -115,13 +124,20 @@ const Experience = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </m.div>
           ))}
         </div>
 
         {/* Education */}
-        <div
-          className="reveal"
+        <m.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1],
+            delay: EXPERIENCE.length * 0.1,
+          }}
           style={{
             display: "grid",
             gridTemplateColumns: "160px 1fr 1fr",
@@ -129,7 +145,6 @@ const Experience = () => {
             alignItems: "start",
             padding: "2.8rem 0",
             borderBottom: "1px solid var(--line)",
-            transitionDelay: "0.1s",
           }}
         >
           <div
@@ -205,7 +220,7 @@ const Experience = () => {
               </span>
             ))}
           </div>
-        </div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 <div align="center">
 
-# Themba Ngobeni — Portfolio V3
+# Themba Ngobeni - Portfolio V3
 [**thembangobeni.vercel.app**](https://thembangobeni.vercel.app/)
 ### Dark Editorial Developer Portfolio
 
@@ -132,7 +132,7 @@ export const EXPERIENCE = [
   {
     role: "Job Title",
     company: "Company Name",
-    period: "2023 — Present",
+    period: "2023 - Present",
     description: "What you do there.",
     tech: ["Java", "Spring Boot"],
   },
@@ -232,4 +232,4 @@ npm run dev
 
 ## License
 
-MIT — free to use and adapt for your own portfolio.
+MIT - free to use and adapt for your own portfolio.
