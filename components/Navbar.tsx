@@ -54,6 +54,7 @@ const Navbar = () => {
       />
 
       <m.nav
+        className="nav-pad"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -66,7 +67,6 @@ const Navbar = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "1.35rem 3rem",
           background: scrolled
             ? "rgba(10,10,10,0.78)"
             : "rgba(10,10,10,0.12)",
@@ -236,7 +236,7 @@ const Navbar = () => {
                 background: "rgba(8,8,8,0.96)",
                 backdropFilter: "blur(40px) saturate(1.6)",
                 WebkitBackdropFilter: "blur(40px) saturate(1.6)",
-                padding: "2rem 3rem 2.5rem",
+                padding: "2rem 1.5rem 2.5rem",
                 borderBottom: "1px solid var(--line)",
                 boxShadow: "0 40px 80px rgba(0,0,0,0.75)",
                 display: "flex",

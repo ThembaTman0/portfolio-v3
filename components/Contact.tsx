@@ -7,9 +7,8 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="contact-grid section-pad"
+      className="contact-grid section-block"
       style={{
-        padding: "8rem 3rem",
         minHeight: "60vh",
         borderBottom: "1px solid var(--line)",
         maxWidth: "1440px",

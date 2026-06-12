@@ -13,10 +13,9 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="section-pad"
+      className="section-block"
       style={{
         background: "rgba(17,17,17,0.72)",
-        padding: "8rem 3rem",
         borderBottom: "1px solid var(--line)",
       }}
     >

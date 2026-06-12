@@ -1,15 +1,43 @@
 "use client";
+import { useRef } from "react";
 import Image from "next/image";
 import { m } from "framer-motion";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { reveal, revealScale } from "./motion-utils";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 const About = () => {
+  const imgCardRef = useRef<HTMLDivElement>(null);
+  const imgInnerRef = useRef<HTMLDivElement>(null);
+
+  // Subtle scroll parallax on the profile image
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.fromTo(
+      imgInnerRef.current,
+      { yPercent: -7, scale: 1.16 },
+      {
+        yPercent: 7,
+        scale: 1.16,
+        ease: "none",
+        scrollTrigger: {
+          trigger: imgCardRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      }
+    );
+  });
+
   return (
     <section
       id="about"
-      className="about-grid section-pad"
+      className="about-grid section-block"
       style={{
-        padding: "8rem 3rem",
         borderBottom: "1px solid var(--line)",
         maxWidth: "1440px",
         margin: "0 auto",
@@ -171,6 +199,7 @@ const About = () => {
       {/* Right - profile image card */}
       <m.div {...revealScale(0.18)}>
         <div
+          ref={imgCardRef}
           style={{
             aspectRatio: "4/5",
             background: "var(--bg2)",
@@ -179,14 +208,16 @@ const About = () => {
             overflow: "hidden",
           }}
         >
-          {/* Profile image */}
-          <Image
-            src="/Profile.png"
-            alt="Themba Ngobeni"
-            fill
-            style={{ objectFit: "cover", objectPosition: "center top" }}
-            priority
-          />
+          {/* Profile image - inner wrapper is parallax-animated by GSAP */}
+          <div ref={imgInnerRef} style={{ position: "absolute", inset: 0 }}>
+            <Image
+              src="/Profile.png"
+              alt="Themba Ngobeni"
+              fill
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+              priority
+            />
+          </div>
 
           {/* Fine grid overlay */}
           <div

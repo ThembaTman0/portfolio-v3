@@ -7,10 +7,9 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="section-pad"
+      className="section-block"
       style={{
         background: "rgba(17,17,17,0.72)",
-        padding: "8rem 3rem",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -36,6 +35,7 @@ const Experience = () => {
           {EXPERIENCE.map((exp, i) => (
             <m.div
               key={i}
+              className="exp-row"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -45,10 +45,6 @@ const Experience = () => {
                 delay: i * 0.1,
               }}
               style={{
-                display: "grid",
-                gridTemplateColumns: "160px 1fr 1fr",
-                gap: "2.5rem",
-                alignItems: "start",
                 padding: "2.8rem 0",
                 borderBottom: "1px solid var(--line)",
               }}
@@ -98,15 +94,7 @@ const Experience = () => {
                   {exp.description}
                 </p>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "0.4rem",
-                  justifyContent: "flex-end",
-                  paddingTop: "0.2rem",
-                }}
-              >
+              <div className="exp-tech">
                 {exp.tech.map((t) => (
                   <span
                     key={t}
@@ -131,6 +119,7 @@ const Experience = () => {
 
         {/* Education */}
         <m.div
+          className="exp-row"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
@@ -140,10 +129,6 @@ const Experience = () => {
             delay: EXPERIENCE.length * 0.1,
           }}
           style={{
-            display: "grid",
-            gridTemplateColumns: "160px 1fr 1fr",
-            gap: "2.5rem",
-            alignItems: "start",
             padding: "2.8rem 0",
             borderBottom: "1px solid var(--line)",
           }}
@@ -194,15 +179,7 @@ const Experience = () => {
               applied machine learning and systems design.
             </p>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "0.4rem",
-              justifyContent: "flex-end",
-              paddingTop: "0.2rem",
-            }}
-          >
+          <div className="exp-tech">
             {["Algorithms", "ML", "Software Engineering"].map((t) => (
               <span
                 key={t}

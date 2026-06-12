@@ -1,9 +1,48 @@
 "use client";
+import { useRef } from "react";
 import { m } from "framer-motion";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
 import { heroContainer, heroItem, heroPanel } from "./motion-utils";
 import HeroTerminal from "./HeroTerminal";
+import Magnetic from "./Magnetic";
+
+gsap.registerPlugin(useGSAP, SplitText);
 
 const Hero = () => {
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  // Guard against React 18 strict-mode double-mount splitting twice
+  const didSplit = useRef(false);
+
+  useGSAP(() => {
+    const el = headlineRef.current;
+    if (!el) return;
+
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      didSplit.current
+    ) {
+      gsap.set(el, { autoAlpha: 1 });
+      return;
+    }
+    didSplit.current = true;
+
+    // Split only after fonts load so line/word metrics are correct
+    document.fonts.ready.then(() => {
+      const split = SplitText.create(el, { type: "words" });
+      gsap.set(el, { autoAlpha: 1 });
+      gsap.from(split.words, {
+        yPercent: 65,
+        autoAlpha: 0,
+        duration: 1.0,
+        ease: "power4.out",
+        stagger: 0.05,
+        delay: 0.45,
+      });
+    });
+  });
+
   return (
     <section
       id="home"
@@ -51,17 +90,10 @@ const Hero = () => {
 
       {/* Left content - staggered page-load animation */}
       <m.div
+        className="hero-left"
         variants={heroContainer}
         initial="hidden"
         animate="show"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          padding: "9rem 4rem 6rem 3rem",
-          position: "relative",
-          zIndex: 2,
-        }}
       >
         <m.div
           variants={heroItem}
@@ -71,8 +103,9 @@ const Hero = () => {
           Java Developer&nbsp;·&nbsp;FNB&nbsp;·&nbsp;South Africa
         </m.div>
 
-        <m.h1
-          variants={heroItem}
+        {/* Headline animated by GSAP SplitText (hidden until split) */}
+        <h1
+          ref={headlineRef}
           style={{
             fontFamily: "var(--font-fraunces), serif",
             fontSize: "clamp(3rem, 5.5vw, 5.6rem)",
@@ -81,6 +114,7 @@ const Hero = () => {
             color: "var(--white)",
             letterSpacing: "-0.028em",
             marginBottom: "2rem",
+            visibility: "hidden",
           }}
         >
           Hi, I&apos;m{" "}
@@ -95,7 +129,7 @@ const Hero = () => {
             matters
           </em>
           .
-        </m.h1>
+        </h1>
 
         <m.p
           variants={heroItem}
@@ -114,12 +148,17 @@ const Hero = () => {
 
         <m.div
           variants={heroItem}
-          style={{ display: "flex", alignItems: "center", gap: "2rem" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1.4rem 2rem",
+            flexWrap: "wrap",
+          }}
         >
+          <Magnetic>
           <m.a
             href="#projects"
             whileHover={{
-              y: -2,
               boxShadow: "0 12px 32px rgba(200,160,90,0.28)",
             }}
             whileTap={{ scale: 0.97 }}
@@ -151,6 +190,7 @@ const Hero = () => {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </m.a>
+          </Magnetic>
           <a
             href="#contact"
             className="hover-line"
@@ -312,6 +352,7 @@ const Hero = () => {
       {/* Scroll indicator */}
       <div
         aria-hidden="true"
+        className="hero-scroll"
         style={{
           position: "absolute",
           bottom: "2.8rem",
