@@ -21,6 +21,9 @@ export default function AnimatedDotGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // Decorative only - skip entirely for users who prefer reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -59,8 +62,13 @@ export default function AnimatedDotGrid() {
     };
 
     const resize = () => {
-      w = canvas.width  = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      // Render at device resolution so dots stay crisp on high-DPI screens
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       allocBuckets();
     };
     resize();

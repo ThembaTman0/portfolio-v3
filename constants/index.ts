@@ -42,6 +42,14 @@ export const PROJECTS = [
     ],
     github: "https://github.com/ThembaTman0/Bankwave-V-2.0",
     demo: null,
+    caseStudy: {
+      problem:
+        "Monolithic banking backends are hard to scale, deploy, and reason about - a single change risks the whole system, and teams can't ship independently.",
+      approach:
+        "Decomposed the domain into independently deployable Spring Boot services with Eureka service discovery, centralized configuration via Spring Cloud Config, and Docker-based local orchestration mirroring production topology.",
+      impact:
+        "Each service builds, tests, and deploys on its own lifecycle. The architecture demonstrates the patterns used in real financial platforms: resilience, discoverability, and configuration as code.",
+    },
   },
   {
     id: "02",
@@ -58,6 +66,14 @@ export const PROJECTS = [
     ],
     github: "https://github.com/ThembaTman0/SATELLITE-IMAGE-CLASSIFICATION",
     demo: null,
+    caseStudy: {
+      problem:
+        "Classifying land cover from satellite imagery by hand is slow and subjective; the research question was whether deep learning could do it reliably at scale.",
+      approach:
+        "Built an end-to-end pipeline - image preprocessing, feature extraction, CNN model training, and rigorous evaluation across architectures - as an honours-level research project.",
+      impact:
+        "Produced a reproducible classification workflow and a comparative analysis of model performance, grounding my engineering work in scientific method and measurement.",
+    },
   },
   {
     id: "03",
@@ -68,6 +84,14 @@ export const PROJECTS = [
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/ThembaTman0/Portfolio-V2",
     demo: "https://thembangobeni.netlify.app",
+    caseStudy: {
+      problem:
+        "Most developer portfolios look like templates - they say nothing about how the developer actually thinks about design, performance, or detail.",
+      approach:
+        "Designed a dark editorial system from scratch: serif display type, a restrained gold accent, canvas-based ambient animation, and motion that respects user preferences.",
+      impact:
+        "A personal brand that reads as deliberate craft rather than a theme - every interaction, easing curve, and hairline border is intentional.",
+    },
   },
   {
     id: "04",
@@ -86,6 +110,14 @@ export const PROJECTS = [
     ],
     github: "https://github.com/ThembaTman0/Eataliano-v2/tree/main",
     demo: "https://eataliano.vercel.app/",
+    caseStudy: {
+      problem:
+        "The original app coupled data fetching, state, and presentation, making features slow to add and the UI janky under network latency.",
+      approach:
+        "Rebuilt on React 18 with a clean separation of concerns: a service layer with in-memory TTL caching, custom hooks for data and debounced search, lazy-loaded routes, and skeleton loading states.",
+      impact:
+        "Instant-feeling search with autocomplete, smooth page transitions, and a codebase where each layer can change independently - a production-grade frontend architecture.",
+    },
   },
 ];
 

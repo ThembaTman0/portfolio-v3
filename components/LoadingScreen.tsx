@@ -6,18 +6,22 @@ const LoadingScreen = () => {
   const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
-    // Only show on hard page load, not soft navigation
-    if (sessionStorage.getItem("tn_loaded")) {
+    // Only show on hard page load, not soft navigation.
+    // Skip for reduced-motion users - it is pure spectacle.
+    if (
+      sessionStorage.getItem("tn_loaded") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       setIsMounted(false);
       return;
     }
 
     // Progress bar fills → screen fades out
-    const t1 = setTimeout(() => setIsExiting(true), 1800);
+    const t1 = setTimeout(() => setIsExiting(true), 1100);
     const t2 = setTimeout(() => {
       setIsMounted(false);
       sessionStorage.setItem("tn_loaded", "1");
-    }, 2500);
+    }, 1700);
 
     return () => {
       clearTimeout(t1);
@@ -63,7 +67,7 @@ const LoadingScreen = () => {
       {/* T.N - staggered letter reveal */}
       <div
         style={{
-          fontFamily: "'Fraunces', serif",
+          fontFamily: "var(--font-fraunces), serif",
           fontSize: "clamp(2.8rem, 6vw, 4.2rem)",
           fontWeight: 400,
           letterSpacing: "0.01em",
@@ -134,7 +138,7 @@ const LoadingScreen = () => {
             height: "100%",
             background:
               "linear-gradient(90deg, var(--accent), var(--accent2))",
-            animation: "loadProgress 1.5s cubic-bezier(0.4,0,0.2,1) 0.3s both",
+            animation: "loadProgress 0.9s cubic-bezier(0.4,0,0.2,1) 0.2s both",
           }}
         />
       </div>

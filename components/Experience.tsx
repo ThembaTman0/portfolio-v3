@@ -7,6 +7,7 @@ const Experience = () => {
   return (
     <section
       id="experience"
+      className="section-pad"
       style={{
         background: "rgba(17,17,17,0.72)",
         padding: "8rem 3rem",

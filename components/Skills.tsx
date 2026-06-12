@@ -1,12 +1,19 @@
 "use client";
 import { SKILLS } from "@/constants";
-import { m } from "framer-motion";
+import { useState } from "react";
+import { m, AnimatePresence } from "framer-motion";
 import { reveal } from "./motion-utils";
 
+const CATEGORIES = Array.from(new Set(SKILLS.map((s) => s.category)));
+
 const Skills = () => {
+  const [active, setActive] = useState(CATEGORIES[0]);
+  const activeSkills = SKILLS.filter((s) => s.category === active);
+
   return (
     <section
       id="skills"
+      className="section-pad"
       style={{
         background: "rgba(17,17,17,0.72)",
         padding: "8rem 3rem",
@@ -15,15 +22,7 @@ const Skills = () => {
     >
       <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
         {/* Header */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "4rem",
-            alignItems: "end",
-            marginBottom: "4.5rem",
-          }}
-        >
+        <div className="skills-header" style={{ marginBottom: "4.5rem" }}>
           <div>
             <m.div
               className="section-label"
@@ -43,7 +42,7 @@ const Skills = () => {
             </m.div>
             <m.h2
               style={{
-                fontFamily: "'Fraunces', serif",
+                fontFamily: "var(--font-fraunces), serif",
                 fontSize: "clamp(2rem, 3vw, 3rem)",
                 fontWeight: 300,
                 lineHeight: 1.08,
@@ -73,109 +72,120 @@ const Skills = () => {
           </m.p>
         </div>
 
-        {/* Skills grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-            gap: "1px",
-            background: "var(--line)",
-            border: "1px solid var(--line)",
-          }}
-        >
-          {SKILLS.map((skill, i) => {
-            const colorMap: Record<string, string> = {
-              "3+ years": "var(--accent)",
-              "2+ years": "var(--muted2)",
-              "Honours Research": "#8fb4c0",
-              "1+ year": "var(--muted)",
-              "1 year": "var(--muted)",
-            };
-            const dotColor = colorMap[skill.proficiency] ?? "var(--muted)";
-
-            return (
-              <m.div
-                key={skill.name}
-                className="card-hover"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{
-                  duration: 0.65,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 0.04 * i,
-                }}
-                whileHover={{ background: "var(--bg3)" }}
-                style={{
-                  background: "var(--bg2)",
-                  padding: "1.6rem 1.8rem",
-                }}
-              >
-                <div
+        {/* Category rail + skill list */}
+        <m.div className="skills-showcase" {...reveal(0.2)}>
+          {/* Rail */}
+          <div
+            className="skills-rail"
+            role="tablist"
+            aria-label="Skill categories"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            {CATEGORIES.map((cat) => {
+              const isActive = cat === active;
+              return (
+                <button
+                  key={cat}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActive(cat)}
+                  onMouseEnter={() => setActive(cat)}
                   style={{
                     display: "flex",
-                    justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "0.55rem",
-                    position: "relative",
-                    zIndex: 1,
+                    gap: "0.8rem",
+                    background: "none",
+                    border: "none",
+                    borderLeft: isActive
+                      ? "1px solid var(--accent)"
+                      : "1px solid var(--line)",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    padding: "0.85rem 0 0.85rem 1.2rem",
+                    fontSize: "0.74rem",
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: isActive ? "var(--white)" : "var(--muted)",
+                    transition: "color 0.3s ease, border-color 0.3s ease",
                   }}
                 >
-                  <div
+                  {cat}
+                  <span
                     style={{
-                      fontSize: "0.9rem",
-                      fontWeight: 400,
-                      color: "var(--text)",
-                      letterSpacing: "0.01em",
+                      fontSize: "0.62rem",
+                      color: isActive ? "var(--accent)" : "var(--muted2)",
+                      letterSpacing: "0.08em",
+                      transition: "color 0.3s ease",
                     }}
                   >
-                    {skill.name}
-                  </div>
-                  <div
+                    {SKILLS.filter((s) => s.category === cat).length}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Skill list for the active category */}
+          <div style={{ minHeight: "300px" }}>
+            <AnimatePresence mode="wait">
+              <m.div
+                key={active}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                style={{ borderTop: "1px solid var(--line)" }}
+              >
+                {activeSkills.map((skill, i) => (
+                  <m.div
+                    key={skill.name}
+                    initial={{ opacity: 0, x: 12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: i * 0.06,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    whileHover={{ paddingLeft: "1.2rem" }}
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      gap: "0.38rem",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                      padding: "1.5rem 0.4rem",
+                      borderBottom: "1px solid var(--line)",
+                      cursor: "default",
                     }}
                   >
                     <span
                       style={{
-                        width: "4px",
-                        height: "4px",
-                        borderRadius: "50%",
-                        background: dotColor,
-                        display: "block",
-                        flexShrink: 0,
+                        fontFamily: "var(--font-fraunces), serif",
+                        fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)",
+                        fontWeight: 300,
+                        color: "var(--white)",
+                        letterSpacing: "-0.015em",
+                        lineHeight: 1.1,
                       }}
-                    />
+                    >
+                      {skill.name}
+                    </span>
                     <span
                       style={{
-                        fontSize: "0.64rem",
-                        letterSpacing: "0.1em",
+                        fontSize: "0.66rem",
+                        letterSpacing: "0.12em",
                         textTransform: "uppercase",
-                        color: dotColor,
+                        color: "var(--accent)",
+                        flexShrink: 0,
+                        marginLeft: "1.5rem",
                       }}
                     >
                       {skill.proficiency}
                     </span>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.66rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "var(--muted2)",
-                    position: "relative",
-                    zIndex: 1,
-                  }}
-                >
-                  {skill.category}
-                </div>
+                  </m.div>
+                ))}
               </m.div>
-            );
-          })}
-        </div>
+            </AnimatePresence>
+          </div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 import { m } from "framer-motion";
 import { heroContainer, heroItem, heroPanel } from "./motion-utils";
+import HeroTerminal from "./HeroTerminal";
 
 const Hero = () => {
   return (
@@ -73,7 +74,7 @@ const Hero = () => {
         <m.h1
           variants={heroItem}
           style={{
-            fontFamily: "'Fraunces', serif",
+            fontFamily: "var(--font-fraunces), serif",
             fontSize: "clamp(3rem, 5.5vw, 5.6rem)",
             fontWeight: 300,
             lineHeight: 1.04,
@@ -232,7 +233,7 @@ const Hero = () => {
         <div
           aria-hidden="true"
           style={{
-            fontFamily: "'Fraunces', serif",
+            fontFamily: "var(--font-fraunces), serif",
             fontSize: "clamp(10rem, 16vw, 18rem)",
             fontWeight: 700,
             color: "transparent",
@@ -248,6 +249,9 @@ const Hero = () => {
         >
           TN
         </div>
+
+        {/* Interactive terminal card */}
+        <HeroTerminal />
 
         {/* Status badge */}
         <m.div

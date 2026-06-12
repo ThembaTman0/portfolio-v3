@@ -7,11 +7,8 @@ const Contact = () => {
   return (
     <section
       id="contact"
+      className="contact-grid section-pad"
       style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "6rem",
-        alignItems: "center",
         padding: "8rem 3rem",
         minHeight: "60vh",
         borderBottom: "1px solid var(--line)",
@@ -40,7 +37,7 @@ const Contact = () => {
 
         <m.h2
           style={{
-            fontFamily: "'Fraunces', serif",
+            fontFamily: "var(--font-fraunces), serif",
             fontSize: "clamp(2.4rem, 4vw, 4rem)",
             fontWeight: 300,
             lineHeight: 1.06,

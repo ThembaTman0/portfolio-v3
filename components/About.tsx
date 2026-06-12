@@ -7,7 +7,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="about-grid"
+      className="about-grid section-pad"
       style={{
         padding: "8rem 3rem",
         borderBottom: "1px solid var(--line)",
@@ -36,7 +36,7 @@ const About = () => {
 
         <m.h2
           style={{
-            fontFamily: "'Fraunces', serif",
+            fontFamily: "var(--font-fraunces), serif",
             fontSize: "clamp(2.2rem, 3.5vw, 3.5rem)",
             fontWeight: 300,
             lineHeight: 1.08,
@@ -142,7 +142,7 @@ const About = () => {
             >
               <div
                 style={{
-                  fontFamily: "'Fraunces', serif",
+                  fontFamily: "var(--font-fraunces), serif",
                   fontSize: "2.6rem",
                   fontWeight: 700,
                   color: "var(--accent)",
@@ -262,7 +262,7 @@ const About = () => {
             <div>
               <div
                 style={{
-                  fontFamily: "'Fraunces', serif",
+                  fontFamily: "var(--font-fraunces), serif",
                   fontSize: "1.05rem",
                   fontWeight: 300,
                   color: "var(--white)",

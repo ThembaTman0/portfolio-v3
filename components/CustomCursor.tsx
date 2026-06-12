@@ -12,8 +12,15 @@ const CustomCursor = () => {
   const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // No-op on touch devices
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    // No-op on touch devices and for reduced-motion users
+    if (
+      !window.matchMedia("(pointer: fine)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+
+    // Hide the native cursor while the custom one is active
+    document.documentElement.classList.add("custom-cursor-active");
 
     const dot = dotRef.current!;
     const ring = ringRef.current!;
@@ -96,6 +103,7 @@ const CustomCursor = () => {
     document.addEventListener("mouseup", onMouseUp, { passive: true });
 
     return () => {
+      document.documentElement.classList.remove("custom-cursor-active");
       cancelAnimationFrame(rafId);
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);

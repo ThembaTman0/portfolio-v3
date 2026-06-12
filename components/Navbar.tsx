@@ -86,7 +86,7 @@ const Navbar = () => {
             whileHover={{ opacity: 0.72 }}
             transition={{ duration: 0.2 }}
             style={{
-              fontFamily: "'Fraunces', serif",
+              fontFamily: "var(--font-fraunces), serif",
               fontSize: "1.15rem",
               fontWeight: 400,
               color: "var(--white)",
@@ -263,7 +263,7 @@ const Navbar = () => {
                       fontSize: "1.05rem",
                       color: isActive ? "var(--accent)" : "var(--text)",
                       textDecoration: "none",
-                      fontFamily: "'Fraunces', serif",
+                      fontFamily: "var(--font-fraunces), serif",
                       fontWeight: 300,
                       letterSpacing: "-0.01em",
                       transition: "color 0.25s ease",
