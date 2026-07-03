@@ -88,7 +88,6 @@ const Skills = () => {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActive(cat)}
-                  onMouseEnter={() => setActive(cat)}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -138,6 +137,7 @@ const Skills = () => {
                 {activeSkills.map((skill, i) => (
                   <m.div
                     key={skill.name}
+                    className="skill-row"
                     initial={{ opacity: 0, x: 12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
@@ -145,7 +145,6 @@ const Skills = () => {
                       delay: i * 0.06,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    whileHover={{ paddingLeft: "1.2rem" }}
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
@@ -156,11 +155,11 @@ const Skills = () => {
                     }}
                   >
                     <span
+                      className="skill-name"
                       style={{
                         fontFamily: "var(--font-fraunces), serif",
                         fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)",
                         fontWeight: 300,
-                        color: "var(--white)",
                         letterSpacing: "-0.015em",
                         lineHeight: 1.1,
                       }}

@@ -142,8 +142,8 @@ const Hero = () => {
           }}
         >
           Building scalable Java microservices at FNB, designing resilient
-          backend architectures, and developing production-grade software used
-          by thousands of customers.
+          backend architectures, and shipping production software for the
+          foreign-exchange systems behind international money transfers.
         </m.p>
 
         <m.div
@@ -193,20 +193,12 @@ const Hero = () => {
           </Magnetic>
           <a
             href="#contact"
-            className="hover-line"
+            className="hover-line link-quiet"
             style={{
               fontSize: "0.8rem",
-              color: "var(--muted)",
               textDecoration: "none",
               letterSpacing: "0.02em",
-              transition: "color 0.3s ease",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "var(--text)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "var(--muted)")
-            }
           >
             Get in touch →
           </a>
@@ -295,6 +287,7 @@ const Hero = () => {
 
         {/* Status badge */}
         <m.div
+          className="status-badge"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
@@ -302,27 +295,12 @@ const Hero = () => {
             position: "absolute",
             top: "9rem",
             left: "2.5rem",
-            border: "1px solid rgba(255,255,255,0.07)",
-            background: "rgba(17,17,17,0.75)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
             padding: "0.65rem 1rem",
             display: "flex",
             alignItems: "center",
             gap: "0.6rem",
-            transition: "border-color 0.3s ease, background 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor =
-              "rgba(74,222,128,0.25)";
-            (e.currentTarget as HTMLElement).style.background =
-              "rgba(17,17,17,0.9)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor =
-              "rgba(255,255,255,0.07)";
-            (e.currentTarget as HTMLElement).style.background =
-              "rgba(17,17,17,0.75)";
           }}
         >
           <span

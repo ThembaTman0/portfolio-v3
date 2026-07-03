@@ -69,26 +69,16 @@ const Contact = () => {
 
         <m.a
           href="mailto:thembatman0@gmail.com"
+          className="email-link"
           style={{
             display: "inline-flex",
             alignItems: "center",
             gap: "0.7rem",
             fontSize: "1rem",
-            color: "var(--white)",
             textDecoration: "none",
             paddingBottom: "0.35rem",
-            borderBottom: "1px solid rgba(200,160,90,0.35)",
-            transition: "color 0.25s ease, border-color 0.25s ease",
           }}
           {...reveal(0.25)}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "var(--accent)";
-            e.currentTarget.style.borderColor = "var(--accent)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "var(--white)";
-            e.currentTarget.style.borderColor = "rgba(200,160,90,0.35)";
-          }}
         >
           thembatman0@gmail.com
           <svg
@@ -108,13 +98,12 @@ const Contact = () => {
       <m.div {...revealScale(0.2)}>
         <div style={{ border: "1px solid var(--line)" }}>
           {SOCIALS.map((social, i) => (
-            <m.a
+            <a
               key={social.name}
               href={social.url}
               target={social.url.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              whileHover={{ paddingLeft: "2.4rem", background: "rgba(255,255,255,0.02)" }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="social-row"
               style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -127,7 +116,10 @@ const Contact = () => {
                 fontSize: "0.88rem",
               }}
             >
-              <span style={{ fontWeight: 400, letterSpacing: "0.01em" }}>
+              <span
+                className="social-name"
+                style={{ fontWeight: 400, letterSpacing: "0.01em" }}
+              >
                 {social.name}
               </span>
               <span
@@ -139,7 +131,7 @@ const Contact = () => {
               >
                 {social.handle}
               </span>
-            </m.a>
+            </a>
           ))}
         </div>
       </m.div>

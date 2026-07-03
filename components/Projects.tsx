@@ -1,17 +1,8 @@
 "use client";
-import { PROJECTS } from "@/constants";
+import { PROJECTS, type Project } from "@/constants";
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { reveal } from "./motion-utils";
-
-type Project = (typeof PROJECTS)[number];
-
-const accentOnHover = {
-  onMouseEnter: (e: React.MouseEvent<HTMLElement>) =>
-    (e.currentTarget.style.color = "var(--accent)"),
-  onMouseLeave: (e: React.MouseEvent<HTMLElement>) =>
-    (e.currentTarget.style.color = "var(--muted)"),
-};
 
 const ProjectRow = ({
   project,
@@ -57,6 +48,11 @@ const ProjectRow = ({
 
         {/* Main content */}
         <div>
+          {project.featured && (
+            <div style={{ marginBottom: "0.9rem" }}>
+              <span className="featured-tag">★ Featured build</span>
+            </div>
+          )}
           <div
             style={{
               display: "flex",
@@ -136,6 +132,7 @@ const ProjectRow = ({
               onClick={onToggle}
               aria-expanded={open}
               aria-controls={panelId}
+              className="case-toggle"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -147,17 +144,7 @@ const ProjectRow = ({
                 fontSize: "0.68rem",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: open ? "var(--accent)" : "var(--muted)",
-                transition: "color 0.25s ease",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--accent)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = open
-                  ? "var(--accent)"
-                  : "var(--muted)")
-              }
             >
               <m.span
                 animate={{ rotate: open ? 45 : 0 }}
@@ -326,20 +313,17 @@ const Projects = () => {
           href="https://github.com/ThembaTman0"
           target="_blank"
           rel="noreferrer"
-          className="hover-line"
+          className="hover-line link-accent"
           style={{
             fontSize: "0.72rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "var(--muted)",
             textDecoration: "none",
             display: "flex",
             alignItems: "center",
             gap: "0.45rem",
-            transition: "color 0.25s ease",
           }}
           {...reveal(0.15)}
-          {...accentOnHover}
         >
           GitHub →
         </m.a>

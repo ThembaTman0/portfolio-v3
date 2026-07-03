@@ -3,7 +3,6 @@ import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import LoadingScreen from "@/components/LoadingScreen";
 import AnimatedDotGrid from "@/components/AnimatedDotGrid";
 import MotionProvider from "@/components/MotionProvider";
 import CustomCursor from "@/components/CustomCursor";
@@ -116,9 +115,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
 
-        {/* Loading screen - shown once per session */}
-        <LoadingScreen />
-
         <AnimatedDotGrid />
         <CustomCursor />
         <div id="scroll-progress" />
@@ -128,75 +124,19 @@ export default function RootLayout({
           <Footer />
         </MotionProvider>
 
+        {/* Scroll progress bar (anchor smooth-scroll is handled by CSS
+            scroll-behavior + scroll-padding-top in globals.css) */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function () {
-                var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-                /* ── Smooth scroll for anchor links ──────── */
-                function easeInOutQuint(t) {
-                  return t < 0.5
-                    ? 16 * t * t * t * t * t
-                    : 1 - Math.pow(-2 * t + 2, 5) / 2;
-                }
-
-                function smoothScrollTo(y, duration) {
-                  var startY = window.scrollY;
-                  var diff   = y - startY;
-                  var start  = null;
-
-                  function step(now) {
-                    if (!start) start = now;
-                    var elapsed  = now - start;
-                    var progress = Math.min(elapsed / duration, 1);
-                    window.scrollTo(0, startY + diff * easeInOutQuint(progress));
-                    if (progress < 1) requestAnimationFrame(step);
-                  }
-                  requestAnimationFrame(step);
-                }
-
-                document.addEventListener('click', function (e) {
-                  /* Walk up the DOM to find the anchor */
-                  var el = e.target;
-                  while (el && el.tagName !== 'A') el = el.parentElement;
-                  if (!el) return;
-
-                  var href = el.getAttribute('href');
-                  if (!href || href.charAt(0) !== '#' || href.length < 2) return;
-
-                  var dest = document.querySelector(href);
-                  if (!dest) return;
-
-                  e.preventDefault();
-
-                  /* Offset so the section clears the fixed navbar (~72px) */
-                  var navH   = 72;
-                  var destY  = dest.getBoundingClientRect().top + window.scrollY - navH;
-
-                  if (reduceMotion) {
-                    window.scrollTo(0, destY);
-                  } else {
-                    var distance = Math.abs(destY - window.scrollY);
-                    /* Adaptive duration: fast for short hops, max ~1100ms */
-                    var duration = Math.min(Math.max(distance * 0.55, 550), 1100);
-                    smoothScrollTo(destY, duration);
-                  }
-
-                  /* Update hash without the instant jump */
-                  history.pushState(null, '', href);
-                });
-
-                /* ── Scroll progress bar ─────────────────── */
                 var bar = document.getElementById('scroll-progress');
-
-                function updateProgress() {
+                if (!bar) return;
+                window.addEventListener('scroll', function () {
                   var total = document.documentElement.scrollHeight - window.innerHeight;
-                  var pct   = total > 0 ? Math.min(window.scrollY / total, 1) : 0;
-                  if (bar) bar.style.transform = 'scaleX(' + pct + ')';
-                }
-                window.addEventListener('scroll', updateProgress, { passive: true });
-
+                  var pct = total > 0 ? Math.min(window.scrollY / total, 1) : 0;
+                  bar.style.transform = 'scaleX(' + pct + ')';
+                }, { passive: true });
               })();
             `,
           }}

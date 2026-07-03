@@ -8,14 +8,15 @@ interface Wave {
   maxRadius: number;
   speedPxSec: number;
   sigma2: number;
+  band: number;      // distance from the ring beyond which glow is negligible
   peak: number;
 }
 
-const SPACING   = 25;
 const DOT_R     = 0.8;
 const BASE      = 0.1;
 const LEVELS    = 12;
 const MAX_WAVES = 7;
+const BASE_BUCKET = Math.round(BASE * (LEVELS - 1));
 
 export default function AnimatedDotGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -31,13 +32,16 @@ export default function AnimatedDotGrid() {
 
     let animId: number;
     let w = 0, h = 0;
+    let spacing = 25;
+    let frameMs = 0; // min ms between rendered frames (0 = every rAF tick)
 
     let bktX: Float32Array[] = [];
     let bktY: Float32Array[] = [];
     const bktLen = new Int32Array(LEVELS);
 
     const allocBuckets = () => {
-      const maxDots = (Math.ceil(w / SPACING) + 2) * (Math.ceil(h / SPACING) + 2);
+      const maxDots =
+        (Math.ceil(w / spacing) + 2) * (Math.ceil(h / spacing) + 2);
       bktX = Array.from({ length: LEVELS }, () => new Float32Array(maxDots));
       bktY = Array.from({ length: LEVELS }, () => new Float32Array(maxDots));
     };
@@ -56,16 +60,21 @@ export default function AnimatedDotGrid() {
         maxRadius:  Math.hypot(w, docH),
         speedPxSec: 55 + Math.random() * 400,
         sigma2:     2 * sigma * sigma,
+        band:       4 * sigma, // beyond 4σ the gaussian is ~0
         peak:       0.55 + Math.random() * 0.3,
       });
       nextSpawnAt = now + 2600 + Math.random() * 2200;
     };
 
     const resize = () => {
-      // Render at device resolution so dots stay crisp on high-DPI screens
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = window.innerWidth;
       h = window.innerHeight;
+      // High-res screens: the grid is ambient decoration, so trade fidelity
+      // for a fraction of the fill cost - 1x pixels, wider spacing, 30fps.
+      const bigScreen = w * h > 2560 * 1440;
+      const dpr = Math.min(window.devicePixelRatio || 1, bigScreen ? 1 : 2);
+      spacing = w >= 2560 ? 34 : 25;
+      frameMs = bigScreen ? 31 : 0;
       canvas.width  = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -78,20 +87,26 @@ export default function AnimatedDotGrid() {
       `rgba(200,160,90,${(i / (LEVELS - 1)).toFixed(3)})`
     );
 
-    let lastFrame = 0;
+    let lastFrame = performance.now();
+
+    // Per-row scratch lists of waves whose ring can actually reach the row
+    const rowWaves: Wave[] = [];
+    const rowDy: number[] = [];
 
     const draw = (now: number) => {
       animId = requestAnimationFrame(draw);
+      if (now - lastFrame < frameMs) return;
 
-      // Advance wave physics with real elapsed time - smooth at any frame rate
-      const dt = now - lastFrame;
+      // Advance wave physics with real elapsed time - smooth at any frame
+      // rate (capped so a backgrounded tab doesn't teleport the rings)
+      const dt = Math.min(now - lastFrame, 100);
       lastFrame = now;
 
       if (now >= nextSpawnAt) spawnWave(now);
 
       for (let i = waves.length - 1; i >= 0; i--) {
         waves[i].radius += waves[i].speedPxSec * (dt / 1000);
-        if (waves[i].radius > waves[i].maxRadius + Math.sqrt(waves[i].sigma2 / 2) * 5)
+        if (waves[i].radius > waves[i].maxRadius + waves[i].band)
           waves.splice(i, 1);
       }
 
@@ -100,22 +115,49 @@ export default function AnimatedDotGrid() {
 
       // Read scroll offset every frame so dots track the page exactly
       const scrollY   = window.scrollY;
-      const firstRow  = Math.floor(scrollY / SPACING);
-      const lastRow   = Math.ceil((scrollY + h) / SPACING);
-      const cols      = Math.ceil(w / SPACING) + 1;
+      const firstRow  = Math.floor(scrollY / spacing);
+      const lastRow   = Math.ceil((scrollY + h) / spacing);
+      const cols      = Math.ceil(w / spacing) + 1;
 
       for (let row = firstRow; row <= lastRow; row++) {
-        const docY    = row * SPACING;       // fixed position in the document
+        const docY    = row * spacing;       // fixed position in the document
         const screenY = docY - scrollY;      // where it appears on screen
 
+        // Cull waves whose ring band cannot intersect this row: cheap
+        // per-row test replaces thousands of per-dot gaussians.
+        rowWaves.length = 0;
+        rowDy.length = 0;
+        for (const wv of waves) {
+          const dy  = docY - wv.y;
+          const ady = Math.abs(dy);
+          const maxDx = Math.max(wv.x, w - wv.x);
+          const maxDist = Math.sqrt(maxDx * maxDx + dy * dy);
+          if (wv.radius + wv.band < ady || wv.radius - wv.band > maxDist)
+            continue;
+          rowWaves.push(wv);
+          rowDy.push(dy);
+        }
+
+        if (rowWaves.length === 0) {
+          // No wave touches this row - every dot sits at base opacity
+          for (let col = 0; col < cols; col++) {
+            const idx = bktLen[BASE_BUCKET]++;
+            bktX[BASE_BUCKET][idx] = col * spacing;
+            bktY[BASE_BUCKET][idx] = screenY;
+          }
+          continue;
+        }
+
         for (let col = 0; col < cols; col++) {
-          const x = col * SPACING;
+          const x = col * spacing;
 
           let glow = 0;
-          for (const wv of waves) {
-            const dx   = x - wv.x;
-            const dy   = docY - wv.y;        // distance in document space
+          for (let k = 0; k < rowWaves.length; k++) {
+            const wv = rowWaves[k];
+            const dx = x - wv.x;
+            const dy = rowDy[k];
             const diff = Math.sqrt(dx * dx + dy * dy) - wv.radius;
+            if (diff > wv.band || diff < -wv.band) continue;
             glow += wv.peak * Math.exp(-(diff * diff) / wv.sigma2);
           }
 

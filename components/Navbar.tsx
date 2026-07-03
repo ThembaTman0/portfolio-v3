@@ -122,23 +122,15 @@ const Navbar = () => {
               >
                 <a
                   href={link.href}
-                  className={`hover-line${isActive ? " nav-active" : ""}`}
+                  className={`hover-line nav-link${
+                    isActive ? " nav-active" : ""
+                  }`}
                   style={{
                     fontSize: "0.72rem",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: isActive ? "var(--white)" : "var(--muted)",
                     textDecoration: "none",
-                    transition: "color 0.3s ease",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "var(--text)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = isActive
-                      ? "var(--white)"
-                      : "var(--muted)")
-                  }
                 >
                   {link.label}
                 </a>
@@ -150,7 +142,7 @@ const Navbar = () => {
         {/* CTA */}
         <m.a
           href="#contact"
-          className="hidden lg:inline-flex"
+          className="hidden lg:inline-flex btn-outline"
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
@@ -159,23 +151,7 @@ const Navbar = () => {
             fontSize: "0.72rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            border: "1px solid rgba(200,160,90,0.45)",
-            color: "var(--accent)",
             padding: "0.45rem 1.1rem",
-            borderRadius: "var(--radius)",
-            textDecoration: "none",
-            transition:
-              "background 0.3s ease, color 0.3s ease, border-color 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "var(--accent)";
-            e.currentTarget.style.color = "#0a0a0a";
-            e.currentTarget.style.borderColor = "var(--accent)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "var(--accent)";
-            e.currentTarget.style.borderColor = "rgba(200,160,90,0.45)";
           }}
         >
           Hire me
@@ -193,10 +169,7 @@ const Navbar = () => {
             cursor: "pointer",
             color: "var(--text)",
             padding: "0.2rem",
-            transition: "opacity 0.2s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.65")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
           <svg
             width="20"
@@ -252,6 +225,9 @@ const Navbar = () => {
                     key={link.key}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
+                    className={`menu-link${
+                      isActive ? " menu-link-active" : ""
+                    }`}
                     initial={{ opacity: 0, x: -14 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
@@ -261,21 +237,11 @@ const Navbar = () => {
                     }}
                     style={{
                       fontSize: "1.05rem",
-                      color: isActive ? "var(--accent)" : "var(--text)",
                       textDecoration: "none",
                       fontFamily: "var(--font-fraunces), serif",
                       fontWeight: 300,
                       letterSpacing: "-0.01em",
-                      transition: "color 0.25s ease",
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "var(--accent)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = isActive
-                        ? "var(--accent)"
-                        : "var(--text)")
-                    }
                   >
                     {link.label}
                   </m.a>
@@ -284,6 +250,7 @@ const Navbar = () => {
               <m.a
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
+                className="btn-outline"
                 initial={{ opacity: 0, x: -14 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -297,21 +264,8 @@ const Navbar = () => {
                   fontSize: "0.75rem",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  border: "1px solid rgba(200,160,90,0.4)",
-                  color: "var(--accent)",
                   padding: "0.65rem 1.3rem",
-                  borderRadius: "var(--radius)",
-                  textDecoration: "none",
                   alignSelf: "flex-start",
-                  transition: "background 0.3s ease, color 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "var(--accent)";
-                  e.currentTarget.style.color = "#0a0a0a";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "var(--accent)";
                 }}
               >
                 Hire me

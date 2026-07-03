@@ -14,7 +14,9 @@
   --accent:  #c8a05a;
   --accent2: #b86840;
   --accent-dim: rgba(200, 160, 90, 0.15);
+  --accent-line: rgba(200, 160, 90, 0.35);
   --white:   #ede9e1;
+  --nav-h:   72px;
   --radius:  2px;
   --ease-silk: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
@@ -27,7 +29,9 @@
 }
 
 html {
-  /* scroll-behavior handled by JS smooth scroll in layout */
+  scroll-behavior: smooth;
+  /* Anchor targets clear the fixed navbar */
+  scroll-padding-top: calc(var(--nav-h) + 12px);
 }
 
 body {
@@ -36,6 +40,15 @@ body {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-weight: 300;
   overflow-x: hidden;
+}
+
+/* ── Keyboard focus: visible everywhere, hover styles are not enough ── */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
 }
 
 /* ── Reduced motion: collapse all CSS animation/transitions ──── */
@@ -55,6 +68,10 @@ html.custom-cursor-active,
 html.custom-cursor-active * {
   cursor: none !important;
 }
+/* …but keep the native I-beam over readable text */
+html.custom-cursor-active :is(p, h1, h2, h3, h4, h5, h6, li, blockquote) {
+  cursor: text !important;
+}
 
 /* ── Film grain overlay ──────────────────────────────────────── */
 body::before {
@@ -73,9 +90,13 @@ body::before {
   color: #0a0a0a;
 }
 
-::-webkit-scrollbar { width: 1px; }
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(200,160,90,0.35); }
+::-webkit-scrollbar-thumb {
+  background: rgba(200, 160, 90, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(200, 160, 90, 0.5); }
 
 /* ── Scroll progress bar ─────────────────────────────────────── */
 #scroll-progress {
@@ -91,9 +112,6 @@ body::before {
   pointer-events: none;
   will-change: transform;
 }
-
-
-/* - Scroll reveal - handled by Framer Motion ────────────────── */
 
 /* ── Section label line ──────────────────────────────────────── */
 .section-label {
@@ -129,11 +147,39 @@ body::before {
   background: var(--accent);
   transition: width 0.4s var(--ease-silk);
 }
-.hover-line:hover::after {
+.hover-line:hover::after,
+.hover-line:focus-visible::after {
   width: 100%;
 }
 
-/* ── Active nav link ─────────────────────────────────────────── */
+/* ── Link color treatments (replace JS mouseenter handlers) ──── */
+.link-quiet {
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+.link-quiet:hover,
+.link-quiet:focus-visible {
+  color: var(--text);
+}
+
+.link-accent {
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+.link-accent:hover,
+.link-accent:focus-visible {
+  color: var(--accent);
+}
+
+/* ── Nav links ───────────────────────────────────────────────── */
+.nav-link {
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--text);
+}
 .nav-active {
   color: var(--white) !important;
 }
@@ -141,50 +187,103 @@ body::before {
   width: 100% !important;
 }
 
-/* ── Card hover border + shimmer ─────────────────────────────── */
-.card-hover {
-  position: relative;
-  overflow: hidden;
-  transition: background 0.4s var(--ease-silk);
+/* ── Outline CTA button (navbar "Hire me") ───────────────────── */
+.btn-outline {
+  border: 1px solid rgba(200, 160, 90, 0.45);
+  color: var(--accent);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
-.card-hover::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
+.btn-outline:hover,
+.btn-outline:focus-visible {
   background: var(--accent);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.45s var(--ease-silk);
-  z-index: 1;
+  color: #0a0a0a;
+  border-color: var(--accent);
 }
-.card-hover:hover::before {
-  transform: scaleY(1);
+
+/* ── Mobile menu link ────────────────────────────────────────── */
+.menu-link {
+  color: var(--text);
+  transition: color 0.25s ease;
 }
-/* Shimmer sweep */
-.card-hover::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent 20%,
-    rgba(200, 160, 90, 0.06) 50%,
-    transparent 80%
-  );
-  transform: translateX(-140%) skewX(-12deg);
-  transition: none;
-  pointer-events: none;
-  z-index: 0;
+.menu-link:hover,
+.menu-link:focus-visible {
+  color: var(--accent);
 }
-.card-hover:hover::after {
-  transform: translateX(300%) skewX(-12deg);
-  transition: transform 0.75s var(--ease-silk);
+.menu-link.menu-link-active {
+  color: var(--accent);
+}
+
+/* ── Contact email link ──────────────────────────────────────── */
+.email-link {
+  color: var(--white);
+  border-bottom: 1px solid var(--accent-line);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.email-link:hover,
+.email-link:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Skill rows: transform-only hover (no layout reflow) ─────── */
+.skill-row {
+  transition: background 0.35s var(--ease-silk);
+}
+.skill-row:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+.skill-row .skill-name {
+  display: inline-block;
+  color: var(--white);
+  transition: transform 0.45s var(--ease-silk), color 0.3s ease;
+  will-change: transform;
+}
+.skill-row:hover .skill-name {
+  transform: translateX(0.7rem);
+  color: var(--accent);
+}
+
+/* ── Social rows (contact): transform-only hover ─────────────── */
+.social-row {
+  transition: background 0.35s var(--ease-silk);
+}
+.social-row:hover,
+.social-row:focus-visible {
+  background: rgba(255, 255, 255, 0.02);
+}
+.social-row .social-name {
+  display: inline-block;
+  transition: transform 0.45s var(--ease-silk), color 0.3s ease;
+  will-change: transform;
+}
+.social-row:hover .social-name,
+.social-row:focus-visible .social-name {
+  transform: translateX(0.7rem);
+  color: var(--accent);
+}
+
+/* ── Case study toggle ───────────────────────────────────────── */
+.case-toggle {
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+.case-toggle:hover,
+.case-toggle:focus-visible,
+.case-toggle[aria-expanded="true"] {
+  color: var(--accent);
+}
+
+/* ── Status badge (hero) ─────────────────────────────────────── */
+.status-badge {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(17, 17, 17, 0.75);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.status-badge:hover {
+  border-color: rgba(74, 222, 128, 0.25);
+  background: rgba(17, 17, 17, 0.9);
 }
 
 /* ── Project row hover ───────────────────────────────────────── */
@@ -201,7 +300,20 @@ body::before {
   color: var(--white) !important;
 }
 
-/* - Mobile menu - handled by Framer Motion AnimatePresence ──── */
+/* ── Featured project tag ────────────────────────────────────── */
+.featured-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent-line);
+  background: rgba(200, 160, 90, 0.06);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius);
+}
 
 /* - Keyframes ───────────────────────────────────────────────── */
 @keyframes scrollBounce {
@@ -214,11 +326,6 @@ body::before {
   50%       { opacity: 0.75; box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-10px); }
@@ -227,22 +334,6 @@ body::before {
 @keyframes accentPulse {
   0%, 100% { opacity: 0.07; }
   50%       { opacity: 0.14; }
-}
-
-/* ── Loading screen ──────────────────────────────────────────── */
-@keyframes loadFadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes loadLine {
-  from { width: 0;   opacity: 0; }
-  to   { width: 36px; opacity: 1; }
-}
-
-@keyframes loadProgress {
-  from { width: 0%; }
-  to   { width: 100%; }
 }
 
 /* ── Responsive layouts ──────────────────────────────────────── */
@@ -313,7 +404,8 @@ body::before {
   height: 14px;
   flex-shrink: 0;
 }
-.project-link-btn:hover {
+.project-link-btn:hover,
+.project-link-btn:focus-visible {
   color: var(--accent);
   border-color: rgba(200, 160, 90, 0.55);
   background: rgba(200, 160, 90, 0.06);
@@ -456,11 +548,4 @@ body::before {
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
   }
-}
-
-@layer utilities {
-  .max-container    { @apply mx-auto max-w-[1440px]; }
-  .padding-container { @apply px-6 lg:px-16 2xl:px-20; }
-  .flexCenter       { @apply flex items-center justify-center; }
-  .flexBetween      { @apply flex items-center justify-between; }
 }

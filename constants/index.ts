@@ -17,7 +17,7 @@ export const SKILLS = [
   { name: "SQL / PostgreSQL", proficiency: "3+ years", category: "Data" },
   { name: "Git & CI/CD", proficiency: "3+ years", category: "DevOps" },
   { name: "Docker", proficiency: "2+ years", category: "DevOps" },
-  { name: "AWS", proficiency: "1 year", category: "Cloud" },
+  // { name: "AWS", proficiency: "1 year", category: "Cloud" },
   { name: "React", proficiency: "2+ years", category: "Frontend" },
   { name: "TypeScript", proficiency: "2+ years", category: "Frontend" },
   { name: "Next.js", proficiency: "2+ years", category: "Frontend" },
@@ -25,9 +25,26 @@ export const SKILLS = [
   { name: "TensorFlow", proficiency: "Honours Research", category: "AI / ML" },
 ];
 
-export const PROJECTS = [
+export interface Project {
+  id: string;
+  featured?: boolean;
+  title: string;
+  subtitle: string;
+  description: string;
+  tags: string[];
+  github: string | null;
+  demo: string | null;
+  caseStudy: {
+    problem: string;
+    approach: string;
+    impact: string;
+  } | null;
+}
+
+export const PROJECTS: Project[] = [
   {
     id: "01",
+    featured: true,
     title: "Bankwave V2.0 - Microservices Banking Platform",
     subtitle: "Java · Spring Boot · Microservices",
     description:
@@ -80,7 +97,7 @@ export const PROJECTS = [
     title: "Portfolio V2",
     subtitle: "Next.js · TypeScript · Design",
     description:
-      "This portfolio built with Next.js, TypeScript and Tailwind CSS. Dark editorial design with clean typography and minimal animations.",
+      "The previous iteration of this site, built with Next.js, TypeScript and Tailwind CSS. Dark editorial design with clean typography and minimal animations.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/ThembaTman0/Portfolio-V2",
     demo: "https://thembangobeni.netlify.app",
@@ -127,7 +144,7 @@ export const EXPERIENCE = [
     company: "First National Bank (FNB) - Foreign Exchange",
     period: "2023 - Present",
     description:
-      "Building backend systems for FNB's foreign exchange division the engine behind currency conversions and international money transfers for millions of customers. Working on modernising older codebases, improving system reliability, scalability, and ease of deployment.",
+      "Building backend systems for FNB's foreign exchange division - the engine behind currency conversions and international money transfers for millions of customers. Modernising older codebases and improving system reliability, scalability, and ease of deployment.",
     tech: ["Java", "Apache Wicket", "Spring Boot", "REST APIs", "SQL"],
   },
   {
