@@ -67,7 +67,7 @@ export const PROJECTS: Project[] = [
     demo: null,
     caseStudy: {
       problem:
-        "Monolithic banking backends are hard to scale, deploy, and reason about - a single change risks the whole system, and teams can't ship independently.",
+        "Monolithic banking backends are hard to scale, deploy, and reason about. A single change risks the whole system, and teams can't ship independently.",
       approach:
         "Decomposed the domain into independently deployable Spring Boot services with Eureka service discovery, centralized configuration via Spring Cloud Config, and Docker-based local orchestration mirroring production topology.",
       impact:
@@ -79,7 +79,7 @@ export const PROJECTS: Project[] = [
     title: "SynthForge - JPA-Aware Data Seeding for Spring Boot",
     subtitle: "Java 21 · Spring Boot · Maven",
     description:
-      "A JPA-aware fake data seeding library for Spring Boot: annotate an entity with @Seed, start the app in a dev profile, and the database fills with realistic, relationship-consistent rows - correct parent-before-child ordering, profile-gated so it can never touch production, and idempotent across restarts.",
+      "A JPA-aware fake data seeding library for Spring Boot: annotate an entity with @Seed, start the app in a dev profile, and the database fills with realistic, relationship-consistent rows. Parent-before-child ordering is correct, seeding is profile-gated so it can never touch production, and it's idempotent across restarts.",
     tags: [
       "Java 21",
       "Spring Boot",
@@ -95,7 +95,7 @@ export const PROJECTS: Project[] = [
       approach:
         "Built a JPA-aware seeding library around an @Seed annotation: entity scanning and generator resolution in synthforge-core, a topological seed graph that orders parents before children across owning @ManyToOne/@OneToOne relationships, and Spring Boot autoconfiguration that only activates on explicitly enabled profiles.",
       impact:
-        "Startup seeding is idempotent (tables with existing rows are skipped) and constraint-aware (@NotNull, @Size, @Email, unique columns), validated by unit and integration tests against a demo app on H2 - with a public, gated roadmap that only opens further scope once real usage justifies it.",
+        "Startup seeding is idempotent (tables with existing rows are skipped) and constraint-aware (@NotNull, @Size, @Email, unique columns), validated by unit and integration tests against a demo app on H2. A public, gated roadmap only opens further scope once real usage justifies it.",
     },
   },
   {
@@ -117,11 +117,11 @@ export const PROJECTS: Project[] = [
     demoLabel: "Paper",
     caseStudy: {
       problem:
-        "High-resolution satellite imagery is collected far faster than it can be labelled by hand. The research question: how well can a classical feature-descriptor pipeline classify land use - without the data volume and compute that deep learning demands?",
+        "High-resolution satellite imagery is collected far faster than it can be labelled by hand. The research question: how well can a classical feature-descriptor pipeline classify land use without the data volume and compute that deep learning demands?",
       approach:
-        "Combined global (HOG) and local (DAISY) descriptors through a Bag of Features pipeline - Mini-Batch K-Means encoding with L2 pooling - and classified with an SVM (RBF kernel), validated by 10-fold cross-validation across 21 UC Merced land-use classes.",
+        "Combined global (HOG) and local (DAISY) descriptors through a Bag of Features pipeline (Mini-Batch K-Means encoding with L2 pooling), then classified with an SVM (RBF kernel), validated by 10-fold cross-validation across 21 UC Merced land-use classes.",
       impact:
-        "The hybrid model reached 81.42% accuracy and beat an Inception-v3-CapsNet deep-learning baseline at this dataset scale - published on IEEE Xplore - showing a well-tuned classical pipeline can outperform data-hungry deep models when samples are limited.",
+        "The hybrid model reached 81.42% accuracy and beat an Inception-v3-CapsNet deep-learning baseline at this dataset scale. Published on IEEE Xplore and since cited in subsequent research, it shows a well-tuned classical pipeline can outperform data-hungry deep models when samples are limited.",
     },
   },
   {
@@ -149,7 +149,7 @@ export const PROJECTS: Project[] = [
       approach:
         "Rebuilt on React 18 with a clean separation of concerns: a service layer with in-memory TTL caching, custom hooks for data and debounced search, lazy-loaded routes, and skeleton loading states.",
       impact:
-        "Instant-feeling search with autocomplete, smooth page transitions, and a codebase where each layer can change independently - a production-grade frontend architecture.",
+        "Instant-feeling search with autocomplete, smooth page transitions, and a codebase where each layer can change independently: a production-grade frontend architecture.",
     },
   },
 ];
@@ -160,7 +160,7 @@ export const EXPERIENCE = [
     company: "First National Bank (FNB) - Foreign Exchange",
     period: "2023 - Present",
     description:
-      "Building backend systems for FNB's foreign exchange division - the engine behind currency conversions and international money transfers for millions of customers. Modernising older codebases and improving system reliability, scalability, and ease of deployment.",
+      "Building backend systems for FNB's foreign exchange division, the engine behind currency conversions and international money transfers for millions of customers. Modernising older codebases and improving system reliability, scalability, and ease of deployment.",
     tech: ["Java", "Apache Wicket", "Spring Boot", "REST APIs", "SQL"],
   },
   {

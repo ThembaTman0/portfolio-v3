@@ -2,9 +2,10 @@
 import { m } from "framer-motion";
 
 /*
- * Static terminal card for the hero's right panel. Renders a short, fixed
- * command/output transcript. (Previously typed itself out on a loop; that
- * perpetual timer was trimmed in favour of a calmer, quieter hero.)
+ * Static terminal card for the hero's right panel. Renders a fixed transcript.
+ * (A typewriter version was tried and removed - it read as broken/distracting
+ * next to the headline; keep this static.) The only motion is the card's
+ * one-time fade-in on mount.
  */
 
 interface TermLine {
