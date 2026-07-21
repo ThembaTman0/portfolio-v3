@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { getPerfTier } from "./perf-tier";
 
 interface Wave {
   x: number;
@@ -46,11 +47,16 @@ export default function AnimatedDotGrid() {
       bktY = Array.from({ length: LEVELS }, () => new Float32Array(maxDots));
     };
 
+    // Mobile/touch and low-power hardware get the same cheaper treatment as
+    // oversized desktop monitors: this is ambient decoration, not content.
+    const lite = getPerfTier() === "lite";
+    let maxWaves = lite ? 3 : MAX_WAVES;
+
     const waves: Wave[] = [];
     let nextSpawnAt = 0;
 
     const spawnWave = (now: number) => {
-      if (waves.length >= MAX_WAVES) return;
+      if (waves.length >= maxWaves) return;
       const sigma = 55 + Math.random() * 35;
       const docH  = document.documentElement.scrollHeight;
       waves.push({
@@ -69,16 +75,29 @@ export default function AnimatedDotGrid() {
     const resize = () => {
       w = window.innerWidth;
       h = window.innerHeight;
-      // High-res screens: the grid is ambient decoration, so trade fidelity
-      // for a fraction of the fill cost - 1x pixels, wider spacing, 30fps.
-      const bigScreen = w * h > 2560 * 1440;
-      const dpr = Math.min(window.devicePixelRatio || 1, bigScreen ? 1 : 2);
-      spacing = w >= 2560 ? 34 : 25;
-      frameMs = bigScreen ? 31 : 0;
+
+      // Three area-based tiers instead of one "big screen" bucket - a true
+      // 4K+ display (~8.3M px) is more than double a 1440p monitor's area
+      // and needs meaningfully sparser treatment, not the same one.
+      const area = w * h;
+      const big   = lite || area > 1920 * 1080;   // 1440p-class and up, or mobile/low-power
+      const ultra = area > 2560 * 1440;           // true 4K and beyond
+
+      const dpr = Math.min(window.devicePixelRatio || 1, big ? 1 : 2);
+      spacing  = ultra ? 48 : big ? (lite ? 40 : 34) : 25;
+      frameMs  = ultra ? 42 : big ? 31 : 0;
+      maxWaves = ultra ? 2 : lite ? 3 : big ? 4 : MAX_WAVES;
+
       canvas.width  = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       allocBuckets();
+
+      // Backdrop-filter blur re-samples whatever's behind it on every change,
+      // and this canvas is always changing - at large pixel counts that
+      // compounds into real jank. Let CSS lighten every blur() on the page
+      // whenever the canvas itself has dropped out of full fidelity.
+      document.documentElement.classList.toggle("reduce-fx", big);
     };
     resize();
     window.addEventListener("resize", resize, { passive: true });
@@ -182,12 +201,26 @@ export default function AnimatedDotGrid() {
       }
     };
 
+    // Pause the rAF loop while the tab is backgrounded - a decorative canvas
+    // has no reason to burn CPU/battery on a hidden tab.
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animId);
+      } else {
+        lastFrame = performance.now();
+        animId = requestAnimationFrame(draw);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
     spawnWave(performance.now());
     animId = requestAnimationFrame(draw);
 
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      document.documentElement.classList.remove("reduce-fx");
     };
   }, []);
 

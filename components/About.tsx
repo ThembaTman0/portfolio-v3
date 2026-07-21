@@ -6,8 +6,37 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { reveal, revealScale } from "./motion-utils";
+import SplitReveal from "./SplitReveal";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+// Counts up from 0 once the stat scrolls into view - static under reduced motion.
+const StatCounter = ({ value, suffix }: { value: number; suffix: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useGSAP(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = `${value}${suffix}`;
+      return;
+    }
+
+    const counter = { n: 0 };
+    gsap.to(counter, {
+      n: value,
+      duration: 1.4,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 90%", once: true },
+      onUpdate: () => {
+        el.textContent = `${Math.round(counter.n)}${suffix}`;
+      },
+    });
+  }, [value, suffix]);
+
+  return <span ref={ref}>0{suffix}</span>;
+};
 
 const About = () => {
   const imgCardRef = useRef<HTMLDivElement>(null);
@@ -62,7 +91,7 @@ const About = () => {
           </span>
         </m.div>
 
-        <m.h2
+        <SplitReveal
           style={{
             fontFamily: "var(--font-fraunces), serif",
             fontSize: "clamp(2.2rem, 3.5vw, 3.5rem)",
@@ -72,15 +101,14 @@ const About = () => {
             letterSpacing: "-0.022em",
             marginBottom: "2.4rem",
           }}
-          {...reveal(0.1)}
         >
           A developer who
           <br />
-          <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+          <em style={{ fontStyle: "italic", color: "var(--white)" }}>
             loves
           </em>{" "}
           the craft.
-        </m.h2>
+        </SplitReveal>
 
         <m.p
           style={{
@@ -121,27 +149,12 @@ const About = () => {
             color: "var(--muted)",
             fontSize: "0.94rem",
             lineHeight: 1.9,
-            marginBottom: "1.3rem",
           }}
           {...reveal(0.26)}
         >
           Outside of work, I build side projects, refine my engineering skills,
           and explore new technologies that improve how software is designed and
           delivered.
-        </m.p>
-        <m.p
-          style={{
-            color: "var(--muted)",
-            fontSize: "0.94rem",
-            lineHeight: 1.9,
-          }}
-          {...reveal(0.3)}
-        >
-          I believe great software lives at the intersection of{" "}
-          <span style={{ color: "var(--text)" }}>
-            technical rigour, simplicity, and maintainability
-          </span>{" "}
-          - a standard I continuously work toward.
         </m.p>
 
         {/* Stats */}
@@ -155,9 +168,9 @@ const About = () => {
           {...reveal(0.35)}
         >
           {[
-            { num: "3+", label: "Years exp." },
-            { num: "15+", label: "Projects" },
-            { num: "∞", label: "Curiosity" },
+            { value: 3, suffix: "+", label: "Years at FNB" },
+            { value: 10, suffix: "+", label: "Technologies" },
+            { value: 4, suffix: "", label: "Selected projects" },
           ].map((s, i) => (
             <m.div
               key={i}
@@ -179,7 +192,7 @@ const About = () => {
                   letterSpacing: "-0.02em",
                 }}
               >
-                {s.num}
+                <StatCounter value={s.value} suffix={s.suffix} />
               </div>
               <div
                 style={{
@@ -214,6 +227,7 @@ const About = () => {
               src="/Profile.png"
               alt="Themba Ngobeni"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1440px) 45vw, 620px"
               style={{ objectFit: "cover", objectPosition: "center top" }}
               priority
             />

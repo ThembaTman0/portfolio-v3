@@ -28,8 +28,13 @@ const Hero = () => {
     }
     didSplit.current = true;
 
-    // Split only after fonts load so line/word metrics are correct
-    document.fonts.ready.then(() => {
+    // Split once fonts load so line/word metrics are correct - but on a slow
+    // connection we never want the LCP headline hidden indefinitely, so cap
+    // the wait and reveal on schedule regardless of font load state.
+    const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+    const timeout = new Promise((resolve) => setTimeout(resolve, 350));
+
+    Promise.race([fontsReady, timeout]).then(() => {
       const split = SplitText.create(el, { type: "words" });
       gsap.set(el, { autoAlpha: 1 });
       gsap.from(split.words, {

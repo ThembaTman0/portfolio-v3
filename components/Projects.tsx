@@ -3,6 +3,8 @@ import { PROJECTS, type Project } from "@/constants";
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { reveal } from "./motion-utils";
+import SplitReveal from "./SplitReveal";
+import ProjectVisual from "./ProjectVisual";
 
 const ProjectRow = ({
   project,
@@ -191,7 +193,9 @@ const ProjectRow = ({
               target="_blank"
               rel="noreferrer"
               className="project-link-btn"
-              aria-label={`Open live demo of ${project.title}`}
+              aria-label={`${
+                project.demoLabel ?? "Open live demo"
+              } for ${project.title}`}
             >
               <svg
                 fill="none"
@@ -204,7 +208,7 @@ const ProjectRow = ({
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-              Live
+              {project.demoLabel ?? "Live"}
             </a>
           )}
         </div>
@@ -225,6 +229,9 @@ const ProjectRow = ({
               className="case-study-grid"
               style={{ padding: "0 1rem 3rem 80px" }}
             >
+              <div style={{ gridColumn: "1 / -1", maxWidth: "560px" }}>
+                <ProjectVisual project={project} />
+              </div>
               {(
                 [
                   ["Problem", project.caseStudy.problem],
@@ -291,7 +298,7 @@ const Projects = () => {
               03
             </span>
           </m.div>
-          <m.h2
+          <SplitReveal
             style={{
               fontFamily: "var(--font-fraunces), serif",
               fontSize: "clamp(2.2rem, 3.5vw, 3.5rem)",
@@ -300,14 +307,13 @@ const Projects = () => {
               color: "var(--white)",
               letterSpacing: "-0.022em",
             }}
-            {...reveal(0.1)}
           >
             Selected{" "}
-            <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+            <em style={{ fontStyle: "italic", color: "var(--white)" }}>
               work
             </em>
             .
-          </m.h2>
+          </SplitReveal>
         </div>
         <m.a
           href="https://github.com/ThembaTman0"

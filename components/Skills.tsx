@@ -3,6 +3,7 @@ import { SKILLS } from "@/constants";
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { reveal } from "./motion-utils";
+import SplitReveal from "./SplitReveal";
 
 const CATEGORIES = Array.from(new Set(SKILLS.map((s) => s.category)));
 
@@ -39,7 +40,7 @@ const Skills = () => {
                 02
               </span>
             </m.div>
-            <m.h2
+            <SplitReveal
               style={{
                 fontFamily: "var(--font-fraunces), serif",
                 fontSize: "clamp(2rem, 3vw, 3rem)",
@@ -48,14 +49,13 @@ const Skills = () => {
                 color: "var(--white)",
                 letterSpacing: "-0.022em",
               }}
-              {...reveal(0.1)}
             >
               The tools I<br />
-              <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+              <em style={{ fontStyle: "italic", color: "var(--white)" }}>
                 work with
               </em>
               .
-            </m.h2>
+            </SplitReveal>
           </div>
           <m.p
             style={{

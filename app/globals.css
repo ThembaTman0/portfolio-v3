@@ -9,8 +9,8 @@
   --line:    rgba(255, 255, 255, 0.065);
   --line2:   rgba(255, 255, 255, 0.03);
   --text:    #ddd8cf;
-  --muted:   #64605b;
-  --muted2:  #4a4743;
+  --muted:   #8f8a82; /* ~5.8:1 on --bg (WCAG AA); was #64605b at ~3.2:1 */
+  --muted2:  #7d786f; /* ~4.5:1 on --bg (WCAG AA); was #4a4743 at ~2.1:1 */
   --accent:  #c8a05a;
   --accent2: #b86840;
   --accent-dim: rgba(200, 160, 90, 0.15);
@@ -42,6 +42,28 @@ body {
   overflow-x: hidden;
 }
 
+/* ── Skip link: hidden off-screen until keyboard focus ───────── */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transform: translateY(-100%);
+  background: var(--accent);
+  color: #0a0a0a;
+  padding: 0.85rem 1.4rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius) 0;
+  transition: transform 0.25s var(--ease-silk);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 /* ── Keyboard focus: visible everywhere, hover styles are not enough ── */
 a:focus-visible,
 button:focus-visible,
@@ -61,16 +83,6 @@ button:focus-visible,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* ── Custom cursor active: hide the native cursor ────────────── */
-html.custom-cursor-active,
-html.custom-cursor-active * {
-  cursor: none !important;
-}
-/* …but keep the native I-beam over readable text */
-html.custom-cursor-active :is(p, h1, h2, h3, h4, h5, h6, li, blockquote) {
-  cursor: text !important;
 }
 
 /* ── Film grain overlay ──────────────────────────────────────── */
@@ -225,6 +237,25 @@ body::before {
 .email-link:focus-visible {
   color: var(--accent);
   border-color: var(--accent);
+}
+
+/* ── Contact form fields: visible focus (inputs aren't covered by
+      the a/button focus-visible rule above) ──────────────────── */
+.contact-field {
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.contact-field::placeholder {
+  color: var(--muted2);
+}
+.contact-field:hover {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+.contact-field:focus,
+.contact-field:focus-visible {
+  border-color: var(--accent) !important;
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 /* ── Skill rows: transform-only hover (no layout reflow) ─────── */
@@ -461,6 +492,30 @@ body::before {
   gap: 2.5rem;
 }
 
+/* ── High-resolution relief ──────────────────────────────────── */
+/* AnimatedDotGrid toggles this on <html> whenever it drops out of full
+   fidelity (1440p+ area, touch, or low-power hardware). backdrop-filter
+   re-samples whatever's behind it on every change, and the canvas behind
+   these elements is always changing - at large pixel counts (4K+ monitors
+   especially) that compounds into real jank, so every blur() on the page
+   gets lighter here too, independent of viewport width. */
+html.reduce-fx .nav-pad {
+  backdrop-filter: blur(14px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+}
+html.reduce-fx .mobile-menu {
+  backdrop-filter: blur(18px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.3) !important;
+}
+html.reduce-fx .hero-terminal-card {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+html.reduce-fx .status-badge {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
 @media (max-width: 768px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -477,6 +532,14 @@ body::before {
   }
   .nav-pad {
     padding: 1.1rem 1.5rem;
+    /* backdrop-filter is one of the priciest CSS effects on mobile GPUs;
+       a lighter blur still reads as "frosted glass" at a fraction of the cost */
+    backdrop-filter: blur(14px) saturate(1.4) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+  }
+  .mobile-menu {
+    backdrop-filter: blur(18px) saturate(1.3) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.3) !important;
   }
   .section-block {
     padding: 5rem 1.5rem;

@@ -1,11 +1,10 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import { m } from "framer-motion";
 
 /*
- * Typed terminal card for the hero's right panel.
- * Cycles through short command/output pairs with a blinking caret.
- * Renders the full transcript statically for reduced-motion users.
+ * Static terminal card for the hero's right panel. Renders a short, fixed
+ * command/output transcript. (Previously typed itself out on a loop; that
+ * perpetual timer was trimmed in favour of a calmer, quieter hero.)
  */
 
 interface TermLine {
@@ -22,68 +21,10 @@ const LINES: TermLine[] = [
   { text: "✓ build passed — shipping to production" },
 ];
 
-const TYPE_MS = 42; // per character while typing a prompt line
-const OUTPUT_DELAY_MS = 350; // pause before an output line appears
-const LINE_PAUSE_MS = 650; // pause after a line completes
-const RESTART_PAUSE_MS = 6000; // hold the finished transcript, then loop
-
 const HeroTerminal = () => {
-  const [reduced, setReduced] = useState(false);
-  // (lineIdx, charCount) drives the typewriter; output lines appear whole
-  const [lineIdx, setLineIdx] = useState(0);
-  const [charCount, setCharCount] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setReduced(true);
-      return;
-    }
-
-    const line = LINES[lineIdx];
-
-    if (!line) {
-      // Transcript finished - hold, then restart
-      timerRef.current = setTimeout(() => {
-        setLineIdx(0);
-        setCharCount(0);
-      }, RESTART_PAUSE_MS);
-      return () => clearTimeout(timerRef.current);
-    }
-
-    if (line.prompt) {
-      if (charCount < line.text.length) {
-        timerRef.current = setTimeout(
-          () => setCharCount((c) => c + 1),
-          TYPE_MS
-        );
-      } else {
-        timerRef.current = setTimeout(() => {
-          setLineIdx((i) => i + 1);
-          setCharCount(0);
-        }, LINE_PAUSE_MS);
-      }
-    } else {
-      // Output lines pop in whole after a short "processing" pause
-      timerRef.current = setTimeout(() => {
-        setLineIdx((i) => i + 1);
-        setCharCount(0);
-      }, OUTPUT_DELAY_MS + LINE_PAUSE_MS);
-    }
-
-    return () => clearTimeout(timerRef.current);
-  }, [lineIdx, charCount]);
-
-  const visibleLines = reduced
-    ? LINES
-    : LINES.slice(0, lineIdx + 1).map((l, i) =>
-        i === lineIdx && l.prompt
-          ? { ...l, text: l.text.slice(0, charCount) }
-          : l
-      );
-
   return (
     <m.div
+      className="hero-terminal-card"
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
@@ -148,36 +89,16 @@ const HeroTerminal = () => {
           minHeight: "13.2em",
         }}
       >
-        {visibleLines.map((line, i) => {
-          const isTyping = !reduced && i === lineIdx;
-          return (
-            <div key={i} style={{ whiteSpace: "pre-wrap" }}>
-              {line.prompt && (
-                <span style={{ color: "var(--accent)" }}>$ </span>
-              )}
-              <span
-                style={{
-                  color: line.prompt ? "var(--text)" : "var(--muted)",
-                }}
-              >
-                {line.text}
-              </span>
-              {isTyping && (
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "7px",
-                    height: "1em",
-                    verticalAlign: "-0.18em",
-                    marginLeft: "2px",
-                    background: "var(--accent)",
-                    animation: "pulse 1.1s ease-in-out infinite",
-                  }}
-                />
-              )}
-            </div>
-          );
-        })}
+        {LINES.map((line, i) => (
+          <div key={i} style={{ whiteSpace: "pre-wrap" }}>
+            {line.prompt && <span style={{ color: "var(--accent)" }}>$ </span>}
+            <span
+              style={{ color: line.prompt ? "var(--text)" : "var(--muted)" }}
+            >
+              {line.text}
+            </span>
+          </div>
+        ))}
       </div>
     </m.div>
   );

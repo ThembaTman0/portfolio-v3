@@ -197,6 +197,7 @@ const Navbar = () => {
         <AnimatePresence>
           {menuOpen && (
             <m.div
+              className="mobile-menu"
               initial={{ opacity: 0, y: -14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -14 }}

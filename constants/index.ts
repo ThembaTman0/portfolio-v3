@@ -34,6 +34,12 @@ export interface Project {
   tags: string[];
   github: string | null;
   demo: string | null;
+  // Overrides the default "Live" text on the demo link (e.g. "Paper" for a
+  // publication rather than a running app).
+  demoLabel?: string;
+  // Optional real screenshot for the case-study visual; falls back to a
+  // generated placeholder frame (see ProjectVisual) when omitted.
+  image?: string;
   caseStudy: {
     problem: string;
     approach: string;
@@ -70,44 +76,52 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "02",
-    title: "Satellite Image Classification",
-    subtitle: "Python · Deep Learning · Remote Sensing",
+    title: "SynthForge - JPA-Aware Data Seeding for Spring Boot",
+    subtitle: "Java 21 · Spring Boot · Maven",
     description:
-      "Built an end-to-end image classification workflow involving preprocessing, feature extraction, and machine learning model evaluation as part of an honours-level research project.",
+      "A JPA-aware fake data seeding library for Spring Boot: annotate an entity with @Seed, start the app in a dev profile, and the database fills with realistic, relationship-consistent rows - correct parent-before-child ordering, profile-gated so it can never touch production, and idempotent across restarts.",
     tags: [
-      "Python",
-      "TensorFlow",
-      "CNN",
-      "Remote Sensing",
-      "Image Classification",
+      "Java 21",
+      "Spring Boot",
+      "JPA / Hibernate",
+      "Maven Multi-Module",
+      "Datafaker",
     ],
-    github: "https://github.com/ThembaTman0/SATELLITE-IMAGE-CLASSIFICATION",
+    github: "https://github.com/ThembaTman0/synthforge",
     demo: null,
     caseStudy: {
       problem:
-        "Classifying land cover from satellite imagery by hand is slow and subjective; the research question was whether deep learning could do it reliably at scale.",
+        "Getting realistic, relationally-consistent data into a running Spring Boot app usually means hand-written SQL fixtures or ad hoc seeding code that drifts from the schema and risks leaking into production.",
       approach:
-        "Built an end-to-end pipeline - image preprocessing, feature extraction, CNN model training, and rigorous evaluation across architectures - as an honours-level research project.",
+        "Built a JPA-aware seeding library around an @Seed annotation: entity scanning and generator resolution in synthforge-core, a topological seed graph that orders parents before children across owning @ManyToOne/@OneToOne relationships, and Spring Boot autoconfiguration that only activates on explicitly enabled profiles.",
       impact:
-        "Produced a reproducible classification workflow and a comparative analysis of model performance, grounding my engineering work in scientific method and measurement.",
+        "Startup seeding is idempotent (tables with existing rows are skipped) and constraint-aware (@NotNull, @Size, @Email, unique columns), validated by unit and integration tests against a demo app on H2 - with a public, gated roadmap that only opens further scope once real usage justifies it.",
     },
   },
   {
     id: "03",
-    title: "Portfolio V2",
-    subtitle: "Next.js · TypeScript · Design",
+    title: "Satellite Image Classification",
+    subtitle: "Python · HOG + DAISY · SVM",
     description:
-      "The previous iteration of this site, built with Next.js, TypeScript and Tailwind CSS. Dark editorial design with clean typography and minimal animations.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/ThembaTman0/Portfolio-V2",
-    demo: "https://thembangobeni.netlify.app",
+      "An IEEE-published study on classifying satellite land use with a classical feature-descriptor pipeline: global HOG and local DAISY features combined through Bag of Features and classified with an SVM, reaching 81.42% accuracy across 21 scene categories on the UC Merced dataset.",
+    tags: [
+      "Python",
+      "scikit-learn",
+      "HOG",
+      "DAISY",
+      "SVM",
+      "Bag of Features",
+    ],
+    github: "https://github.com/ThembaTman0/SATELLITE-IMAGE-CLASSIFICATION",
+    demo: "https://ieeexplore.ieee.org/abstract/document/9988636",
+    demoLabel: "Paper",
     caseStudy: {
       problem:
-        "Most developer portfolios look like templates - they say nothing about how the developer actually thinks about design, performance, or detail.",
+        "High-resolution satellite imagery is collected far faster than it can be labelled by hand. The research question: how well can a classical feature-descriptor pipeline classify land use - without the data volume and compute that deep learning demands?",
       approach:
-        "Designed a dark editorial system from scratch: serif display type, a restrained gold accent, canvas-based ambient animation, and motion that respects user preferences.",
+        "Combined global (HOG) and local (DAISY) descriptors through a Bag of Features pipeline - Mini-Batch K-Means encoding with L2 pooling - and classified with an SVM (RBF kernel), validated by 10-fold cross-validation across 21 UC Merced land-use classes.",
       impact:
-        "A personal brand that reads as deliberate craft rather than a theme - every interaction, easing curve, and hairline border is intentional.",
+        "The hybrid model reached 81.42% accuracy and beat an Inception-v3-CapsNet deep-learning baseline at this dataset scale - published on IEEE Xplore - showing a well-tuned classical pipeline can outperform data-hungry deep models when samples are limited.",
     },
   },
   {
@@ -127,6 +141,8 @@ export const PROJECTS: Project[] = [
     ],
     github: "https://github.com/ThembaTman0/Eataliano-v2/tree/main",
     demo: "https://eataliano.vercel.app/",
+    // Real recipe-detail screenshot (public/projects/eataliano.png).
+    image: "/projects/eataliano.png",
     caseStudy: {
       problem:
         "The original app coupled data fetching, state, and presentation, making features slow to add and the UI janky under network latency.",

@@ -2,6 +2,8 @@
 import { SOCIALS } from "@/constants";
 import { m } from "framer-motion";
 import { reveal, revealScale } from "./motion-utils";
+import SplitReveal from "./SplitReveal";
+import ContactForm from "./ContactForm";
 
 const Contact = () => {
   return (
@@ -10,6 +12,7 @@ const Contact = () => {
       className="contact-grid section-block"
       style={{
         minHeight: "60vh",
+        alignItems: "start",
         borderBottom: "1px solid var(--line)",
         maxWidth: "1440px",
         margin: "0 auto",
@@ -34,7 +37,7 @@ const Contact = () => {
           </span>
         </m.div>
 
-        <m.h2
+        <SplitReveal
           style={{
             fontFamily: "var(--font-fraunces), serif",
             fontSize: "clamp(2.4rem, 4vw, 4rem)",
@@ -44,7 +47,6 @@ const Contact = () => {
             letterSpacing: "-0.026em",
             marginBottom: "1.6rem",
           }}
-          {...reveal(0.1)}
         >
           Let&apos;s build something
           <br />
@@ -52,14 +54,14 @@ const Contact = () => {
             great together
           </em>
           .
-        </m.h2>
+        </SplitReveal>
 
         <m.p
           style={{
             color: "var(--muted)",
             fontSize: "0.93rem",
             lineHeight: 1.85,
-            marginBottom: "2.8rem",
+            marginBottom: "2.4rem",
           }}
           {...reveal(0.18)}
         >
@@ -67,31 +69,9 @@ const Contact = () => {
           just want to say hello, my inbox is always open.
         </m.p>
 
-        <m.a
-          href="mailto:thembatman0@gmail.com"
-          className="email-link"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.7rem",
-            fontSize: "1rem",
-            textDecoration: "none",
-            paddingBottom: "0.35rem",
-          }}
-          {...reveal(0.25)}
-        >
-          thembatman0@gmail.com
-          <svg
-            width="13"
-            height="13"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </m.a>
+        <m.div {...reveal(0.25)}>
+          <ContactForm />
+        </m.div>
       </div>
 
       {/* Right socials */}
