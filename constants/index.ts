@@ -51,6 +51,31 @@ export const PROJECTS: Project[] = [
   {
     id: "01",
     featured: true,
+    title: "SynthForge",
+    subtitle: "Java 21 · Spring Boot · Maven Central",
+    description:
+      "A JPA-aware fake data seeding library for Spring Boot, published to Maven Central. Faker generates realistic values but has no idea your entities are related. SynthForge reads JPA relationships directly and seeds a valid, correctly ordered object graph from a single annotation, with no seed script to write or maintain.",
+    tags: [
+      "Java 21",
+      "Spring Boot",
+      "JPA / Hibernate",
+      "Datafaker",
+      "Maven Central",
+    ],
+    github: "https://github.com/ThembaTman0/synthforge",
+    demo: "https://central.sonatype.com/artifact/io.github.thembatman0/synthforge-spring",
+    demoLabel: "Maven Central",
+    caseStudy: {
+      problem:
+        "Most fake-data libraries generate convincing values in isolation. The moment one entity depends on another, like a payment referencing a counterparty, you're back to hand-writing a seed script: create parents first, hold their IDs, wire children to them, and hope nothing violates a constraint along the way. That script rots the first time the schema changes.",
+      approach:
+        "SynthForge reads JPA entities the way Hibernate does, through the jakarta.persistence.metamodel.Metamodel API, and builds a dependency graph from owning-side relationships. A topological sort guarantees parent rows exist before any child is generated to reference them. Constraint-aware generation handles @NotNull, @Size and unique columns with a bounded retry loop rather than a thrown exception, so what comes out is structurally valid, not just plausible-looking.",
+      impact:
+        "The entity becomes the seed script: annotate it with @Seed(count = 50), start the app in a dev profile, and the tables populate in the correct order on every restart. Published to Maven Central after being proven against two independent Spring Boot projects, with a longer technical writeup on the design decisions behind it.",
+    },
+  },
+  {
+    id: "02",
     title: "Bankwave V2.0 - Microservices Banking Platform",
     subtitle: "Java · Spring Boot · Microservices",
     description:
@@ -72,30 +97,6 @@ export const PROJECTS: Project[] = [
         "Decomposed the domain into independently deployable Spring Boot services with Eureka service discovery, centralized configuration via Spring Cloud Config, and Docker-based local orchestration mirroring production topology.",
       impact:
         "Each service builds, tests, and deploys on its own lifecycle. The architecture demonstrates the patterns used in real financial platforms: resilience, discoverability, and configuration as code.",
-    },
-  },
-  {
-    id: "02",
-    title: "SynthForge - JPA-Aware Data Seeding for Spring Boot",
-    subtitle: "Java 21 · Spring Boot · Maven",
-    description:
-      "A JPA-aware fake data seeding library for Spring Boot: annotate an entity with @Seed, start the app in a dev profile, and the database fills with realistic, relationship-consistent rows. Parent-before-child ordering is correct, seeding is profile-gated so it can never touch production, and it's idempotent across restarts.",
-    tags: [
-      "Java 21",
-      "Spring Boot",
-      "JPA / Hibernate",
-      "Maven Multi-Module",
-      "Datafaker",
-    ],
-    github: "https://github.com/ThembaTman0/synthforge",
-    demo: null,
-    caseStudy: {
-      problem:
-        "Getting realistic, relationally-consistent data into a running Spring Boot app usually means hand-written SQL fixtures or ad hoc seeding code that drifts from the schema and risks leaking into production.",
-      approach:
-        "Built a JPA-aware seeding library around an @Seed annotation: entity scanning and generator resolution in synthforge-core, a topological seed graph that orders parents before children across owning @ManyToOne/@OneToOne relationships, and Spring Boot autoconfiguration that only activates on explicitly enabled profiles.",
-      impact:
-        "Startup seeding is idempotent (tables with existing rows are skipped) and constraint-aware (@NotNull, @Size, @Email, unique columns), validated by unit and integration tests against a demo app on H2. A public, gated roadmap only opens further scope once real usage justifies it.",
     },
   },
   {

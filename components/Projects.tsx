@@ -21,7 +21,7 @@ const ProjectRow = ({
 
   return (
     <m.div
-      className="project-row"
+      className={`project-row${project.featured ? " featured-row" : ""}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -68,11 +68,11 @@ const ProjectRow = ({
               className="project-title"
               style={{
                 fontFamily: "var(--font-fraunces), serif",
-                fontSize: "1.5rem",
+                fontSize: "clamp(1.75rem, 3vw, 2.6rem)",
                 fontWeight: 300,
                 color: "var(--white)",
-                letterSpacing: "-0.012em",
-                lineHeight: 1.1,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.08,
                 transition: "color 0.3s ease",
               }}
             >
@@ -274,13 +274,34 @@ const Projects = () => {
       id="projects"
       className="section-block"
       style={{
+        position: "relative",
+        overflow: "hidden",
         borderBottom: "1px solid var(--line)",
         maxWidth: "1440px",
         margin: "0 auto",
       }}
     >
+      {/* Ambient light over the work, same language as the hero. Fades to
+          zero-alpha stone rather than `transparent` so it never darkens. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+          background:
+            "radial-gradient(75% 45% at 68% 0%," +
+            " rgba(236,234,229,0.055) 0%," +
+            " rgba(236,234,229,0.032) 24%," +
+            " rgba(236,234,229,0.015) 44%," +
+            " rgba(236,234,229,0.005) 64%," +
+            " rgba(236,234,229,0) 80%)",
+        }}
+      />
+
       {/* Header */}
-      <div className="projects-header">
+      <div className="projects-header" style={{ position: "relative", zIndex: 1 }}>
         <div>
           <m.div
             className="section-label"
@@ -298,16 +319,7 @@ const Projects = () => {
               03
             </span>
           </m.div>
-          <SplitReveal
-            style={{
-              fontFamily: "var(--font-fraunces), serif",
-              fontSize: "clamp(2.2rem, 3.5vw, 3.5rem)",
-              fontWeight: 300,
-              lineHeight: 1.08,
-              color: "var(--white)",
-              letterSpacing: "-0.022em",
-            }}
-          >
+          <SplitReveal className="section-display">
             Selected{" "}
             <em style={{ fontStyle: "italic", color: "var(--white)" }}>
               work
@@ -335,8 +347,17 @@ const Projects = () => {
         </m.a>
       </div>
 
-      {/* Project list */}
-      <div style={{ borderTop: "1px solid var(--line)" }}>
+      {/* Project list. Pulled out horizontally so each row's hover highlight
+          and divider extend past the content edge; .project-row adds matching
+          padding back, keeping the numbers aligned with the section heading. */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          borderTop: "1px solid var(--line)",
+          marginInline: "-1.6rem",
+        }}
+      >
         {PROJECTS.map((project, i) => (
           <ProjectRow
             key={project.id}

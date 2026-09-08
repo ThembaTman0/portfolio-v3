@@ -92,15 +92,8 @@ const About = () => {
         </m.div>
 
         <SplitReveal
-          style={{
-            fontFamily: "var(--font-fraunces), serif",
-            fontSize: "clamp(2.2rem, 3.5vw, 3.5rem)",
-            fontWeight: 300,
-            lineHeight: 1.08,
-            color: "var(--white)",
-            letterSpacing: "-0.022em",
-            marginBottom: "2.4rem",
-          }}
+          className="section-display"
+          style={{ marginBottom: "2.8rem" }}
         >
           A developer who
           <br />
@@ -185,8 +178,8 @@ const About = () => {
                 style={{
                   fontFamily: "var(--font-fraunces), serif",
                   fontSize: "2.6rem",
-                  fontWeight: 700,
-                  color: "var(--accent)",
+                  fontWeight: 300,
+                  color: "var(--stone)",
                   lineHeight: 1,
                   marginBottom: "0.45rem",
                   letterSpacing: "-0.02em",
@@ -228,23 +221,50 @@ const About = () => {
               alt="Themba Ngobeni"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1440px) 45vw, 620px"
-              style={{ objectFit: "cover", objectPosition: "center top" }}
+              style={{
+                objectFit: "cover",
+                objectPosition: "center top",
+                // Colour is kept deliberately. The sculptural mood comes from
+                // the lighting layers below, not from desaturation.
+                filter: "contrast(1.05)",
+              }}
               priority
             />
           </div>
 
-          {/* Fine grid overlay */}
+          {/* Raking light from the upper right, echoing the hero */}
           <div
             aria-hidden="true"
             style={{
               position: "absolute",
               inset: 0,
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px)," +
-                "linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-              zIndex: 1,
+              zIndex: 2,
               pointerEvents: "none",
+              mixBlendMode: "soft-light",
+              background:
+                "radial-gradient(85% 65% at 82% 6%," +
+                " rgba(236,234,229,0.55) 0%," +
+                " rgba(236,234,229,0.30) 24%," +
+                " rgba(236,234,229,0.14) 44%," +
+                " rgba(236,234,229,0.05) 64%," +
+                " rgba(236,234,229,0) 82%)",
+            }}
+          />
+
+          {/* Falloff into black: light on one side, shadow on the other */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 2,
+              pointerEvents: "none",
+              background:
+                "radial-gradient(120% 95% at 78% 8%," +
+                " rgba(10,10,10,0) 30%," +
+                " rgba(10,10,10,0.18) 54%," +
+                " rgba(10,10,10,0.42) 74%," +
+                " rgba(10,10,10,0.62) 100%)",
             }}
           />
 
@@ -256,9 +276,14 @@ const About = () => {
               bottom: 0,
               left: 0,
               right: 0,
-              height: "60%",
+              height: "66%",
               background:
-                "linear-gradient(to top, rgba(10,10,10,0.94) 0%, rgba(10,10,10,0.5) 40%, transparent 100%)",
+                "linear-gradient(to top," +
+                " rgba(10,10,10,0.95) 0%," +
+                " rgba(10,10,10,0.72) 26%," +
+                " rgba(10,10,10,0.4) 52%," +
+                " rgba(10,10,10,0.16) 76%," +
+                " rgba(10,10,10,0) 100%)",
               zIndex: 2,
             }}
           />
@@ -272,8 +297,8 @@ const About = () => {
               left: "1.2rem",
               width: "28px",
               height: "28px",
-              borderTop: "1px solid rgba(200,160,90,0.35)",
-              borderLeft: "1px solid rgba(200,160,90,0.35)",
+              borderTop: "1px solid rgba(236,234,229,0.28)",
+              borderLeft: "1px solid rgba(236,234,229,0.28)",
               zIndex: 3,
             }}
           />
@@ -285,8 +310,8 @@ const About = () => {
               right: "1.2rem",
               width: "28px",
               height: "28px",
-              borderTop: "1px solid rgba(200,160,90,0.35)",
-              borderRight: "1px solid rgba(200,160,90,0.35)",
+              borderTop: "1px solid rgba(236,234,229,0.28)",
+              borderRight: "1px solid rgba(236,234,229,0.28)",
               zIndex: 3,
             }}
           />
@@ -333,8 +358,8 @@ const About = () => {
                 fontSize: "0.62rem",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "var(--accent)",
-                opacity: 0.85,
+                color: "var(--muted)",
+                opacity: 0.9,
               }}
             >
               Johannesburg, ZA
@@ -362,19 +387,19 @@ const About = () => {
             <m.span
               key={s}
               whileHover={{
-                borderColor: "rgba(200,160,90,0.5)",
-                background: "rgba(200,160,90,0.1)",
+                borderColor: "rgba(236,234,229,0.4)",
+                background: "rgba(236,234,229,0.06)",
               }}
               transition={{ duration: 0.25 }}
               style={{
                 fontSize: "0.66rem",
                 letterSpacing: "0.09em",
                 textTransform: "uppercase",
-                color: "var(--accent)",
-                border: "1px solid rgba(200,160,90,0.2)",
+                color: "var(--muted)",
+                border: "1px solid rgba(236,234,229,0.16)",
                 padding: "0.22rem 0.65rem",
                 borderRadius: "1px",
-                background: "rgba(200,160,90,0.04)",
+                background: "rgba(236,234,229,0.02)",
                 cursor: "default",
                 display: "inline-block",
               }}

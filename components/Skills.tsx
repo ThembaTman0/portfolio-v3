@@ -16,7 +16,7 @@ const Skills = () => {
       id="skills"
       className="section-block"
       style={{
-        background: "rgba(17,17,17,0.72)",
+        background: "rgba(255,255,255,0.013)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -40,16 +40,7 @@ const Skills = () => {
                 02
               </span>
             </m.div>
-            <SplitReveal
-              style={{
-                fontFamily: "var(--font-fraunces), serif",
-                fontSize: "clamp(2rem, 3vw, 3rem)",
-                fontWeight: 300,
-                lineHeight: 1.08,
-                color: "var(--white)",
-                letterSpacing: "-0.022em",
-              }}
-            >
+            <SplitReveal className="section-display">
               The tools I<br />
               <em style={{ fontStyle: "italic", color: "var(--white)" }}>
                 work with
@@ -111,7 +102,7 @@ const Skills = () => {
                   <span
                     style={{
                       fontSize: "0.62rem",
-                      color: isActive ? "var(--accent)" : "var(--muted2)",
+                      color: isActive ? "var(--stone)" : "var(--muted2)",
                       letterSpacing: "0.08em",
                       transition: "color 0.3s ease",
                     }}
@@ -149,7 +140,7 @@ const Skills = () => {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "baseline",
-                      padding: "1.5rem 0.4rem",
+                      padding: "1.9rem 0.4rem",
                       borderBottom: "1px solid var(--line)",
                       cursor: "default",
                     }}
@@ -158,10 +149,10 @@ const Skills = () => {
                       className="skill-name"
                       style={{
                         fontFamily: "var(--font-fraunces), serif",
-                        fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)",
+                        fontSize: "clamp(1.4rem, 2.2vw, 2rem)",
                         fontWeight: 300,
-                        letterSpacing: "-0.015em",
-                        lineHeight: 1.1,
+                        letterSpacing: "-0.022em",
+                        lineHeight: 1.08,
                       }}
                     >
                       {skill.name}
@@ -171,7 +162,7 @@ const Skills = () => {
                         fontSize: "0.66rem",
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
-                        color: "var(--accent)",
+                        color: "var(--muted)",
                         flexShrink: 0,
                         marginLeft: "1.5rem",
                       }}

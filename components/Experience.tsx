@@ -9,7 +9,7 @@ const Experience = () => {
       id="experience"
       className="section-block"
       style={{
-        background: "rgba(17,17,17,0.72)",
+        background: "rgba(255,255,255,0.013)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -45,7 +45,7 @@ const Experience = () => {
                 delay: i * 0.1,
               }}
               style={{
-                padding: "2.8rem 0",
+                padding: "3.4rem 0",
                 borderBottom: "1px solid var(--line)",
               }}
             >
@@ -65,8 +65,8 @@ const Experience = () => {
               <div>
                 <div
                   style={{
-                    fontSize: "1.05rem",
-                    fontWeight: 400,
+                    fontSize: "clamp(1.15rem, 1.6vw, 1.45rem)",
+                    fontWeight: 300,
                     color: "var(--white)",
                     marginBottom: "0.25rem",
                     letterSpacing: "-0.01em",
@@ -77,7 +77,7 @@ const Experience = () => {
                 <div
                   style={{
                     fontSize: "0.82rem",
-                    color: "var(--accent)",
+                    color: "var(--stone)",
                     marginBottom: "1rem",
                     letterSpacing: "0.02em",
                   }}
@@ -147,8 +147,8 @@ const Experience = () => {
           <div>
             <div
               style={{
-                fontSize: "1.05rem",
-                fontWeight: 400,
+                fontSize: "clamp(1.15rem, 1.6vw, 1.45rem)",
+                fontWeight: 300,
                 color: "var(--white)",
                 marginBottom: "0.25rem",
                 letterSpacing: "-0.01em",
@@ -159,7 +159,7 @@ const Experience = () => {
             <div
               style={{
                 fontSize: "0.82rem",
-                color: "var(--accent)",
+                color: "var(--stone)",
                 marginBottom: "1rem",
                 letterSpacing: "0.02em",
               }}

@@ -17,10 +17,29 @@ const PullQuote = () => {
         position: "relative",
         overflow: "hidden",
         borderBottom: "1px solid var(--line)",
-        padding: "clamp(6rem, 14vh, 11rem) 1.5rem",
+        padding: "clamp(7rem, 17vh, 14rem) 1.5rem",
         textAlign: "center",
       }}
     >
+      {/* Soft overhead light, echoing the hero. Fades to zero-alpha stone
+          rather than `transparent` so it never darkens toward black. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          background:
+            "radial-gradient(70% 55% at 50% 0%," +
+            " rgba(236,234,229,0.075) 0%," +
+            " rgba(236,234,229,0.045) 22%," +
+            " rgba(236,234,229,0.022) 40%," +
+            " rgba(236,234,229,0.009) 58%," +
+            " rgba(236,234,229,0.003) 74%," +
+            " rgba(236,234,229,0) 88%)",
+        }}
+      />
+
       {/* Oversized ghost quotation mark */}
       <div
         aria-hidden="true"
@@ -34,7 +53,7 @@ const PullQuote = () => {
           fontWeight: 700,
           lineHeight: 1,
           color: "transparent",
-          WebkitTextStroke: "1px rgba(200,160,90,0.06)",
+          WebkitTextStroke: "1px rgba(236,234,229,0.05)",
           userSelect: "none",
           pointerEvents: "none",
         }}
@@ -66,7 +85,7 @@ const PullQuote = () => {
         }}
       >
         Great software lives at the intersection of{" "}
-        <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+        <em style={{ fontStyle: "italic", color: "var(--stone)" }}>
           rigour, simplicity, and maintainability
         </em>
         .

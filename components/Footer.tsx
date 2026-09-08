@@ -65,7 +65,7 @@ const Footer = () => {
 
       <m.a
         href="#home"
-        whileHover={{ color: "var(--accent)" }}
+        whileHover={{ color: "var(--stone)" }}
         transition={{ duration: 0.25 }}
         style={{
           fontSize: "0.7rem",

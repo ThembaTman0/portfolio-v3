@@ -8,14 +8,19 @@
   --bg3:     #191919;
   --line:    rgba(255, 255, 255, 0.065);
   --line2:   rgba(255, 255, 255, 0.03);
-  --text:    #ddd8cf;
-  --muted:   #8f8a82; /* ~5.8:1 on --bg (WCAG AA); was #64605b at ~3.2:1 */
-  --muted2:  #7d786f; /* ~4.5:1 on --bg (WCAG AA); was #4a4743 at ~2.1:1 */
+  /* Marble palette: neutral stone greys, cooled off the old warm cream.
+     Luminance held steady so the WCAG AA ratios below still hold. */
+  --text:    #d9d7d2;
+  --muted:   #8e8c86; /* ~5.8:1 on --bg (WCAG AA); was #64605b at ~3.2:1 */
+  --muted2:  #7c7a75; /* ~4.5:1 on --bg (WCAG AA); was #4a4743 at ~2.1:1 */
   --accent:  #c8a05a;
   --accent2: #b86840;
   --accent-dim: rgba(200, 160, 90, 0.15);
   --accent-line: rgba(200, 160, 90, 0.35);
-  --white:   #ede9e1;
+  --white:   #eae8e3;
+  /* Display white for the hero statement - the lit edge of marble */
+  --stone:      #eceae5;
+  --stone-line: rgba(236, 234, 229, 0.22);
   --nav-h:   72px;
   --radius:  2px;
   --ease-silk: cubic-bezier(0.16, 1, 0.3, 1);
@@ -126,6 +131,8 @@ body::before {
 }
 
 /* ── Section label line ──────────────────────────────────────── */
+/* Eyebrow: stone text with a gold hairline. The line is the whisper of gold;
+   the text itself stays neutral so gold never becomes the theme colour. */
 .section-label {
   display: flex;
   align-items: center;
@@ -133,7 +140,7 @@ body::before {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--muted);
 }
 .section-label::before {
   content: "";
@@ -180,7 +187,7 @@ body::before {
 }
 .link-accent:hover,
 .link-accent:focus-visible {
-  color: var(--accent);
+  color: var(--stone);
 }
 
 /* ── Nav links ───────────────────────────────────────────────── */
@@ -201,17 +208,17 @@ body::before {
 
 /* ── Outline CTA button (navbar "Hire me") ───────────────────── */
 .btn-outline {
-  border: 1px solid rgba(200, 160, 90, 0.45);
-  color: var(--accent);
+  border: 1px solid var(--stone-line);
+  color: var(--stone);
   border-radius: var(--radius);
   text-decoration: none;
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background 0.4s var(--ease-silk), border-color 0.4s var(--ease-silk);
 }
 .btn-outline:hover,
 .btn-outline:focus-visible {
-  background: var(--accent);
-  color: #0a0a0a;
-  border-color: var(--accent);
+  background: rgba(236, 234, 229, 0.05);
+  border-color: rgba(236, 234, 229, 0.5);
+  color: var(--stone);
 }
 
 /* ── Mobile menu link ────────────────────────────────────────── */
@@ -221,22 +228,22 @@ body::before {
 }
 .menu-link:hover,
 .menu-link:focus-visible {
-  color: var(--accent);
+  color: var(--stone);
 }
 .menu-link.menu-link-active {
-  color: var(--accent);
+  color: var(--stone);
 }
 
 /* ── Contact email link ──────────────────────────────────────── */
 .email-link {
   color: var(--white);
-  border-bottom: 1px solid var(--accent-line);
+  border-bottom: 1px solid var(--stone-line);
   transition: color 0.25s ease, border-color 0.25s ease;
 }
 .email-link:hover,
 .email-link:focus-visible {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--stone);
+  border-color: rgba(236, 234, 229, 0.5);
 }
 
 /* ── Contact form fields: visible focus (inputs aren't covered by
@@ -273,7 +280,7 @@ body::before {
 }
 .skill-row:hover .skill-name {
   transform: translateX(0.7rem);
-  color: var(--accent);
+  color: var(--stone);
 }
 
 /* ── Social rows (contact): transform-only hover ─────────────── */
@@ -292,7 +299,7 @@ body::before {
 .social-row:hover .social-name,
 .social-row:focus-visible .social-name {
   transform: translateX(0.7rem);
-  color: var(--accent);
+  color: var(--stone);
 }
 
 /* ── Case study toggle ───────────────────────────────────────── */
@@ -303,7 +310,7 @@ body::before {
 .case-toggle:hover,
 .case-toggle:focus-visible,
 .case-toggle[aria-expanded="true"] {
-  color: var(--accent);
+  color: var(--stone);
 }
 
 /* ── Status badge (hero) ─────────────────────────────────────── */
@@ -319,13 +326,23 @@ body::before {
 
 /* ── Project row hover ───────────────────────────────────────── */
 .project-row {
+  padding-inline: 1.6rem;
   transition: background 0.4s var(--ease-silk);
 }
 .project-row:hover {
   background: rgba(255,255,255,0.015);
 }
+/* The featured build sits permanently in a little more light, so the eye
+   lands on it first. More specific than the hover rule above, so it keeps
+   its own (brighter) hover state. */
+.project-row.featured-row {
+  background: rgba(236, 234, 229, 0.018);
+}
+.project-row.featured-row:hover {
+  background: rgba(236, 234, 229, 0.034);
+}
 .project-row:hover .project-num {
-  color: var(--accent) !important;
+  color: var(--stone) !important;
 }
 .project-row:hover .project-title {
   color: var(--white) !important;
@@ -368,18 +385,156 @@ body::before {
 }
 
 /* ── Responsive layouts ──────────────────────────────────────── */
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* ── Hero: single statement column in a pool of light ────────── */
+.hero-statement {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 10rem 3rem 7rem;
 }
 
-.hero-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 9rem 4rem 6rem 3rem;
+/* Light emerging from black - the whole mood of the section lives here */
+.hero-light {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* NB: never fade to `transparent` here - that keyword is rgba(0,0,0,0), so the
+     ramp interpolates toward black and leaves visible dark arcs at each stop.
+     Always fade to the same RGB at zero alpha, with small deltas to avoid
+     Mach banding on a near-black ground. */
+  background:
+    radial-gradient(88% 68% at 74% 8%,
+      rgba(236, 234, 229, 0.125) 0%,
+      rgba(236, 234, 229, 0.103) 12%,
+      rgba(236, 234, 229, 0.081) 22%,
+      rgba(236, 234, 229, 0.060) 31%,
+      rgba(236, 234, 229, 0.043) 40%,
+      rgba(236, 234, 229, 0.028) 49%,
+      rgba(236, 234, 229, 0.017) 58%,
+      rgba(236, 234, 229, 0.009) 67%,
+      rgba(236, 234, 229, 0.004) 77%,
+      rgba(236, 234, 229, 0.000) 92%),
+    radial-gradient(58% 48% at 2% 98%,
+      rgba(200, 160, 90, 0.052) 0%,
+      rgba(200, 160, 90, 0.034) 22%,
+      rgba(200, 160, 90, 0.020) 38%,
+      rgba(200, 160, 90, 0.010) 52%,
+      rgba(200, 160, 90, 0.004) 66%,
+      rgba(200, 160, 90, 0.000) 82%);
+}
+
+/* Vignette pulls the edges down into true black */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(105% 82% at 40% 38%,
+    rgba(0, 0, 0, 0.00) 16%,
+    rgba(0, 0, 0, 0.05) 30%,
+    rgba(0, 0, 0, 0.13) 42%,
+    rgba(0, 0, 0, 0.24) 53%,
+    rgba(0, 0, 0, 0.37) 63%,
+    rgba(0, 0, 0, 0.51) 72%,
+    rgba(0, 0, 0, 0.65) 81%,
+    rgba(0, 0, 0, 0.78) 90%,
+    rgba(0, 0, 0, 0.88) 100%);
+}
+
+.hero-inner {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hero-display {
+  font-family: var(--font-fraunces), serif;
+  font-size: clamp(2.9rem, 7.4vw, 7.2rem);
+  font-weight: 300;
+  line-height: 0.99;
+  letter-spacing: -0.042em;
+  color: var(--stone);
+  margin: 2.6rem 0 2.6rem;
+}
+
+.hero-lede {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.95;
+  max-width: 46ch;
+  margin-bottom: 3.4rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem 2.4rem;
+  flex-wrap: wrap;
+}
+
+/* Quiet, stone-toned CTA - the loud gold button is gone */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid var(--stone-line);
+  color: var(--stone);
+  padding: 1.05rem 2rem;
+  border-radius: var(--radius);
+  font-size: 0.71rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.5s var(--ease-silk), background 0.5s var(--ease-silk);
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  border-color: rgba(236, 234, 229, 0.5);
+  background: rgba(236, 234, 229, 0.04);
+}
+
+/* The single "whisper of gold" in the hero */
+.hero-rule {
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 3.2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.hero-meta-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: block;
+  flex-shrink: 0;
 }
 
 .nav-pad {
@@ -388,7 +543,19 @@ body::before {
 
 /* Standard section frame: generous on desktop, tight on mobile */
 .section-block {
-  padding: 8rem 3rem;
+  padding: 11rem 3rem;
+}
+
+/* Shared section headline. Centralised so every h2 scales together and stays
+   in proportion with the hero display type, instead of each section carrying
+   its own hand-tuned clamp. */
+.section-display {
+  font-family: var(--font-fraunces), serif;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  font-weight: 300;
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+  color: var(--stone);
 }
 
 .project-grid {
@@ -437,9 +604,9 @@ body::before {
 }
 .project-link-btn:hover,
 .project-link-btn:focus-visible {
-  color: var(--accent);
-  border-color: rgba(200, 160, 90, 0.55);
-  background: rgba(200, 160, 90, 0.06);
+  color: var(--stone);
+  border-color: rgba(236, 234, 229, 0.4);
+  background: rgba(236, 234, 229, 0.04);
 }
 
 .exp-tech {
@@ -517,15 +684,36 @@ html.reduce-fx .status-badge {
 }
 
 @media (max-width: 768px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
+  .hero-statement {
+    padding: 8rem 1.5rem 5rem;
+    align-items: flex-end;
   }
-  .hero-right {
-    /* beats the inline display:flex on the panel */
-    display: none !important;
+  /* Keep the eyebrow on one line instead of orphaning "JAVA" */
+  .hero-eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.13em;
+    gap: 0.7rem;
   }
-  .hero-left {
-    padding: 7.5rem 1.5rem 5.5rem;
+  .hero-rule {
+    width: 20px;
+  }
+  .hero-display {
+    margin: 2rem 0 1.9rem;
+    letter-spacing: -0.03em;
+  }
+  .hero-lede {
+    font-size: 0.94rem;
+    line-height: 1.85;
+    margin-bottom: 2.6rem;
+  }
+  .hero-actions {
+    gap: 1.1rem 1.6rem;
+  }
+  .btn-ghost {
+    padding: 0.95rem 1.6rem;
+  }
+  .hero-meta {
+    margin-top: 2.4rem;
   }
   .hero-scroll {
     display: none !important;

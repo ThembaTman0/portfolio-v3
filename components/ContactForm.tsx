@@ -135,7 +135,7 @@ const ContactForm = () => {
             aria-live="polite"
             style={{
               border: "1px solid var(--accent-line)",
-              background: "rgba(200,160,90,0.06)",
+              background: "rgba(236,234,229,0.04)",
               borderRadius: "var(--radius)",
               padding: "2rem 1.6rem",
             }}
@@ -274,7 +274,7 @@ const ContactForm = () => {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.55rem",
-                  background: "var(--accent)",
+                  background: "var(--stone)",
                   color: "#0a0a0a",
                   fontSize: "0.75rem",
                   fontWeight: 500,

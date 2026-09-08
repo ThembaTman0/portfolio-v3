@@ -38,19 +38,12 @@ const Contact = () => {
         </m.div>
 
         <SplitReveal
-          style={{
-            fontFamily: "var(--font-fraunces), serif",
-            fontSize: "clamp(2.4rem, 4vw, 4rem)",
-            fontWeight: 300,
-            lineHeight: 1.06,
-            color: "var(--white)",
-            letterSpacing: "-0.026em",
-            marginBottom: "1.6rem",
-          }}
+          className="section-display"
+          style={{ marginBottom: "1.8rem" }}
         >
           Let&apos;s build something
           <br />
-          <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+          <em style={{ fontStyle: "italic", color: "var(--stone)" }}>
             great together
           </em>
           .

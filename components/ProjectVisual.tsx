@@ -7,9 +7,12 @@ import SatelliteChart from "./diagrams/SatelliteChart";
 // Per-project authored visuals, keyed by Project.id. A project renders, in
 // priority order: a real screenshot (Project.image) in a browser frame; else
 // a registered diagram in a "schematic" frame; else the monogram placeholder.
+// NB: these keys track Project.id, so if you reorder/renumber PROJECTS in
+// constants/index.ts you MUST update this map or projects get each other's
+// diagrams (it fails silently - nothing errors, the wrong visual just renders).
 const DIAGRAMS: Record<string, { label: string; Component: React.FC }> = {
-  "01": { label: "System architecture", Component: BankwaveDiagram },
-  "02": { label: "How it works", Component: SynthForgeDiagram },
+  "01": { label: "How it works", Component: SynthForgeDiagram },
+  "02": { label: "System architecture", Component: BankwaveDiagram },
   "03": { label: "Model accuracy", Component: SatelliteChart },
 };
 
