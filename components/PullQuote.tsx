@@ -85,7 +85,9 @@ const PullQuote = () => {
         }}
       >
         Great software lives at the intersection of{" "}
-        <em style={{ fontStyle: "italic", color: "var(--stone)" }}>
+        {/* The one gold typographic moment on the site. Everything else keeps
+            gold to hairlines, so this reads as deliberate punctuation. */}
+        <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
           rigour, simplicity, and maintainability
         </em>
         .

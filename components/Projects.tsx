@@ -211,6 +211,31 @@ const ProjectRow = ({
               {project.demoLabel ?? "Live"}
             </a>
           )}
+          {project.writeup && (
+            <a
+              href={project.writeup}
+              target="_blank"
+              rel="noreferrer"
+              className="project-link-btn"
+              aria-label={`Read the ${
+                project.writeupLabel ?? "technical writeup"
+              } about ${project.title}`}
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.9"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M4 5.5A1.5 1.5 0 015.5 4H14l6 6v8.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 18.5z" />
+                <polyline points="14 4 14 10 20 10" />
+                <line x1="8" y1="13.5" x2="15" y2="13.5" />
+                <line x1="8" y1="16.5" x2="13" y2="16.5" />
+              </svg>
+              {project.writeupLabel ?? "Article"}
+            </a>
+          )}
         </div>
       </div>
 

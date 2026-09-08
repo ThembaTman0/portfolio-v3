@@ -37,6 +37,9 @@ export interface Project {
   // Overrides the default "Live" text on the demo link (e.g. "Paper" for a
   // publication rather than a running app).
   demoLabel?: string;
+  // Optional third link: a long-form technical writeup about the project.
+  writeup?: string;
+  writeupLabel?: string;
   // Optional real screenshot for the case-study visual; falls back to a
   // generated placeholder frame (see ProjectVisual) when omitted.
   image?: string;
@@ -65,6 +68,9 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/ThembaTman0/synthforge",
     demo: "https://central.sonatype.com/artifact/io.github.thembatman0/synthforge-spring",
     demoLabel: "Maven Central",
+    writeup:
+      "https://dev.to/themba/faker-doesnt-know-your-entities-are-related-so-i-built-something-that-does-2jgn",
+    writeupLabel: "Article",
     caseStudy: {
       problem:
         "Most fake-data libraries generate convincing values in isolation. The moment one entity depends on another, like a payment referencing a counterparty, you're back to hand-writing a seed script: create parents first, hold their IDs, wire children to them, and hope nothing violates a constraint along the way. That script rots the first time the schema changes.",
