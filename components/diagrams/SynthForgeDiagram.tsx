@@ -36,7 +36,7 @@ const SynthForgeDiagram = () => (
       style={{
         margin: 0,
         fontFamily: MONO,
-        fontSize: "clamp(0.6rem, 1.5vw, 0.78rem)",
+        fontSize: "clamp(0.75rem, 1.5vw, 0.85rem)",
         lineHeight: 1.65,
         color: "var(--text)",
         background: "rgba(255,255,255,0.02)",
@@ -73,7 +73,7 @@ const SynthForgeDiagram = () => (
         flexWrap: "wrap",
         alignItems: "center",
         gap: "0.5rem 0.7rem",
-        fontSize: "clamp(0.56rem, 1.4vw, 0.66rem)",
+        fontSize: "clamp(0.75rem, 1.4vw, 0.8rem)",
         letterSpacing: "0.06em",
         textTransform: "uppercase",
         color: "var(--muted)",
