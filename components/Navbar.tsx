@@ -17,11 +17,19 @@ const Navbar = () => {
 
   useEffect(() => {
     const ids = NAV_LINKS.map((l) => l.key);
+    // Track the full visible set rather than latching onto the last entry that
+    // reported intersecting. Without this, scrolling back up to the hero (which
+    // has no nav entry) leaves the previous section highlighted forever.
+    const visible = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
         });
+        // Highest section in document order wins, so the highlight never jumps
+        // backwards when two sections are in view at once.
+        setActiveSection(ids.find((id) => visible.has(id)) ?? "");
       },
       { rootMargin: "-30% 0px -60% 0px", threshold: 0 }
     );
@@ -81,7 +89,7 @@ const Navbar = () => {
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none" }}>
+        <Link href="/" className="nav-logo" style={{ textDecoration: "none" }}>
           <m.span
             whileHover={{ opacity: 0.72 }}
             transition={{ duration: 0.2 }}
@@ -126,7 +134,7 @@ const Navbar = () => {
                     isActive ? " nav-active" : ""
                   }`}
                   style={{
-                    fontSize: "0.72rem",
+                    fontSize: "0.75rem",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     textDecoration: "none",
@@ -148,10 +156,10 @@ const Navbar = () => {
           transition={{ duration: 0.5, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
           whileHover={{ y: -1 }}
           style={{
-            fontSize: "0.72rem",
+            fontSize: "0.75rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            padding: "0.45rem 1.1rem",
+            padding: "0.85rem 1.3rem",
           }}
         >
           Hire me
@@ -169,6 +177,8 @@ const Navbar = () => {
             cursor: "pointer",
             color: "var(--text)",
             padding: "0.2rem",
+            minWidth: "44px",
+            minHeight: "44px",
           }}
         >
           <svg
@@ -265,7 +275,7 @@ const Navbar = () => {
                   fontSize: "0.75rem",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  padding: "0.65rem 1.3rem",
+                  padding: "0.9rem 1.4rem",
                   alignSelf: "flex-start",
                 }}
               >

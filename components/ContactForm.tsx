@@ -28,7 +28,7 @@ const validate = (v: { name: string; email: string; message: string }) => {
 
 const labelStyle: React.CSSProperties = {
   display: "block",
-  fontSize: "0.66rem",
+  fontSize: "0.75rem",
   letterSpacing: "0.14em",
   textTransform: "uppercase",
   color: "var(--muted)",
@@ -44,13 +44,13 @@ const fieldStyle: React.CSSProperties = {
   padding: "0.7rem 0.9rem",
   color: "var(--text)",
   fontFamily: "var(--font-dm-sans), sans-serif",
-  fontSize: "0.9rem",
+  fontSize: "1rem",
   outline: "none",
 };
 
 const errStyle: React.CSSProperties = {
   color: "#e0a08a",
-  fontSize: "0.72rem",
+  fontSize: "0.75rem",
   marginTop: "0.4rem",
   letterSpacing: "0.01em",
 };

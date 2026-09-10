@@ -67,7 +67,7 @@ const Hero = () => {
       >
         <m.div className="hero-eyebrow" variants={heroItem}>
           <span className="hero-rule" aria-hidden="true" />
-          Java Developer&nbsp;·&nbsp;FNB&nbsp;·&nbsp;Johannesburg
+          Themba Ngobeni&nbsp;·&nbsp;Java Developer&nbsp;·&nbsp;Johannesburg
         </m.div>
 
         {/* Headline animated by GSAP SplitText (hidden until split) */}
@@ -76,17 +76,16 @@ const Hero = () => {
           className="hero-display"
           style={{ visibility: "hidden" }}
         >
-          Hi, I&apos;m <em style={{ fontStyle: "italic" }}>Themba</em>.
+          I build the backend behind
           <br />
-          I build software
-          <br />
-          that <em style={{ fontStyle: "italic" }}>matters</em>.
+          <em style={{ fontStyle: "italic" }}>cross-border payments</em>.
         </h1>
 
         <m.p className="hero-lede" variants={heroItem}>
-          Building scalable Java microservices at FNB, designing resilient
-          backend architectures, and shipping production software for the
-          foreign-exchange systems behind international money transfers.
+          Java and Spring Boot for FNB&apos;s foreign-exchange division, the
+          engine behind currency conversions and international transfers. I
+          also publish developer tooling, most recently SynthForge on Maven
+          Central.
         </m.p>
 
         <m.div className="hero-actions" variants={heroItem}>
@@ -139,7 +138,7 @@ const Hero = () => {
           alignItems: "center",
           gap: "0.55rem",
           color: "var(--muted2)",
-          fontSize: "0.6rem",
+          fontSize: "0.75rem",
           letterSpacing: "0.2em",
           textTransform: "uppercase",
           animation: "scrollBounce 2.8s ease-in-out infinite",

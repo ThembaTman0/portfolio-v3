@@ -69,7 +69,7 @@ const HeroTerminal = () => {
         <span
           style={{
             marginLeft: "0.5rem",
-            fontSize: "0.62rem",
+            fontSize: "0.75rem",
             letterSpacing: "0.14em",
             textTransform: "uppercase",
             color: "var(--muted2)",
@@ -85,7 +85,7 @@ const HeroTerminal = () => {
           padding: "1.1rem 1.2rem 1.3rem",
           fontFamily:
             "ui-monospace, 'Cascadia Code', 'JetBrains Mono', Consolas, monospace",
-          fontSize: "0.74rem",
+          fontSize: "0.75rem",
           lineHeight: 2.05,
           minHeight: "13.2em",
         }}

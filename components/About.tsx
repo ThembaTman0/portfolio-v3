@@ -80,15 +80,6 @@ const About = () => {
           {...reveal(0)}
         >
           About
-          <span
-            style={{
-              color: "var(--muted2)",
-              marginLeft: "0.6rem",
-              fontSize: "0.65rem",
-            }}
-          >
-            01
-          </span>
         </m.div>
 
         <SplitReveal
@@ -106,7 +97,7 @@ const About = () => {
         <m.p
           style={{
             color: "var(--muted)",
-            fontSize: "0.94rem",
+            fontSize: "1.0rem",
             lineHeight: 1.9,
             marginBottom: "1.3rem",
           }}
@@ -122,7 +113,7 @@ const About = () => {
         <m.p
           style={{
             color: "var(--muted)",
-            fontSize: "0.94rem",
+            fontSize: "1.0rem",
             lineHeight: 1.9,
             marginBottom: "1.3rem",
           }}
@@ -140,7 +131,7 @@ const About = () => {
         <m.p
           style={{
             color: "var(--muted)",
-            fontSize: "0.94rem",
+            fontSize: "1.0rem",
             lineHeight: 1.9,
           }}
           {...reveal(0.26)}
@@ -189,7 +180,7 @@ const About = () => {
               </div>
               <div
                 style={{
-                  fontSize: "0.68rem",
+                  fontSize: "0.75rem",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   color: "var(--muted)",
@@ -344,7 +335,7 @@ const About = () => {
               </div>
               <div
                 style={{
-                  fontSize: "0.66rem",
+                  fontSize: "0.75rem",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "var(--muted)",
@@ -355,7 +346,7 @@ const About = () => {
             </div>
             <div
               style={{
-                fontSize: "0.62rem",
+                fontSize: "0.75rem",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 color: "var(--muted)",
@@ -392,7 +383,7 @@ const About = () => {
               }}
               transition={{ duration: 0.25 }}
               style={{
-                fontSize: "0.66rem",
+                fontSize: "0.75rem",
                 letterSpacing: "0.09em",
                 textTransform: "uppercase",
                 color: "var(--muted)",

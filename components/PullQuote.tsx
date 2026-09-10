@@ -97,7 +97,7 @@ const PullQuote = () => {
         {...reveal(0.2)}
         style={{
           marginTop: "2.6rem",
-          fontSize: "0.72rem",
+          fontSize: "0.75rem",
           letterSpacing: "0.16em",
           textTransform: "uppercase",
           color: "var(--muted)",

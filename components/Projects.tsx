@@ -80,7 +80,7 @@ const ProjectRow = ({
             </h3>
             <span
               style={{
-                fontSize: "0.73rem",
+                fontSize: "0.75rem",
                 color: "var(--muted2)",
                 letterSpacing: "0.04em",
               }}
@@ -91,7 +91,7 @@ const ProjectRow = ({
 
           <p
             style={{
-              fontSize: "0.87rem",
+              fontSize: "1.0rem",
               color: "var(--muted)",
               lineHeight: 1.8,
               marginBottom: "1.4rem",
@@ -113,7 +113,7 @@ const ProjectRow = ({
               <span
                 key={tag}
                 style={{
-                  fontSize: "0.62rem",
+                  fontSize: "0.75rem",
                   letterSpacing: "0.09em",
                   textTransform: "uppercase",
                   color: "var(--muted2)",
@@ -143,7 +143,7 @@ const ProjectRow = ({
                 border: "none",
                 cursor: "pointer",
                 padding: 0,
-                fontSize: "0.68rem",
+                fontSize: "0.75rem",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
               }}
@@ -267,13 +267,13 @@ const ProjectRow = ({
                 <div key={label}>
                   <div
                     className="section-label"
-                    style={{ marginBottom: "1rem", fontSize: "0.64rem" }}
+                    style={{ marginBottom: "1rem", fontSize: "0.75rem" }}
                   >
                     {label}
                   </div>
                   <p
                     style={{
-                      fontSize: "0.84rem",
+                      fontSize: "1.0rem",
                       color: "var(--muted)",
                       lineHeight: 1.85,
                     }}
@@ -334,15 +334,6 @@ const Projects = () => {
             {...reveal(0)}
           >
             Projects
-            <span
-              style={{
-                color: "var(--muted2)",
-                marginLeft: "0.6rem",
-                fontSize: "0.65rem",
-              }}
-            >
-              03
-            </span>
           </m.div>
           <SplitReveal className="section-display">
             Selected{" "}
@@ -358,7 +349,7 @@ const Projects = () => {
           rel="noreferrer"
           className="hover-line link-accent"
           style={{
-            fontSize: "0.72rem",
+            fontSize: "0.75rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             textDecoration: "none",

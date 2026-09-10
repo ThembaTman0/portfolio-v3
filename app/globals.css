@@ -21,7 +21,9 @@
   /* Display white for the hero statement - the lit edge of marble */
   --stone:      #eceae5;
   --stone-line: rgba(236, 234, 229, 0.22);
-  --nav-h:   72px;
+  /* Must track the rendered navbar height; anchor targets use it for
+     scroll-padding-top, so if it under-reports, sections land under the bar. */
+  --nav-h:   92px;
   --radius:  2px;
   --ease-silk: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
@@ -137,7 +139,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
@@ -353,7 +355,7 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
@@ -487,7 +489,7 @@ body::before {
   color: var(--stone);
   padding: 1.05rem 2rem;
   border-radius: var(--radius);
-  font-size: 0.71rem;
+  font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
@@ -512,7 +514,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--muted);
@@ -523,7 +525,7 @@ body::before {
   align-items: center;
   gap: 0.65rem;
   margin-top: 3.2rem;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted2);
@@ -585,14 +587,14 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
   text-decoration: none;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.02);
-  padding: 0.55rem 1rem;
+  padding: 0.9rem 1.15rem;
   border-radius: var(--radius);
   transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
   white-space: nowrap;
@@ -602,6 +604,35 @@ body::before {
   height: 14px;
   flex-shrink: 0;
 }
+/* ── Touch targets ───────────────────────────────────────────────
+   Several controls are intentionally small type (nav links, inline text
+   buttons). Rather than padding them out - which would move the layout and
+   detach the hover underline from the text - extend the hit area with a
+   transparent overlay so the tappable region clears 44px while the visual
+   bounds stay exactly as designed. */
+.nav-link,
+.case-toggle,
+.link-quiet,
+.link-accent,
+.nav-logo,
+.footer-link {
+  position: relative;
+}
+.nav-link::before,
+.case-toggle::before,
+.link-quiet::before,
+.link-accent::before,
+.nav-logo::before,
+.footer-link::before {
+  content: "";
+  position: absolute;
+  left: -0.55rem;
+  right: -0.55rem;
+  top: 50%;
+  height: 44px;
+  transform: translateY(-50%);
+}
+
 .project-link-btn:hover,
 .project-link-btn:focus-visible {
   color: var(--stone);
@@ -690,7 +721,7 @@ html.reduce-fx .status-badge {
   }
   /* Keep the eyebrow on one line instead of orphaning "JAVA" */
   .hero-eyebrow {
-    font-size: 0.58rem;
+    font-size: 0.75rem;
     letter-spacing: 0.13em;
     gap: 0.7rem;
   }

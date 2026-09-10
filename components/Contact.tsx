@@ -26,15 +26,6 @@ const Contact = () => {
           {...reveal(0)}
         >
           Contact
-          <span
-            style={{
-              color: "var(--muted2)",
-              marginLeft: "0.6rem",
-              fontSize: "0.65rem",
-            }}
-          >
-            05
-          </span>
         </m.div>
 
         <SplitReveal
@@ -52,7 +43,7 @@ const Contact = () => {
         <m.p
           style={{
             color: "var(--muted)",
-            fontSize: "0.93rem",
+            fontSize: "1.0rem",
             lineHeight: 1.85,
             marginBottom: "2.4rem",
           }}

@@ -30,15 +30,6 @@ const Skills = () => {
               {...reveal(0)}
             >
               Skills
-              <span
-                style={{
-                  color: "var(--muted2)",
-                  marginLeft: "0.6rem",
-                  fontSize: "0.65rem",
-                }}
-              >
-                02
-              </span>
             </m.div>
             <SplitReveal className="section-display">
               The tools I<br />
@@ -90,8 +81,9 @@ const Skills = () => {
                       : "1px solid var(--line)",
                     cursor: "pointer",
                     textAlign: "left",
-                    padding: "0.85rem 0 0.85rem 1.2rem",
-                    fontSize: "0.74rem",
+                    padding: "1.05rem 0 1.05rem 1.2rem",
+                    minHeight: "44px",
+                    fontSize: "0.75rem",
                     letterSpacing: "0.16em",
                     textTransform: "uppercase",
                     color: isActive ? "var(--white)" : "var(--muted)",
@@ -101,7 +93,7 @@ const Skills = () => {
                   {cat}
                   <span
                     style={{
-                      fontSize: "0.62rem",
+                      fontSize: "0.75rem",
                       color: isActive ? "var(--stone)" : "var(--muted2)",
                       letterSpacing: "0.08em",
                       transition: "color 0.3s ease",
@@ -159,7 +151,7 @@ const Skills = () => {
                     </span>
                     <span
                       style={{
-                        fontSize: "0.66rem",
+                        fontSize: "0.75rem",
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
                         color: "var(--muted)",

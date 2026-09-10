@@ -41,7 +41,7 @@ const Footer = () => {
     >
       <p
         style={{
-          fontSize: "0.74rem",
+          fontSize: "0.75rem",
           color: "var(--muted2)",
           letterSpacing: "0.04em",
         }}
@@ -52,7 +52,7 @@ const Footer = () => {
       {time && (
         <span
           style={{
-            fontSize: "0.7rem",
+            fontSize: "0.75rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "var(--muted2)",
@@ -65,10 +65,11 @@ const Footer = () => {
 
       <m.a
         href="#home"
+        className="footer-link"
         whileHover={{ color: "var(--stone)" }}
         transition={{ duration: 0.25 }}
         style={{
-          fontSize: "0.7rem",
+          fontSize: "0.75rem",
           letterSpacing: "0.12em",
           textTransform: "uppercase",
           color: "var(--muted2)",

@@ -20,15 +20,6 @@ const Experience = () => {
           {...reveal(0)}
         >
           Experience
-          <span
-            style={{
-              color: "var(--muted2)",
-              marginLeft: "0.6rem",
-              fontSize: "0.65rem",
-            }}
-          >
-            04
-          </span>
         </m.div>
 
         <div style={{ borderTop: "1px solid var(--line)" }}>
@@ -86,7 +77,7 @@ const Experience = () => {
                 </div>
                 <p
                   style={{
-                    fontSize: "0.88rem",
+                    fontSize: "1.0rem",
                     color: "var(--muted)",
                     lineHeight: 1.8,
                   }}
@@ -99,7 +90,7 @@ const Experience = () => {
                   <span
                     key={t}
                     style={{
-                      fontSize: "0.64rem",
+                      fontSize: "0.75rem",
                       letterSpacing: "0.09em",
                       textTransform: "uppercase",
                       color: "var(--muted)",
@@ -168,7 +159,7 @@ const Experience = () => {
             </div>
             <p
               style={{
-                fontSize: "0.88rem",
+                fontSize: "1.0rem",
                 color: "var(--muted)",
                 lineHeight: 1.8,
               }}
@@ -184,7 +175,7 @@ const Experience = () => {
               <span
                 key={t}
                 style={{
-                  fontSize: "0.64rem",
+                  fontSize: "0.75rem",
                   letterSpacing: "0.09em",
                   textTransform: "uppercase",
                   color: "var(--muted)",

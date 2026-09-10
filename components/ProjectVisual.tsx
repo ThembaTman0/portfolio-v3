@@ -151,7 +151,7 @@ const ProjectVisual = ({ project }: { project: Project }) => {
           <div
             style={{
               marginLeft: "0.6rem",
-              fontSize: "0.58rem",
+              fontSize: "0.75rem",
               letterSpacing: "0.16em",
               textTransform: "uppercase",
               color: "var(--muted)",
@@ -163,7 +163,7 @@ const ProjectVisual = ({ project }: { project: Project }) => {
           <div
             style={{
               marginLeft: "0.6rem",
-              fontSize: "0.62rem",
+              fontSize: "0.75rem",
               letterSpacing: "0.04em",
               color: "var(--muted2)",
               background: "rgba(255,255,255,0.03)",
