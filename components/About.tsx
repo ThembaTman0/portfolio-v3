@@ -372,7 +372,6 @@ const About = () => {
             "Python",
             "React",
             "Spring Boot",
-            "TensorFlow",
             "Next.js",
           ].map((s) => (
             <m.span

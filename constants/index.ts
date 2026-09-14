@@ -14,7 +14,7 @@ export const SKILLS = [
   },
   { name: "Spring Boot", proficiency: "3+ years", category: "Backend" },
   { name: "REST APIs", proficiency: "3+ years", category: "Backend" },
-  { name: "SQL / PostgreSQL", proficiency: "3+ years", category: "Data" },
+  { name: "SQL / MySQL", proficiency: "3+ years", category: "Data" },
   { name: "Git & CI/CD", proficiency: "3+ years", category: "DevOps" },
   { name: "Docker", proficiency: "2+ years", category: "DevOps" },
   // { name: "AWS", proficiency: "1 year", category: "Cloud" },
@@ -22,7 +22,6 @@ export const SKILLS = [
   { name: "TypeScript", proficiency: "2+ years", category: "Frontend" },
   { name: "Next.js", proficiency: "2+ years", category: "Frontend" },
   { name: "Python", proficiency: "Honours Research", category: "AI / ML" },
-  { name: "TensorFlow", proficiency: "Honours Research", category: "AI / ML" },
 ];
 
 export interface Project {
@@ -110,7 +109,7 @@ export const PROJECTS: Project[] = [
     title: "Satellite Image Classification",
     subtitle: "Python · HOG + DAISY · SVM",
     description:
-      "An IEEE-published study on classifying satellite land use with a classical feature-descriptor pipeline: global HOG and local DAISY features combined through Bag of Features and classified with an SVM, reaching 81.42% accuracy across 21 scene categories on the UC Merced dataset.",
+      "An IEEE-published study, co-authored with Ritesh Ajoodha, on classifying satellite land use with a classical feature-descriptor pipeline: global HOG and local DAISY features combined through Bag of Features and classified with an SVM, reaching 81.76% accuracy across 21 scene categories on the UC Merced dataset.",
     tags: [
       "Python",
       "scikit-learn",
@@ -128,7 +127,7 @@ export const PROJECTS: Project[] = [
       approach:
         "Combined global (HOG) and local (DAISY) descriptors through a Bag of Features pipeline (Mini-Batch K-Means encoding with L2 pooling), then classified with an SVM (RBF kernel), validated by 10-fold cross-validation across 21 UC Merced land-use classes.",
       impact:
-        "The hybrid model reached 81.42% accuracy and beat an Inception-v3-CapsNet deep-learning baseline at this dataset scale. Published on IEEE Xplore and since cited in subsequent research, it shows a well-tuned classical pipeline can outperform data-hungry deep models when samples are limited.",
+        "The hybrid model reached 81.76% accuracy, ahead of the 80.00% previously reported for an Inception-v3-CapsNet deep-learning approach on the same dataset. Published on IEEE Xplore and since cited in subsequent research.",
     },
   },
   {
@@ -167,16 +166,47 @@ export const EXPERIENCE = [
     company: "First National Bank (FNB) - Foreign Exchange",
     period: "2023 - Present",
     description:
-      "Building backend systems for FNB's foreign exchange division, the engine behind currency conversions and international money transfers for millions of customers. Modernising older codebases and improving system reliability, scalability, and ease of deployment.",
-    tech: ["Java", "Apache Wicket", "Spring Boot", "REST APIs", "SQL"],
+      "Working on TCIB, a real-time cross-border payments platform for the SADC region, integrated with three regional banking partners and live since 2024. Built Spring Boot transformation microservices for the SWIFT MT to ISO 20022 MX migration, with XSD validation enforced at the inbound boundary. Built the Spring Boot API connecting the Illicit Flow Fraud Model into the live payments pipeline, and support it in production as part of the on-call rotation.",
+    tech: [
+      "Java",
+      "Java EE",
+      "Apache Wicket",
+      "Spring Boot",
+      "JPA/Hibernate",
+      "Apache ActiveMQ",
+      "MySQL",
+      "Oracle SQL",
+      "XML/XSD",
+      "REST APIs",
+      "SOAP APIs",
+    ],
   },
   {
     role: "Full Stack Developer - Internship",
     company: "Avior Labs",
     period: "2022 Nov - 2022 Dec",
     description:
-      "Two-month internship contributing to software tooling for autonomous drone systems. Worked on image processing components supporting UAV flight simulation pipelines.",
-    tech: ["Python", "OpenCV", "Image Processing", "Computer Vision"],
+      "Two-month internship contributing to software tooling for autonomous drone systems. Worked on image processing components supporting UAV flight simulation pipelines. Also worked on a React document storage system that let managers filter and sort the specific clients they work with, using an internal sorting system.",
+    tech: ["Python", "OpenCV", "Image Processing", "Computer Vision", "React"],
+  },
+];
+
+export const EDUCATION = [
+  {
+    degree: "BSc Honours in Mathematical Sciences",
+    institution: "University of the Witwatersrand",
+    period: "2022",
+    description:
+      "Built a strong foundation in pure and applied mathematics alongside computer science fundamentals covering data structures, algorithms, and software engineering, with a specialisation in applied machine learning.",
+    tags: ["Algorithms", "ML", "Software Engineering"],
+  },
+  {
+    degree: "BSc Computer Science",
+    institution: "University of the Witwatersrand",
+    period: "2020",
+    description:
+      "Undergraduate degree in computer science, covering programming, data structures, and algorithms.",
+    tags: ["Programming", "Data Structures", "Algorithms"],
   },
 ];
 

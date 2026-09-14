@@ -12,10 +12,10 @@ const MUTED2 = "var(--muted2)";
 const WHITE = "var(--white)";
 
 const DATA: { name: string; value: number; best?: boolean }[] = [
-  { name: "Hybrid (SVM + RBF)", value: 81.42, best: true },
+  { name: "Hybrid (SVM + RBF)", value: 81.76, best: true },
   { name: "Linear classifier", value: 76.19 },
   { name: "DAISY only", value: 73.4 },
-  { name: "KNN", value: 68.02 },
+  { name: "KNN", value: 67.14 },
   { name: "HOG only", value: 36.73 },
 ];
 
@@ -33,7 +33,7 @@ const SatelliteChart = () => (
     height="100%"
     preserveAspectRatio="xMidYMid meet"
     role="img"
-    aria-label="Classifier accuracy on the UC Merced land-use dataset: Hybrid SVM with RBF kernel 81.42 percent (best), Linear classifier 76.19, DAISY only 73.4, KNN 68.02, HOG only 36.73."
+    aria-label="Classifier accuracy on the UC Merced land-use dataset: Hybrid SVM with RBF kernel 81.76 percent (best), Linear classifier 76.19, DAISY only 73.4, KNN 67.14, HOG only 36.73."
   >
     {/* Baseline axis */}
     <line
