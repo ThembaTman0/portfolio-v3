@@ -161,6 +161,9 @@ const ProjectRow = ({
                   borderRadius: "1px",
                   fontSize: "0.8rem",
                   lineHeight: 1,
+                  // The button's letter-spacing would otherwise add trailing
+                  // space after the glyph and pull it left of centre.
+                  letterSpacing: 0,
                 }}
                 aria-hidden="true"
               >
