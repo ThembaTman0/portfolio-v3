@@ -4,7 +4,7 @@ import { m } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
-import { heroContainer, heroItem } from "./motion-utils";
+import { heroContainer, heroItem, revealAllActive } from "./motion-utils";
 import Magnetic from "./Magnetic";
 
 gsap.registerPlugin(useGSAP, SplitText);
@@ -26,7 +26,8 @@ const Hero = () => {
 
     if (
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      didSplit.current
+      didSplit.current ||
+      revealAllActive()
     ) {
       gsap.set(el, { autoAlpha: 1 });
       return;
@@ -35,7 +36,8 @@ const Hero = () => {
 
     // Split once fonts load so line/word metrics are correct - but on a slow
     // connection we never want the LCP headline hidden indefinitely, so cap
-    // the wait and reveal on schedule regardless of font load state.
+    // the wait and reveal on schedule regardless of font load state. No extra
+    // delay after that: this headline is the page's largest paint.
     const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
     const timeout = new Promise((resolve) => setTimeout(resolve, 350));
 
@@ -48,7 +50,6 @@ const Hero = () => {
         duration: 1.45,
         ease: "power4.out",
         stagger: 0.07,
-        delay: 0.5,
       });
     });
   });
@@ -65,7 +66,7 @@ const Hero = () => {
         initial="hidden"
         animate="show"
       >
-        <m.div className="hero-eyebrow" variants={heroItem}>
+        <m.div className="hero-eyebrow" variants={heroItem} data-reveal>
           <span className="hero-rule" aria-hidden="true" />
           Themba Ngobeni&nbsp;·&nbsp;Java Developer&nbsp;·&nbsp;Johannesburg
         </m.div>
@@ -74,6 +75,7 @@ const Hero = () => {
         <h1
           ref={headlineRef}
           className="hero-display"
+          data-reveal
           style={{ visibility: "hidden" }}
         >
           I build the backend behind
@@ -81,14 +83,14 @@ const Hero = () => {
           <em style={{ fontStyle: "italic" }}>cross-border payments</em>.
         </h1>
 
-        <m.p className="hero-lede" variants={heroItem}>
+        <m.p className="hero-lede" variants={heroItem} data-reveal>
           Java and Spring Boot for FNB&apos;s foreign-exchange division, the
           engine behind currency conversions and international transfers. I
           also publish developer tooling, most recently SynthForge on Maven
           Central.
         </m.p>
 
-        <m.div className="hero-actions" variants={heroItem}>
+        <m.div className="hero-actions" variants={heroItem} data-reveal>
           <Magnetic>
             <a href="#projects" className="btn-ghost">
               View selected work
@@ -118,7 +120,7 @@ const Hero = () => {
           </a>
         </m.div>
 
-        <m.div className="hero-meta" variants={heroItem}>
+        <m.div className="hero-meta" variants={heroItem} data-reveal>
           <span className="hero-meta-dot" aria-hidden="true" />
           Available for work
         </m.div>

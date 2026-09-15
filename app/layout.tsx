@@ -107,7 +107,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${dmSans.variable}`}>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${dmSans.variable}`}
+      // The head script below adds classes before React hydrates.
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Animated content is server-rendered in its hidden start state.
+            Before first paint, mark that JavaScript is running (.js); if the
+            app still hasn't hydrated after 2.5s (slow or failed scripts), add
+            .reveal-all. The safety net in globals.css shows every data-reveal
+            element when .js is missing or .reveal-all is present. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__motionReady)d.classList.add('reveal-all')},2500)})();",
+          }}
+        />
+      </head>
       <body>
         <script
           type="application/ld+json"

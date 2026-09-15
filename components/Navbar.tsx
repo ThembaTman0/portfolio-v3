@@ -45,6 +45,7 @@ const Navbar = () => {
       {/* Gold hairline top rule */}
       <m.div
         aria-hidden="true"
+        data-reveal
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
@@ -63,6 +64,7 @@ const Navbar = () => {
 
       <m.nav
         className="nav-pad"
+        data-reveal
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -120,6 +122,7 @@ const Navbar = () => {
             return (
               <m.li
                 key={link.key}
+                data-reveal
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -151,6 +154,7 @@ const Navbar = () => {
         <m.a
           href="#contact"
           className="hidden lg:inline-flex btn-outline"
+          data-reveal
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}

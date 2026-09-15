@@ -1,8 +1,10 @@
+// Keep in page order (app/page.tsx): Navbar's active-link highlight picks the
+// first visible section in this array's order.
 export const NAV_LINKS = [
   { href: "#about", key: "about", label: "About" },
+  { href: "#experience", key: "experience", label: "Experience" },
   { href: "#skills", key: "skills", label: "Skills" },
   { href: "#projects", key: "projects", label: "Projects" },
-  { href: "#experience", key: "experience", label: "Experience" },
   { href: "#contact", key: "contact", label: "Contact" },
 ];
 

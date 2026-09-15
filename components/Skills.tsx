@@ -111,6 +111,7 @@ const Skills = () => {
             <AnimatePresence mode="wait">
               <m.div
                 key={active}
+                data-reveal
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -121,6 +122,7 @@ const Skills = () => {
                   <m.div
                     key={skill.name}
                     className="skill-row"
+                    data-reveal
                     initial={{ opacity: 0, x: 12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{

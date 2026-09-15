@@ -1,6 +1,15 @@
 // Shared Framer Motion animation helpers
 
+// Every element that is server-rendered in a hidden start state carries
+// data-reveal, so the CSS safety net in globals.css can show it when
+// JavaScript is unavailable or the app hydrates too late (see layout.tsx).
+// Once that net has fired, GSAP entrances should not re-hide anything.
+export const revealAllActive = () =>
+  typeof document !== "undefined" &&
+  document.documentElement.classList.contains("reveal-all");
+
 export const reveal = (delay = 0) => ({
+  "data-reveal": "",
   initial: { opacity: 0, y: 26 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-70px" } as const,
@@ -8,6 +17,7 @@ export const reveal = (delay = 0) => ({
 });
 
 export const revealScale = (delay = 0) => ({
+  "data-reveal": "",
   initial: { opacity: 0, scale: 0.975 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true, margin: "-70px" } as const,

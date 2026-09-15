@@ -160,6 +160,7 @@ const ContactForm = () => {
             key="form"
             onSubmit={onSubmit}
             noValidate
+            data-reveal
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             style={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}

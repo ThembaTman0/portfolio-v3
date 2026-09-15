@@ -5,12 +5,14 @@ import { m } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { reveal, revealScale } from "./motion-utils";
+import { reveal, revealAllActive, revealScale } from "./motion-utils";
 import SplitReveal from "./SplitReveal";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-// Counts up from 0 once the stat scrolls into view - static under reduced motion.
+// Counts up from 0 once the stat scrolls into view. The server renders the
+// final value, so the stat reads correctly without JavaScript; the count is
+// skipped under reduced motion or once the content safety net has fired.
 const StatCounter = ({ value, suffix }: { value: number; suffix: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -18,12 +20,15 @@ const StatCounter = ({ value, suffix }: { value: number; suffix: string }) => {
     const el = ref.current;
     if (!el) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      el.textContent = `${value}${suffix}`;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      revealAllActive()
+    ) {
       return;
     }
 
     const counter = { n: 0 };
+    el.textContent = `0${suffix}`;
     gsap.to(counter, {
       n: value,
       duration: 1.4,
@@ -35,8 +40,19 @@ const StatCounter = ({ value, suffix }: { value: number; suffix: string }) => {
     });
   }, [value, suffix]);
 
-  return <span ref={ref}>0{suffix}</span>;
+  return <span ref={ref}>{`${value}${suffix}`}</span>;
 };
+
+type Stat = { label: string } & (
+  | { count: number; suffix: string }
+  | { text: string }
+);
+
+const STATS: Stat[] = [
+  { count: 3, suffix: "+", label: "Years at FNB" },
+  { text: "ISO", label: "20022 migration" },
+  { text: "IEEE", label: "Published research" },
+];
 
 const About = () => {
   const imgCardRef = useRef<HTMLDivElement>(null);
@@ -103,12 +119,13 @@ const About = () => {
           }}
           {...reveal(0.17)}
         >
-          I&apos;m a{" "}
-          <span style={{ color: "var(--text)" }}>Java developer at FNB</span>{" "}
-          focused on building scalable and reliable backend systems for
-          enterprise banking. I enjoy designing clean architectures, improving
-          system performance, and delivering software that solves real business
-          problems.
+          I&apos;m a Java developer in FNB&apos;s foreign-exchange division,
+          working on{" "}
+          <span style={{ color: "var(--text)" }}>cross-border payments</span>.
+          That includes TCIB, a real-time payments platform for the SADC
+          region; the move from SWIFT MT to ISO 20022; and the Spring Boot API
+          that connects a fraud detection model into the live payments
+          pipeline.
         </m.p>
         <m.p
           style={{
@@ -119,14 +136,9 @@ const About = () => {
           }}
           {...reveal(0.22)}
         >
-          My experience spans{" "}
-          <span style={{ color: "var(--text)" }}>
-            Java microservices, REST APIs, and modern backend development
-            practices
-          </span>
-          . During my honours studies in Mathematical Sciences, I explored
-          applied machine learning, strengthening my analytical and
-          problem-solving approach to software engineering.
+          Production support is part of the job. I&apos;m on the on-call
+          rotation for that fraud API, and I use MySQL to investigate why
+          applications fail and why payments don&apos;t go through.
         </m.p>
         <m.p
           style={{
@@ -136,47 +148,39 @@ const About = () => {
           }}
           {...reveal(0.26)}
         >
-          Outside of work, I build side projects, refine my engineering skills,
-          and explore new technologies that improve how software is designed and
-          delivered.
+          I also build developer tooling:{" "}
+          <span style={{ color: "var(--text)" }}>SynthForge</span>, my Spring
+          Boot library on Maven Central, seeds related JPA entities with
+          realistic fake data in the right order. Before that, my honours
+          research at Wits became an IEEE-published paper on satellite image
+          classification, co-authored with Ritesh Ajoodha.
         </m.p>
 
-        {/* Stats */}
-        <m.div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            border: "1px solid var(--line)",
-            marginTop: "3.5rem",
-          }}
-          {...reveal(0.35)}
-        >
-          {[
-            { value: 3, suffix: "+", label: "Years at FNB" },
-            { value: 10, suffix: "+", label: "Technologies" },
-            { value: 4, suffix: "", label: "Selected projects" },
-          ].map((s, i) => (
+        {/* Stats: each reads as one phrase, value then label */}
+        <m.div className="about-stats" {...reveal(0.35)}>
+          {STATS.map((s) => (
             <m.div
-              key={i}
+              key={s.label}
+              className="about-stat"
               whileHover={{ background: "var(--bg3)" }}
               transition={{ duration: 0.3 }}
-              style={{
-                padding: "1.6rem 1.4rem",
-                borderRight: i < 2 ? "1px solid var(--line)" : "none",
-              }}
             >
               <div
+                className="about-stat-value"
                 style={{
                   fontFamily: "var(--font-fraunces), serif",
                   fontSize: "2.6rem",
                   fontWeight: 300,
                   color: "var(--stone)",
                   lineHeight: 1,
-                  marginBottom: "0.45rem",
                   letterSpacing: "-0.02em",
                 }}
               >
-                <StatCounter value={s.value} suffix={s.suffix} />
+                {"count" in s ? (
+                  <StatCounter value={s.count} suffix={s.suffix} />
+                ) : (
+                  s.text
+                )}
               </div>
               <div
                 style={{

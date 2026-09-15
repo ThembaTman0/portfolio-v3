@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { revealAllActive } from "./motion-utils";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -30,7 +31,11 @@ const SplitReveal = ({
     const el = ref.current;
     if (!el) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || didSplit.current) {
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      didSplit.current ||
+      revealAllActive()
+    ) {
       gsap.set(el, { autoAlpha: 1 });
       return;
     }
@@ -60,7 +65,12 @@ const SplitReveal = ({
   }, []);
 
   return (
-    <h2 ref={ref} className={className} style={{ ...style, visibility: "hidden" }}>
+    <h2
+      ref={ref}
+      className={className}
+      data-reveal
+      style={{ ...style, visibility: "hidden" }}
+    >
       {children}
     </h2>
   );
