@@ -86,12 +86,11 @@ export const PROJECTS: Project[] = [
     title: "Bankwave V2.0 - Microservices Banking Platform",
     subtitle: "Java · Spring Boot · Microservices",
     description:
-      "A microservices-based banking backend built with Spring Boot and Spring Cloud, demonstrating service discovery, centralized configuration, and containerized deployment for scalable financial systems.",
+      "A microservices-based banking backend built with Spring Boot and Spring Cloud, demonstrating centralised configuration and containerised deployment for scalable financial systems.",
     tags: [
       "Java 17",
       "Spring Boot 3",
       "Spring Cloud",
-      "Eureka",
       "Docker",
       "MySQL",
     ],
@@ -101,9 +100,9 @@ export const PROJECTS: Project[] = [
       problem:
         "Monolithic banking backends are hard to scale, deploy, and reason about. A single change risks the whole system, and teams can't ship independently.",
       approach:
-        "Decomposed the domain into independently deployable Spring Boot services with Eureka service discovery, centralized configuration via Spring Cloud Config, and Docker-based local orchestration mirroring production topology.",
+        "Decomposed the domain into independently deployable Spring Boot services with centralised configuration via Spring Cloud Config and Docker-based local orchestration mirroring production topology.",
       impact:
-        "Each service builds, tests, and deploys on its own lifecycle. The architecture demonstrates the patterns used in real financial platforms: resilience, discoverability, and configuration as code.",
+        "Each service ships as its own container image with its own MySQL database. The same images run under the default, QA and prod profiles, pulling their settings from the Config Server, and Docker Compose health checks hold each service back until its database and the Config Server are ready.",
     },
   },
   {
