@@ -1,15 +1,10 @@
-/*
- * Satellite case-study visual: a themed horizontal bar chart of the real
- * classifier accuracies from the IEEE-published study (results table), so the
- * project shows genuine data on-brand rather than a white-background figure or
- * stock imagery. 16:9 inline SVG using the site's color tokens.
- */
+import { Fragment } from "react";
 
-const FONT = "var(--font-dm-sans), sans-serif";
-const ACCENT = "var(--accent)";
-const MUTED = "var(--muted)";
-const MUTED2 = "var(--muted2)";
-const WHITE = "var(--white)";
+/*
+ * Satellite case-study visual: the classifier accuracies from the IEEE study as
+ * a themed horizontal bar chart. Built in HTML rather than SVG so the labels
+ * keep real text sizes on narrow screens instead of shrinking with the frame.
+ */
 
 const DATA: { name: string; value: number; best?: boolean }[] = [
   { name: "Hybrid (SVM + RBF)", value: 81.76, best: true },
@@ -19,93 +14,98 @@ const DATA: { name: string; value: number; best?: boolean }[] = [
   { name: "HOG only", value: 36.73 },
 ];
 
-const CHART_LEFT = 168;
-const CHART_RIGHT = 566; // leave room for the value label after the longest bar
-const SCALE = (CHART_RIGHT - CHART_LEFT) / 100; // px per percentage point
-const TOP = 60;
-const STEP = 56;
-const BAR_H = 24;
-
 const SatelliteChart = () => (
-  <svg
-    viewBox="0 0 640 360"
-    width="100%"
-    height="100%"
-    preserveAspectRatio="xMidYMid meet"
+  <div
     role="img"
     aria-label="Classifier accuracy on the UC Merced land-use dataset: Hybrid SVM with RBF kernel 81.76 percent (best), Linear classifier 76.19, DAISY only 73.4, KNN 67.14, HOG only 36.73."
+    style={{
+      width: "100%",
+      padding: "clamp(1rem, 3vw, 1.8rem)",
+      display: "flex",
+      flexDirection: "column",
+      gap: "1.1rem",
+    }}
   >
-    {/* Baseline axis */}
-    <line
-      x1={CHART_LEFT}
-      y1={44}
-      x2={CHART_LEFT}
-      y2={TOP + STEP * 4 + 20}
-      stroke="rgba(255,255,255,0.12)"
-      strokeWidth={1}
-    />
-
-    {DATA.map((d, i) => {
-      const cy = TOP + i * STEP;
-      const w = d.value * SCALE;
-      return (
-        <g key={d.name}>
-          {/* Name label */}
-          <text
-            x={CHART_LEFT - 12}
-            y={cy + 4}
-            textAnchor="end"
-            fill={d.best ? WHITE : MUTED}
-            fontFamily={FONT}
-            fontSize={11}
+    <div
+      aria-hidden="true"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "max-content 1fr max-content",
+        columnGap: "0.75rem",
+        rowGap: "0.7rem",
+        alignItems: "center",
+      }}
+    >
+      {/* Baseline axis running behind every bar */}
+      <div
+        style={{
+          gridColumn: 2,
+          gridRow: `1 / span ${DATA.length}`,
+          alignSelf: "stretch",
+          borderLeft: "1px solid rgba(255,255,255,0.12)",
+          margin: "-0.35rem 0",
+        }}
+      />
+      {DATA.map((d, i) => (
+        <Fragment key={d.name}>
+          <div
+            style={{
+              gridColumn: 1,
+              gridRow: i + 1,
+              fontSize: "0.75rem",
+              color: d.best ? "var(--white)" : "var(--muted)",
+              textAlign: "right",
+              whiteSpace: "nowrap",
+            }}
           >
             {d.name}
-          </text>
-          {/* Track */}
-          <rect
-            x={CHART_LEFT}
-            y={cy - BAR_H / 2}
-            width={CHART_RIGHT - CHART_LEFT}
-            height={BAR_H}
-            rx={2}
-            fill="rgba(255,255,255,0.02)"
-          />
-          {/* Bar */}
-          <rect
-            x={CHART_LEFT}
-            y={cy - BAR_H / 2}
-            width={w}
-            height={BAR_H}
-            rx={2}
-            fill={d.best ? ACCENT : "rgba(200,160,90,0.22)"}
-          />
-          {/* Value */}
-          <text
-            x={CHART_LEFT + w + 8}
-            y={cy + 4}
-            fill={d.best ? ACCENT : MUTED}
-            fontFamily={FONT}
-            fontSize={11}
-            fontWeight={d.best ? 600 : 400}
+          </div>
+          <div
+            style={{
+              gridColumn: 2,
+              gridRow: i + 1,
+              height: "clamp(14px, 2.4vw, 22px)",
+              background: "rgba(255,255,255,0.02)",
+              borderRadius: "2px",
+            }}
+          >
+            <div
+              style={{
+                width: `${d.value}%`,
+                height: "100%",
+                borderRadius: "2px",
+                background: d.best ? "var(--accent)" : "rgba(200,160,90,0.22)",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              gridColumn: 3,
+              gridRow: i + 1,
+              fontSize: "0.75rem",
+              color: d.best ? "var(--accent)" : "var(--muted)",
+              fontWeight: d.best ? 600 : 400,
+              fontVariantNumeric: "tabular-nums",
+            }}
           >
             {d.value.toFixed(2)}%
-          </text>
-        </g>
-      );
-    })}
+          </div>
+        </Fragment>
+      ))}
+    </div>
 
-    {/* Caption */}
-    <text
-      x={CHART_LEFT}
-      y={340}
-      fill={MUTED2}
-      fontFamily={FONT}
-      fontSize={10}
-      letterSpacing={0.4}
+    <div
+      aria-hidden="true"
+      style={{
+        fontSize: "0.75rem",
+        lineHeight: 1.5,
+        letterSpacing: "0.02em",
+        color: "var(--muted)",
+      }}
     >
       10-fold cross-validation · SVM · UC Merced Land Use (21 scene classes)
-    </text>
-  </svg>
+    </div>
+  </div>
 );
 
 export default SatelliteChart;

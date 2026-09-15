@@ -1,179 +1,135 @@
 /*
- * Bankwave case-study visual: a themed microservices architecture schematic.
- * Pure inline SVG (16:9) so it stays crisp at any resolution and picks up the
- * site's CSS color tokens. Service names are representative of a banking
- * backend; edit the labels below to match the real service topology.
+ * Bankwave case-study visual: the architecture as it exists in the repo
+ * (ThembaTman0/Bankwave-V-2.0). A Spring Cloud Config Server feeds the three
+ * Spring Boot services, each with its own MySQL database, all started by
+ * Docker Compose. Only draw what the code contains: the API gateway and
+ * circuit breaker are on the README roadmap, not built.
+ * Built in HTML rather than SVG so labels keep real text sizes on narrow
+ * screens instead of shrinking with the frame.
  */
 
-const BOX = "rgba(255,255,255,0.02)";
 const LINE = "rgba(255,255,255,0.12)";
-const ACCENT = "var(--accent)";
 const ACCENT_LINE = "rgba(200,160,90,0.4)";
-const ACCENT_FILL = "rgba(200,160,90,0.08)";
-const WHITE = "var(--white)";
-const MUTED = "var(--muted)";
-const MUTED2 = "var(--muted2)";
-const FONT = "var(--font-dm-sans), sans-serif";
+const BOX_BG = "rgba(255,255,255,0.02)";
+const COLUMN_GAP = "0.5rem";
 
-const Service = ({ x, name }: { x: number; name: string }) => (
-  <g>
-    <rect x={x} y={168} width={150} height={50} rx={4} fill={BOX} stroke={LINE} />
-    <text
-      x={x + 75}
-      y={190}
-      textAnchor="middle"
-      fill={WHITE}
-      fontFamily={FONT}
-      fontSize={13}
+// Soft hyphens let the database names break cleanly on the narrowest phones
+// instead of overflowing their boxes; they never show when there is room.
+const SERVICES = [
+  { name: "Accounts", db: "accounts­db" },
+  { name: "Loans", db: "loans­db" },
+  { name: "Cards", db: "cards­db" },
+];
+
+const Box = ({
+  title,
+  sub,
+  accent,
+  rounded,
+}: {
+  title: string;
+  sub: string;
+  accent?: boolean;
+  rounded?: boolean;
+}) => (
+  <div
+    style={{
+      border: `1px solid ${accent ? ACCENT_LINE : LINE}`,
+      background: accent ? "rgba(200,160,90,0.08)" : BOX_BG,
+      borderRadius: rounded ? "10px" : "4px",
+      padding: "0.45rem 0.25rem",
+      textAlign: "center",
+      lineHeight: 1.3,
+    }}
+  >
+    <div
+      style={{
+        // Databases sit one step below the services in the hierarchy
+        fontSize: rounded ? "0.75rem" : "0.82rem",
+        color: accent ? "var(--accent)" : "var(--white)",
+        hyphens: "manual",
+      }}
     >
-      {name}
-    </text>
-    <text
-      x={x + 75}
-      y={206}
-      textAnchor="middle"
-      fill={MUTED}
-      fontFamily={FONT}
-      fontSize={9}
-      letterSpacing={1}
-    >
-      Spring Boot
-    </text>
-  </g>
+      {title}
+    </div>
+    <div style={{ fontSize: "0.75rem", color: "var(--muted)" }}>
+      {sub}
+    </div>
+  </div>
 );
 
-const Database = ({ cx }: { cx: number }) => (
-  <g>
-    <path
-      d={`M${cx - 34},252 V282 A34,7 0 0 0 ${cx + 34},282 V252`}
-      fill={BOX}
-      stroke={LINE}
-    />
-    <ellipse cx={cx} cy={252} rx={34} ry={7} fill={BOX} stroke={LINE} />
-    <text
-      x={cx}
-      y={274}
-      textAnchor="middle"
-      fill={MUTED}
-      fontFamily={FONT}
-      fontSize={10}
-      letterSpacing={1}
-    >
-      MySQL
-    </text>
-  </g>
+// Vertical connector
+const Wire = () => (
+  <div
+    style={{ width: "1px", height: "12px", margin: "0 auto", background: ACCENT_LINE }}
+  />
 );
 
 const BankwaveDiagram = () => (
-  <svg
-    viewBox="0 0 640 360"
-    width="100%"
-    height="100%"
-    preserveAspectRatio="xMidYMid meet"
+  <div
     role="img"
-    aria-label="Bankwave microservices architecture: clients call an API gateway that routes to Accounts, Payments and Customers services, each with its own MySQL database, wired to Eureka service discovery and Spring Cloud Config inside a Docker Compose environment."
+    aria-label="Bankwave architecture: a Spring Cloud Config Server supplies configuration to the Accounts, Loans and Cards Spring Boot services, each with its own MySQL database, all running under Docker Compose."
+    style={{ width: "100%", padding: "clamp(0.5rem, 3vw, 1.6rem)" }}
   >
-    {/* Connectors (drawn first, under the boxes) */}
-    <g stroke={ACCENT_LINE} fill="none" strokeWidth={1.2}>
-      {/* Clients -> Gateway */}
-      <line x1={320} y1={60} x2={320} y2={88} />
-      {/* Gateway -> services (fan) */}
-      <line x1={320} y1={132} x2={127} y2={168} />
-      <line x1={320} y1={132} x2={320} y2={168} />
-      <line x1={320} y1={132} x2={513} y2={168} />
-      {/* services -> DBs */}
-      <line x1={127} y1={218} x2={127} y2={245} />
-      <line x1={320} y1={218} x2={320} y2={245} />
-      <line x1={513} y1={218} x2={513} y2={245} />
-    </g>
-
-    {/* Infra dashed links */}
-    <g stroke={LINE} fill="none" strokeWidth={1} strokeDasharray="3 3">
-      <line x1={95} y1={132} x2={120} y2={168} />
-      <line x1={545} y1={132} x2={520} y2={168} />
-    </g>
-
-    {/* Docker Compose boundary */}
-    <rect
-      x={40}
-      y={156}
-      width={560}
-      height={150}
-      rx={6}
-      fill="none"
-      stroke={LINE}
-      strokeDasharray="5 4"
-    />
-    <text
-      x={592}
-      y={150}
-      textAnchor="end"
-      fill={MUTED2}
-      fontFamily={FONT}
-      fontSize={9}
-      letterSpacing={2}
+    <div
+      aria-hidden="true"
+      style={{
+        position: "relative",
+        border: `1px dashed ${LINE}`,
+        borderRadius: "6px",
+        padding: "1.9rem clamp(0.35rem, 2vw, 1.2rem) clamp(0.7rem, 2vw, 1.1rem)",
+      }}
     >
-      DOCKER COMPOSE
-    </text>
+      <div
+        style={{
+          position: "absolute",
+          top: "0.5rem",
+          right: "0.7rem",
+          fontSize: "0.75rem",
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+          color: "var(--muted)",
+        }}
+      >
+        Docker Compose
+      </div>
 
-    {/* Clients */}
-    <rect x={245} y={28} width={150} height={32} rx={4} fill={BOX} stroke={LINE} />
-    <text
-      x={320}
-      y={48}
-      textAnchor="middle"
-      fill={MUTED}
-      fontFamily={FONT}
-      fontSize={12}
-    >
-      Clients / apps
-    </text>
+      {/* Config Server */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ minWidth: "min(100%, 11rem)" }}>
+          <Box title="Config Server" sub="Spring Cloud Config" accent />
+        </div>
+      </div>
+      <Wire />
 
-    {/* Eureka */}
-    <rect x={36} y={88} width={118} height={44} rx={4} fill={BOX} stroke={LINE} />
-    <text x={95} y={110} textAnchor="middle" fill={WHITE} fontFamily={FONT} fontSize={12}>
-      Eureka
-    </text>
-    <text x={95} y={124} textAnchor="middle" fill={MUTED} fontFamily={FONT} fontSize={9}>
-      service registry
-    </text>
+      {/* Bus from the first service's centre to the last one's */}
+      <div
+        style={{
+          height: "1px",
+          background: ACCENT_LINE,
+          marginInline: `calc((100% - 2 * ${COLUMN_GAP}) / 6)`,
+        }}
+      />
 
-    {/* API Gateway (accent) */}
-    <rect
-      x={200}
-      y={88}
-      width={240}
-      height={44}
-      rx={4}
-      fill={ACCENT_FILL}
-      stroke={ACCENT_LINE}
-    />
-    <text x={320} y={109} textAnchor="middle" fill={ACCENT} fontFamily={FONT} fontSize={14}>
-      API Gateway
-    </text>
-    <text x={320} y={124} textAnchor="middle" fill={MUTED} fontFamily={FONT} fontSize={9}>
-      Spring Cloud Gateway
-    </text>
-
-    {/* Config */}
-    <rect x={486} y={88} width={118} height={44} rx={4} fill={BOX} stroke={LINE} />
-    <text x={545} y={110} textAnchor="middle" fill={WHITE} fontFamily={FONT} fontSize={12}>
-      Config
-    </text>
-    <text x={545} y={124} textAnchor="middle" fill={MUTED} fontFamily={FONT} fontSize={9}>
-      central config
-    </text>
-
-    {/* Services */}
-    <Service x={52} name="Accounts" />
-    <Service x={245} name="Payments" />
-    <Service x={438} name="Customers" />
-
-    {/* Databases */}
-    <Database cx={127} />
-    <Database cx={320} />
-    <Database cx={513} />
-  </svg>
+      {/* Services and their databases */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+          columnGap: COLUMN_GAP,
+        }}
+      >
+        {SERVICES.map((s) => (
+          <div key={s.name}>
+            <Wire />
+            <Box title={s.name} sub="Spring Boot" />
+            <Wire />
+            <Box title={s.db} sub="MySQL" rounded />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
 );
 
 export default BankwaveDiagram;

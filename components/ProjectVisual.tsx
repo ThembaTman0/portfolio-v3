@@ -181,8 +181,13 @@ const ProjectVisual = ({ project }: { project: Project }) => {
         )}
       </div>
 
-      {/* Content area (16:9) */}
-      <div style={{ position: "relative", aspectRatio: "16/9" }}>
+      {/* Content area: 16:9, but a box with an aspect ratio still grows to
+          fit in-flow content, so diagrams stay in flow and extend the frame
+          on narrow screens instead of being clipped. Screenshots and the
+          monogram are absolutely positioned and keep the exact ratio. */}
+      <div
+        style={{ position: "relative", aspectRatio: "16/9", display: "grid" }}
+      >
         {project.image ? (
           <Image
             src={project.image}
@@ -192,7 +197,7 @@ const ProjectVisual = ({ project }: { project: Project }) => {
             style={{ objectFit: "cover" }}
           />
         ) : diagram ? (
-          <div style={{ position: "absolute", inset: 0 }}>
+          <div style={{ alignSelf: "center", minWidth: 0 }}>
             <diagram.Component />
           </div>
         ) : (
