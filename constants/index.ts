@@ -167,7 +167,7 @@ export const EXPERIENCE = [
     company: "First National Bank (FNB) - Foreign Exchange",
     period: "2023 - Present",
     description:
-      "Working on TCIB, a real-time cross-border payments platform for the SADC region, integrated with three regional banking partners and live since 2024. Built Spring Boot transformation microservices for the SWIFT MT to ISO 20022 MX migration, with XSD validation enforced at the inbound boundary. Built the Spring Boot API connecting the Illicit Flow Fraud Model into the live payments pipeline, and support it in production as part of the on-call rotation.",
+      "Working on TCIB, a real-time cross-border payments platform for the SADC region, integrated with three regional banking partners and live since 2024. Built Spring Boot transformation microservices for the SWIFT MT to ISO 20022 MX migration, with XSD validation enforced at the inbound boundary. The integrations with the legacy bank systems run over SOAP web services. Built the Spring Boot API connecting the Illicit Flow Fraud Model into the live payments pipeline, and support it in production as part of the on-call rotation.",
     tech: [
       "Java",
       "Java EE",
@@ -178,8 +178,8 @@ export const EXPERIENCE = [
       "MySQL",
       "Oracle SQL",
       "XML/XSD",
-      "REST APIs",
-      "SOAP APIs",
+      "REST",
+      "SOAP",
     ],
   },
   {
