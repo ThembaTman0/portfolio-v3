@@ -1,13 +1,34 @@
 "use client";
 import { NAV_LINKS } from "@/constants";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Escape closes the menu and hands focus back to the button that opened it.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMenuOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  // Move focus into the menu when it opens, so the next Tab stays inside it
+  // instead of continuing down the page behind it.
+  useEffect(() => {
+    if (!menuOpen) return;
+    menuRef.current?.querySelector<HTMLElement>("a, button")?.focus();
+  }, [menuOpen]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -171,10 +192,12 @@ const Navbar = () => {
 
         {/* Mobile toggle */}
         <button
+          ref={toggleRef}
           className="lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
           style={{
             background: "none",
             border: "none",
@@ -211,6 +234,8 @@ const Navbar = () => {
         <AnimatePresence>
           {menuOpen && (
             <m.div
+              id="mobile-menu"
+              ref={menuRef}
               className="mobile-menu"
               initial={{ opacity: 0, y: -14 }}
               animate={{ opacity: 1, y: 0 }}
