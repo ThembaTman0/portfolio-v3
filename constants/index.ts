@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
     description:
       "A microservices-based banking backend built with Spring Boot and Spring Cloud, demonstrating centralised configuration and containerised deployment for scalable financial systems.",
     tags: [
-      "Java 17",
+      "Java 21",
       "Spring Boot 3",
       "Spring Cloud",
       "Docker",
