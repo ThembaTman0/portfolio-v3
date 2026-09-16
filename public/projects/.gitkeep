@@ -1,2 +1,2 @@
 Drop project screenshots here.
-eataliano.png -> uncomment image field for project 04 in constants/index.ts
+Then set that project's image field in constants/index.ts (e.g. "/projects/name.png").

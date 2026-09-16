@@ -131,37 +131,9 @@ export const PROJECTS: Project[] = [
       problem:
         "High-resolution satellite imagery is collected far faster than it can be labelled by hand. The research question: how well can a classical feature-descriptor pipeline classify land use without the data volume and compute that deep learning demands?",
       approach:
-        "Combined global (HOG) and local (DAISY) descriptors through a Bag of Features pipeline (Mini-Batch K-Means encoding with L2 pooling), then classified with an SVM (RBF kernel), validated by 10-fold cross-validation across 21 UC Merced land-use classes.",
+        "Built a Bag of Features histogram from local DAISY descriptors (Mini-Batch K-Means codebook), then L2-normalised it and a global HOG descriptor and joined them into one vector per image. Classified with an SVM (RBF kernel) and validated by 10-fold cross-validation across 21 UC Merced land-use classes.",
       impact:
-        "The hybrid model reached 81.76% accuracy, ahead of the 80.00% previously reported for an Inception-v3-CapsNet deep-learning approach on the same dataset. Published on IEEE Xplore and since cited in subsequent research.",
-    },
-  },
-  {
-    id: "04",
-    title: "Eataliano v2 - Recipe Discovery Platform",
-    subtitle: "React · Framer Motion · REST API",
-    description:
-      "A full recipe discovery app rebuilt from the ground up with React 18, featuring a debounced live-search with autocomplete, animated page transitions, and a persistent dark/light theme system. Architected with a clean separation of concerns across custom hooks, a service layer with in-memory TTL caching, and fully lazy-loaded pages. Designed with editorial typography and shimmer skeleton loading states for a polished, production-grade user experience.",
-    tags: [
-      "React 18",
-      "React Router v6",
-      "Framer Motion",
-      "Styled Components",
-      "CSS Variables",
-      "REST API",
-      "Custom Hooks",
-    ],
-    github: "https://github.com/ThembaTman0/Eataliano-v2/tree/main",
-    demo: "https://eataliano.vercel.app/",
-    // Real recipe-detail screenshot (public/projects/eataliano.png).
-    image: "/projects/eataliano.png",
-    caseStudy: {
-      problem:
-        "The original app coupled data fetching, state, and presentation, making features slow to add and the UI janky under network latency.",
-      approach:
-        "Rebuilt on React 18 with a clean separation of concerns: a service layer with in-memory TTL caching, custom hooks for data and debounced search, lazy-loaded routes, and skeleton loading states.",
-      impact:
-        "Instant-feeling search with autocomplete, smooth page transitions, and a codebase where each layer can change independently: a production-grade frontend architecture.",
+        "The hybrid model reached 81.76% accuracy using classical features and an SVM alone. Published on IEEE Xplore and since cited in subsequent research.",
     },
   },
 ];

@@ -1,9 +1,11 @@
 import { Fragment } from "react";
 
 /*
- * Satellite case-study visual: the classifier accuracies from the IEEE study as
- * a themed horizontal bar chart. Built in HTML rather than SVG so the labels
- * keep real text sizes on narrow screens instead of shrinking with the frame.
+ * Satellite case-study visual: classifier accuracies as a themed horizontal bar
+ * chart. Hybrid and KNN are the published figures; the other three come from an
+ * earlier run saved in the repo notebook, and the caption says so. Built in HTML
+ * rather than SVG so the labels keep real text sizes on narrow screens instead
+ * of shrinking with the frame.
  */
 
 const DATA: { name: string; value: number; best?: boolean }[] = [
@@ -17,7 +19,7 @@ const DATA: { name: string; value: number; best?: boolean }[] = [
 const SatelliteChart = () => (
   <div
     role="img"
-    aria-label="Classifier accuracy on the UC Merced land-use dataset: Hybrid SVM with RBF kernel 81.76 percent (best), Linear classifier 76.19, DAISY only 73.4, KNN 67.14, HOG only 36.73."
+    aria-label="Classifier accuracy on the UC Merced land-use dataset: Hybrid SVM with RBF kernel 81.76 percent (best), Linear classifier 76.19, DAISY only 73.4, KNN 67.14, HOG only 36.73. Hybrid and KNN are published results; the linear, DAISY only and HOG only figures come from an earlier run saved in the repo notebook."
     style={{
       width: "100%",
       padding: "clamp(1rem, 3vw, 1.8rem)",
@@ -104,6 +106,9 @@ const SatelliteChart = () => (
       }}
     >
       10-fold cross-validation · SVM · UC Merced Land Use (21 scene classes)
+      <br />
+      Hybrid and KNN: published results. Linear, DAISY only and HOG only: an
+      earlier run, saved in the repo notebook.
     </div>
   </div>
 );
