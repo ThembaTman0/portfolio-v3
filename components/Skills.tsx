@@ -1,15 +1,36 @@
 "use client";
 import { SKILLS } from "@/constants";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { reveal } from "./motion-utils";
 import SplitReveal from "./SplitReveal";
 
 const CATEGORIES = Array.from(new Set(SKILLS.map((s) => s.category)));
+const PANEL_ID = "skills-panel";
+const tabId = (cat: string) =>
+  `skills-tab-${cat.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
 const Skills = () => {
   const [active, setActive] = useState(CATEGORIES[0]);
   const activeSkills = SKILLS.filter((s) => s.category === active);
+  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Tabs are expected to move with the arrow keys, with only the selected tab
+  // in the tab sequence. The rail is a column on desktop and a row on mobile,
+  // so both axes move the selection.
+  const onTabKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const i = CATEGORIES.indexOf(active);
+    const last = CATEGORIES.length - 1;
+    let next = i;
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") next = i === last ? 0 : i + 1;
+    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = i === 0 ? last : i - 1;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = last;
+    else return;
+    e.preventDefault();
+    setActive(CATEGORIES[next]);
+    tabRefs.current[CATEGORIES[next]]?.focus();
+  };
 
   return (
     <section
@@ -67,8 +88,15 @@ const Skills = () => {
               return (
                 <button
                   key={cat}
+                  id={tabId(cat)}
+                  ref={(el) => {
+                    tabRefs.current[cat] = el;
+                  }}
                   role="tab"
                   aria-selected={isActive}
+                  aria-controls={PANEL_ID}
+                  tabIndex={isActive ? 0 : -1}
+                  onKeyDown={onTabKeyDown}
                   onClick={() => setActive(cat)}
                   style={{
                     display: "flex",
@@ -107,7 +135,16 @@ const Skills = () => {
           </div>
 
           {/* Skill list for the active category */}
-          <div style={{ minHeight: "300px" }}>
+          <div
+            id={PANEL_ID}
+            role="tabpanel"
+            aria-labelledby={tabId(active)}
+            // Nothing inside is focusable, so the panel itself takes focus for
+            // keyboard and screen reader users.
+            tabIndex={0}
+            className="skills-panel"
+            style={{ minHeight: "300px" }}
+          >
             <AnimatePresence mode="wait">
               <m.div
                 key={active}

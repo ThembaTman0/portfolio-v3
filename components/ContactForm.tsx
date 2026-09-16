@@ -144,6 +144,7 @@ const ContactForm = () => {
               style={{
                 fontFamily: "var(--font-fraunces), serif",
                 fontSize: "1.4rem",
+                fontWeight: 300,
                 color: "var(--white)",
                 marginBottom: "0.6rem",
               }}

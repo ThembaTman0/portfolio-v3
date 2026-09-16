@@ -12,7 +12,7 @@
      Luminance held steady so the WCAG AA ratios below still hold. */
   --text:    #d9d7d2;
   --muted:   #8e8c86; /* ~5.8:1 on --bg (WCAG AA); was #64605b at ~3.2:1 */
-  --muted2:  #7c7a75; /* ~4.5:1 on --bg (WCAG AA); was #4a4743 at ~2.1:1 */
+  --muted2:  #838079; /* ~5.0:1 on --bg, ~4.8:1 on the lighter card backgrounds */
   --accent:  #c8a05a;
   --accent2: #b86840;
   --accent-dim: rgba(200, 160, 90, 0.15);
@@ -45,7 +45,10 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-weight: 300;
+  /* Body copy sits at 400: DM Sans 300 in muted grey on near-black reads
+     thin and washed out, even where the contrast ratio passes. Display
+     serif type keeps its own 300 weight. */
+  font-weight: 400;
   overflow-x: hidden;
 }
 
@@ -305,6 +308,11 @@ body::before {
 }
 
 /* ── Case study toggle ───────────────────────────────────────── */
+.skills-panel:focus-visible {
+  outline: 1px solid var(--accent-line);
+  outline-offset: 6px;
+}
+
 .case-toggle {
   color: var(--muted);
   transition: color 0.25s ease;

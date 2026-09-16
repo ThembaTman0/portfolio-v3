@@ -2,6 +2,7 @@
 import { EDUCATION, EXPERIENCE } from "@/constants";
 import { m } from "framer-motion";
 import { reveal } from "./motion-utils";
+import SplitReveal from "./SplitReveal";
 
 const Experience = () => {
   return (
@@ -14,13 +15,22 @@ const Experience = () => {
       }}
     >
       <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
-        <m.div
-          className="section-label"
-          style={{ marginBottom: "4.5rem" }}
-          {...reveal(0)}
-        >
-          Experience
-        </m.div>
+        <div style={{ marginBottom: "4.5rem" }}>
+          <m.div
+            className="section-label"
+            style={{ marginBottom: "1.6rem" }}
+            {...reveal(0)}
+          >
+            Experience
+          </m.div>
+          <SplitReveal className="section-display">
+            Work and{" "}
+            <em style={{ fontStyle: "italic", color: "var(--white)" }}>
+              study
+            </em>
+            .
+          </SplitReveal>
+        </div>
 
         <div style={{ borderTop: "1px solid var(--line)" }}>
           {EXPERIENCE.map((exp, i) => (

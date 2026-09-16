@@ -40,6 +40,7 @@ const ProjectRow = ({
           style={{
             fontFamily: "var(--font-fraunces), serif",
             fontSize: "0.82rem",
+            fontWeight: 300,
             color: "var(--muted2)",
             paddingTop: "0.4rem",
             letterSpacing: "0.04em",
