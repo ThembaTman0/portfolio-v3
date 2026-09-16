@@ -102,12 +102,12 @@ const About = () => {
           className="section-display"
           style={{ marginBottom: "2.8rem" }}
         >
-          A developer who
+          Careful with
           <br />
           <em style={{ fontStyle: "italic", color: "var(--white)" }}>
-            loves
-          </em>{" "}
-          the craft.
+            other people&apos;s money
+          </em>
+          .
         </SplitReveal>
 
         <m.p

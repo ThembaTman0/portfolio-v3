@@ -84,11 +84,11 @@ const PullQuote = () => {
           color: "var(--white)",
         }}
       >
-        Great software lives at the intersection of{" "}
+        Validate at the boundary, so nothing behind it has to{" "}
         {/* The one gold typographic moment on the site. Everything else keeps
             gold to hairlines, so this reads as deliberate punctuation. */}
         <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
-          rigour, simplicity, and maintainability
+          guess
         </em>
         .
       </m.blockquote>
@@ -103,7 +103,7 @@ const PullQuote = () => {
           color: "var(--muted)",
         }}
       >
-        — a standard I build toward, every day
+        From the SWIFT MT to ISO 20022 migration
       </m.div>
     </section>
   );
