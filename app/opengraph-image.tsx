@@ -89,8 +89,8 @@ export default function OpengraphImage() {
               maxWidth: 900,
             }}
           >
-            Java Developer at FNB — scalable banking microservices &amp; backend
-            architecture.
+            Java Developer at FNB: cross-border payments, ISO 20022 and
+            Spring Boot services.
           </div>
         </div>
 
