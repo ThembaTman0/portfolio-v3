@@ -67,6 +67,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Proves ownership of the site to Google Search Console. Public by design:
+  // it only matters alongside the Google account that added the property.
+  verification: { google: "ULFbdJhfBEitz_tMUTKhYhPF4Jd_djdfz7uPjTo14z0" },
 };
 
 export const viewport: Viewport = {
