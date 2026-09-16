@@ -69,8 +69,8 @@ const Skills = () => {
             }}
             {...reveal(0.15)}
           >
-            Specialising in backend engineering and distributed systems, with
-            practical experience across modern software platforms.
+            Most of this is my day-to-day stack at FNB; the frontend tools are
+            for my own projects, including this site.
           </m.p>
         </div>
 

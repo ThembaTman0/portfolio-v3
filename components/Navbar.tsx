@@ -242,8 +242,11 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                position: "fixed",
-                top: "64px",
+                // Hangs off the bottom of the nav rather than a fixed offset,
+                // because the bar's height changes between breakpoints. The
+                // extra 1px clears the nav's bottom border.
+                position: "absolute",
+                top: "calc(100% + 1px)",
                 left: 0,
                 right: 0,
                 background: "rgba(8,8,8,0.96)",
