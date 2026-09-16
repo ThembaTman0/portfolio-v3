@@ -187,7 +187,7 @@ const Navbar = () => {
             padding: "0.85rem 1.3rem",
           }}
         >
-          Hire me
+          Get in touch
         </m.a>
 
         {/* Mobile toggle */}
@@ -308,7 +308,7 @@ const Navbar = () => {
                   alignSelf: "flex-start",
                 }}
               >
-                Hire me
+                Get in touch
               </m.a>
             </m.div>
           )}

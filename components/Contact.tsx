@@ -32,10 +32,9 @@ const Contact = () => {
           className="section-display"
           style={{ marginBottom: "1.8rem" }}
         >
-          Let&apos;s build something
-          <br />
+          Say{" "}
           <em style={{ fontStyle: "italic", color: "var(--stone)" }}>
-            great together
+            hello
           </em>
           .
         </SplitReveal>
@@ -49,8 +48,8 @@ const Contact = () => {
           }}
           {...reveal(0.18)}
         >
-          Whether you have a project in mind, want to discuss opportunities, or
-          just want to say hello, my inbox is always open.
+          Questions about SynthForge, the research or anything on this page?
+          Send a message below or reach me on LinkedIn.
         </m.p>
 
         <m.div {...reveal(0.25)}>

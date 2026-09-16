@@ -15,8 +15,13 @@ export const SKILLS = [
     category: "Backend",
   },
   { name: "Spring Boot", proficiency: "3+ years", category: "Backend" },
+  { name: "JPA / Hibernate", proficiency: "3+ years", category: "Backend" },
   { name: "REST APIs", proficiency: "3+ years", category: "Backend" },
+  { name: "SOAP web services", proficiency: "3+ years", category: "Backend" },
+  { name: "XML / XSD", proficiency: "3+ years", category: "Backend" },
+  { name: "Apache ActiveMQ", proficiency: "3+ years", category: "Backend" },
   { name: "SQL / MySQL", proficiency: "3+ years", category: "Data" },
+  { name: "Oracle SQL", proficiency: "3+ years", category: "Data" },
   { name: "Git & CI/CD", proficiency: "3+ years", category: "DevOps" },
   { name: "Docker", proficiency: "2+ years", category: "DevOps" },
   // { name: "AWS", proficiency: "1 year", category: "Cloud" },
@@ -163,7 +168,7 @@ export const PROJECTS: Project[] = [
 
 export const EXPERIENCE = [
   {
-    role: "Java Developer",
+    role: "Java Software Engineer",
     company: "First National Bank (FNB) - Foreign Exchange",
     period: "2023 - Present",
     description:
@@ -183,7 +188,7 @@ export const EXPERIENCE = [
     ],
   },
   {
-    role: "Full Stack Developer - Internship",
+    role: "Full Stack Engineer - Internship",
     company: "Avior Labs",
     period: "2022 Nov - 2022 Dec",
     description:

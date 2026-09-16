@@ -119,11 +119,6 @@ const Hero = () => {
             Get in touch
           </a>
         </m.div>
-
-        <m.div className="hero-meta" variants={heroItem} data-reveal>
-          <span className="hero-meta-dot" aria-hidden="true" />
-          Available for work
-        </m.div>
       </m.div>
 
       {/* Scroll indicator */}
