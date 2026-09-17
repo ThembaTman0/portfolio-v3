@@ -102,7 +102,7 @@ const About = () => {
           className="section-display"
           style={{ marginBottom: "2.8rem" }}
         >
-          Careful with
+          Careful with{" "}
           <br />
           <em style={{ fontStyle: "italic", color: "var(--white)" }}>
             other people&apos;s money
@@ -148,7 +148,7 @@ const About = () => {
           }}
           {...reveal(0.26)}
         >
-          I also build developer tooling:{" "}
+          Outside FNB, I build developer tooling:{" "}
           <span style={{ color: "var(--text)" }}>SynthForge</span>, my Spring
           Boot library on Maven Central, seeds related JPA entities with
           realistic fake data in the right order. Before that, my honours

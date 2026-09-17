@@ -83,7 +83,7 @@ export const PROJECTS: Project[] = [
       approach:
         "SynthForge reads JPA entities the way Hibernate does, through the jakarta.persistence.metamodel.Metamodel API, and builds a dependency graph from owning-side relationships. A topological sort guarantees parent rows exist before any child is generated to reference them. Constraint-aware generation handles @NotNull, @Size and unique columns with a bounded retry loop rather than a thrown exception, so what comes out is structurally valid, not just plausible-looking.",
       impact:
-        "The entity becomes the seed script: annotate it with @Seed(count = 50), start the app in a dev profile, and the tables populate in the correct order on every restart. Published to Maven Central after being proven against two independent Spring Boot projects, with a longer technical writeup on the design decisions behind it.",
+        "The entity becomes the seed script: annotate it with @Seed(count = 50), start the app in a dev profile, and the tables populate in the correct order on every restart. Published to Maven Central. The repo includes two Spring Boot apps that use it (synthforge-demo and remitflow), and a longer technical write-up covers the design decisions behind it.",
     },
   },
   {
@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
     title: "Bankwave V2.0 - Microservices Banking Platform",
     subtitle: "Java · Spring Boot · Microservices",
     description:
-      "A microservices-based banking backend built with Spring Boot and Spring Cloud, demonstrating centralised configuration and containerised deployment for scalable financial systems.",
+      "A banking backend split into accounts, loans and cards microservices, built with Spring Boot 3, Spring Cloud Config and Docker Compose.",
     tags: [
       "Java 21",
       "Spring Boot 3",
@@ -105,9 +105,9 @@ export const PROJECTS: Project[] = [
       problem:
         "Monolithic banking backends are hard to scale, deploy, and reason about. A single change risks the whole system, and teams can't ship independently.",
       approach:
-        "Decomposed the domain into independently deployable Spring Boot services with centralised configuration via Spring Cloud Config and Docker-based local orchestration mirroring production topology.",
+        "Split the domain into three independently deployable Spring Boot services, each with its own MySQL database, with per-profile settings served by a central Spring Cloud Config Server.",
       impact:
-        "Each service ships as its own container image with its own MySQL database. The same images run under the default, QA and prod profiles, pulling their settings from the Config Server, and Docker Compose health checks hold each service back until its database and the Config Server are ready.",
+        "Each service ships as its own container image, and the same images run under the default, QA and prod profiles. Docker Compose health checks hold each service back until its database and the Config Server are ready.",
     },
   },
   {
@@ -142,7 +142,7 @@ export const EXPERIENCE = [
   {
     role: "Java Software Engineer",
     company: "First National Bank (FNB) - Foreign Exchange",
-    period: "2023 - Present",
+    period: "Jan 2023 - Present",
     description:
       "Working on TCIB, a real-time cross-border payments platform for the SADC region, integrated with three regional banking partners and live since 2024. Built Spring Boot transformation microservices for the SWIFT MT to ISO 20022 MX migration, with XSD validation enforced at the inbound boundary. Built the Spring Boot API connecting the Illicit Flow Fraud Model into the live payments pipeline, and support it in production as part of the on-call rotation. Outside the Spring Boot work, the integrations with the legacy bank systems run over SOAP web services.",
     tech: [
@@ -162,9 +162,9 @@ export const EXPERIENCE = [
   {
     role: "Full Stack Engineer - Internship",
     company: "Avior Labs",
-    period: "2022 Nov - 2022 Dec",
+    period: "Nov 2022 - Dec 2022",
     description:
-      "Two-month internship contributing to software tooling for autonomous drone systems. Worked on image processing components supporting UAV flight simulation pipelines. Also worked on a React document storage system that let managers filter and sort the specific clients they work with, using an internal sorting system.",
+      "Two-month internship: drone and UAV computer vision work, plus a React document storage system that let managers filter and sort the specific clients they work with, using an internal sorting system.",
     tech: ["Python", "OpenCV", "Image Processing", "Computer Vision", "React"],
   },
 ];
@@ -175,8 +175,8 @@ export const EDUCATION = [
     institution: "University of the Witwatersrand",
     period: "2022",
     description:
-      "Built a strong foundation in pure and applied mathematics alongside computer science fundamentals covering data structures, algorithms, and software engineering, with a specialisation in applied machine learning.",
-    tags: ["Algorithms", "ML", "Software Engineering"],
+      "Honours research on satellite image classification using HOG and DAISY features, published on IEEE Xplore and co-authored with Ritesh Ajoodha.",
+    tags: ["Research", "Computer Vision", "Python"],
   },
   {
     degree: "BSc Computer Science",

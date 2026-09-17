@@ -47,7 +47,7 @@ const Footer = () => {
           letterSpacing: "0.04em",
         }}
       >
-        © {new Date().getFullYear()} Themba Ngobeni. Crafted with care.
+        © {new Date().getFullYear()} Themba Ngobeni.
       </p>
 
       {time && (

@@ -78,7 +78,7 @@ const Hero = () => {
           data-reveal
           style={{ visibility: "hidden" }}
         >
-          I build the backend behind
+          I build the backend behind{" "}
           <br />
           <em style={{ fontStyle: "italic" }}>cross-border payments</em>.
         </h1>
@@ -86,7 +86,7 @@ const Hero = () => {
         <m.p className="hero-lede" variants={heroItem} data-reveal>
           Java and Spring Boot for FNB&apos;s foreign-exchange division, the
           engine behind currency conversions and international transfers. I
-          also publish developer tooling, most recently SynthForge on Maven
+          also built SynthForge, a Spring Boot library published on Maven
           Central.
         </m.p>
 

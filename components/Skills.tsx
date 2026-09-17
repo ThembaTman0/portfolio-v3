@@ -53,7 +53,7 @@ const Skills = () => {
               Skills
             </m.div>
             <SplitReveal className="section-display">
-              The tools I<br />
+              The tools I{" "}<br />
               <em style={{ fontStyle: "italic", color: "var(--white)" }}>
                 work with
               </em>
