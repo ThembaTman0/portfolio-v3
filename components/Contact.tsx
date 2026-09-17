@@ -9,95 +9,94 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="contact-grid section-block"
-      style={{
-        minHeight: "60vh",
-        alignItems: "start",
-        borderBottom: "1px solid var(--line)",
-        maxWidth: "1440px",
-        margin: "0 auto",
-      }}
+      className="section-block"
+      style={{ minHeight: "60vh", borderBottom: "1px solid var(--line)" }}
     >
-      {/* Left */}
-      <div>
-        <m.div
-          className="section-label"
-          style={{ marginBottom: "3rem" }}
-          {...reveal(0)}
-        >
-          Contact
-        </m.div>
+      <div
+        className="contact-grid"
+        style={{ alignItems: "start", maxWidth: "1440px", margin: "0 auto" }}
+      >
+        {/* Left */}
+        <div>
+          <m.div
+            className="section-label"
+            style={{ marginBottom: "3rem" }}
+            {...reveal(0)}
+          >
+            Contact
+          </m.div>
 
-        <SplitReveal
-          className="section-display"
-          style={{ marginBottom: "1.8rem" }}
-        >
-          Say{" "}
-          <em style={{ fontStyle: "italic", color: "var(--stone)" }}>
-            hello
-          </em>
-          .
-        </SplitReveal>
+          <SplitReveal
+            className="section-display"
+            style={{ marginBottom: "1.8rem" }}
+          >
+            Say{" "}
+            <em style={{ fontStyle: "italic", color: "var(--stone)" }}>
+              hello
+            </em>
+            .
+          </SplitReveal>
 
-        <m.p
-          style={{
-            color: "var(--muted)",
-            fontSize: "1.0rem",
-            lineHeight: 1.85,
-            marginBottom: "2.4rem",
-          }}
-          {...reveal(0.18)}
-        >
-          Questions about SynthForge, the research or anything on this page?
-          Send a message below or reach me on LinkedIn.
-        </m.p>
+          <m.p
+            style={{
+              color: "var(--muted)",
+              fontSize: "1.0rem",
+              lineHeight: 1.85,
+              marginBottom: "2.4rem",
+            }}
+            {...reveal(0.18)}
+          >
+            Questions about SynthForge, the research or anything on this page?
+            Send a message below or reach me on LinkedIn.
+          </m.p>
 
-        <m.div {...reveal(0.25)}>
-          <ContactForm />
-        </m.div>
-      </div>
+          <m.div {...reveal(0.25)}>
+            <ContactForm />
+          </m.div>
+        </div>
 
-      {/* Right socials */}
-      <m.div {...revealScale(0.2)}>
-        <div style={{ border: "1px solid var(--line)" }}>
-          {SOCIALS.map((social, i) => (
-            <a
-              key={social.name}
-              href={social.url}
-              target={social.url.startsWith("http") ? "_blank" : undefined}
-              rel="noreferrer"
-              className="social-row"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "1.5rem 1.8rem",
-                borderBottom:
-                  i < SOCIALS.length - 1 ? "1px solid var(--line)" : "none",
-                textDecoration: "none",
-                color: "var(--text)",
-                fontSize: "0.88rem",
-              }}
-            >
-              <span
-                className="social-name"
-                style={{ fontWeight: 400, letterSpacing: "0.01em" }}
-              >
-                {social.name}
-              </span>
-              <span
+        {/* Right socials */}
+        <m.div {...revealScale(0.2)}>
+          <div style={{ border: "1px solid var(--line)" }}>
+            {SOCIALS.map((social, i) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target={social.url.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                className="social-row"
                 style={{
-                  fontSize: "0.76rem",
-                  color: "var(--muted)",
-                  letterSpacing: "0.04em",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "1.5rem 1.8rem",
+                  borderBottom:
+                    i < SOCIALS.length - 1 ? "1px solid var(--line)" : "none",
+                  textDecoration: "none",
+                  color: "var(--text)",
+                  fontSize: "0.88rem",
                 }}
               >
-                {social.handle}
-              </span>
-            </a>
-          ))}
-        </div>
-      </m.div>
+                <span
+                  className="social-name"
+                  style={{ fontWeight: 400, letterSpacing: "0.01em" }}
+                >
+                  {social.name}
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.76rem",
+                    color: "var(--muted)",
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  {social.handle}
+                </span>
+              </a>
+            ))}
+          </div>
+        </m.div>
+      </div>
     </section>
   );
 };

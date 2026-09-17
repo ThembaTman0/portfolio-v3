@@ -307,8 +307,6 @@ const Projects = () => {
         position: "relative",
         overflow: "hidden",
         borderBottom: "1px solid var(--line)",
-        maxWidth: "1440px",
-        margin: "0 auto",
       }}
     >
       {/* Ambient light over the work, same language as the hero. Fades to
@@ -330,66 +328,77 @@ const Projects = () => {
         }}
       />
 
-      {/* Header */}
-      <div className="projects-header" style={{ position: "relative", zIndex: 1 }}>
-        <div>
-          <m.div
-            className="section-label"
-            style={{ marginBottom: "1.6rem" }}
-            {...reveal(0)}
-          >
-            Projects
-          </m.div>
-          <SplitReveal className="section-display">
-            Selected{" "}
-            <em style={{ fontStyle: "italic", color: "var(--white)" }}>
-              work
-            </em>
-            .
-          </SplitReveal>
-        </div>
-        <m.a
-          href="https://github.com/ThembaTman0"
-          target="_blank"
-          rel="noreferrer"
-          className="hover-line link-accent"
-          style={{
-            fontSize: "0.75rem",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.45rem",
-          }}
-          {...reveal(0.15)}
-        >
-          GitHub →
-        </m.a>
-      </div>
-
-      {/* Project list. Pulled out horizontally so each row's hover highlight
-          and divider extend past the content edge; .project-row adds matching
-          padding back, keeping the numbers aligned with the section heading. */}
+      {/* Content column. The section itself spans the viewport so the ambient
+          light and the divider never stop short on screens wider than 1440px. */}
       <div
         style={{
           position: "relative",
           zIndex: 1,
-          borderTop: "1px solid var(--line)",
-          marginInline: "-1.6rem",
+          maxWidth: "1440px",
+          margin: "0 auto",
         }}
       >
-        {PROJECTS.map((project, i) => (
-          <ProjectRow
-            key={project.id}
-            project={project}
-            index={i}
-            open={openId === project.id}
-            onToggle={() =>
-              setOpenId((id) => (id === project.id ? null : project.id))
-            }
-          />
-        ))}
+        {/* Header */}
+        <div className="projects-header" style={{ position: "relative", zIndex: 1 }}>
+          <div>
+            <m.div
+              className="section-label"
+              style={{ marginBottom: "1.6rem" }}
+              {...reveal(0)}
+            >
+              Projects
+            </m.div>
+            <SplitReveal className="section-display">
+              Selected{" "}
+              <em style={{ fontStyle: "italic", color: "var(--white)" }}>
+                work
+              </em>
+              .
+            </SplitReveal>
+          </div>
+          <m.a
+            href="https://github.com/ThembaTman0"
+            target="_blank"
+            rel="noreferrer"
+            className="hover-line link-accent"
+            style={{
+              fontSize: "0.75rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.45rem",
+            }}
+            {...reveal(0.15)}
+          >
+            GitHub →
+          </m.a>
+        </div>
+
+        {/* Project list. Pulled out horizontally so each row's hover highlight
+            and divider extend past the content edge; .project-row adds matching
+            padding back, keeping the numbers aligned with the section heading. */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            borderTop: "1px solid var(--line)",
+            marginInline: "-1.6rem",
+          }}
+        >
+          {PROJECTS.map((project, i) => (
+            <ProjectRow
+              key={project.id}
+              project={project}
+              index={i}
+              open={openId === project.id}
+              onToggle={() =>
+                setOpenId((id) => (id === project.id ? null : project.id))
+              }
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
