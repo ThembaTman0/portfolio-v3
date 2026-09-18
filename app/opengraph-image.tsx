@@ -106,7 +106,7 @@ export default function OpengraphImage() {
             color: "#7d786f",
           }}
         >
-          <div style={{ display: "flex" }}>thembangobeni.vercel.app</div>
+          <div style={{ display: "flex" }}>thembangobeni.com</div>
           <div style={{ display: "flex", color: "#c8a05a" }}>
             Johannesburg, ZA
           </div>

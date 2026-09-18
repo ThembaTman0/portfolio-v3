@@ -1,7 +1,7 @@
 <div align="center">
 
 # Themba Ngobeni - Portfolio V3
-[**thembangobeni.vercel.app**](https://thembangobeni.vercel.app/)
+[**thembangobeni.com**](https://www.thembangobeni.com/)
 ### Dark Editorial Developer Portfolio
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)

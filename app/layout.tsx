@@ -21,7 +21,7 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const SITE_URL = "https://thembangobeni.vercel.app";
+const SITE_URL = "https://www.thembangobeni.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
