@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import AnimatedDotGrid from "@/components/AnimatedDotGrid";
 import MotionProvider from "@/components/MotionProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -151,6 +152,7 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <Footer />
         </MotionProvider>
+        <Analytics />
 
         {/* Scroll progress bar (anchor smooth-scroll is handled by CSS
             scroll-behavior + scroll-padding-top in globals.css) */}
