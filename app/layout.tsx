@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import AnimatedDotGrid from "@/components/AnimatedDotGrid";
 import MotionProvider from "@/components/MotionProvider";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -169,6 +171,12 @@ export default function RootLayout({
             `,
           }}
         />
+
+        {/* Vercel Web Analytics (page views) and Speed Insights (loading
+            speed as real visitors experience it). Both are inert locally and
+            only report from the deployed site. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
